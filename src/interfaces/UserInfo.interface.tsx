@@ -1,8 +1,10 @@
+import { CoinEntry, DAOCoinEntry } from "./Coin.interface";
+
 export interface UserInfoRequest {
-  Username: string;
-  PublicKeyBase58Check: string;
-  GetEntriesFollowingUsername: boolean;
-  LastPublicKeyBase58Check: string;
+  Username?: string;
+  PublicKeyBase58Check?: string;
+  GetEntriesFollowingUsername?: boolean;
+  LastPublicKeyBase58Check?: string;
   NumToFetch: number;
 }
 export interface UserInfoResponse {
@@ -26,18 +28,4 @@ export interface Profile {
   UsersThatHODL?: null;
   IsFeaturedTutorialWellKnownCreator: boolean;
   IsFeaturedTutorialUpAndComingCreator: boolean;
-}
-export interface CoinEntry {
-  CreatorBasisPoints: number;
-  DeSoLockedNanos: number;
-  NumberOfHolders: number;
-  CoinsInCirculationNanos: number;
-  CoinWatermarkNanos: number;
-  BitCloutLockedNanos: number;
-}
-export interface DAOCoinEntry {
-  NumberOfHolders: number;
-  CoinsInCirculationNanos: string;
-  MintingDisabled: boolean;
-  TransferRestrictionStatus: string;
 }

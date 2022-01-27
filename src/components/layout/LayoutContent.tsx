@@ -1,7 +1,7 @@
-import DisplayUser from "../DisplayUser";
+import DisplayUser from "../profile/DisplayUser";
 const LayoutContent = () => {
   return (
-    <div className="flex w-full mx-4 mt-4 justify-center">
+    <div className="flex w-full mx-4 mt-4">
       <DisplayUser></DisplayUser>
     </div>
   );

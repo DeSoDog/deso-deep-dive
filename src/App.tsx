@@ -3,12 +3,15 @@ import logo from "./logo.svg";
 import "./App.css";
 import LayoutContent from "./components/layout/LayoutContent";
 import { Header } from "./components/layout/Header";
+import { RecoilRoot } from "recoil";
 
 function App() {
   return (
     <>
-      <Header />
-      <LayoutContent></LayoutContent>
+      <RecoilRoot>
+        <Header />
+        <LayoutContent></LayoutContent>
+      </RecoilRoot>
     </>
   );
 }

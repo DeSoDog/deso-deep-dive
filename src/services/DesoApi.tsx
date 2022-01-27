@@ -1,36 +1,46 @@
 import axios from "axios";
+import { FollowerInfoRequest } from "../interfaces/FollowerInfo.interface";
 import {
-  UserInfoRequest,
-  UserInfoResponse,
-} from "../interfaces/UserInfo.interface";
+  PostInfoRequest,
+  PostInfoResponse,
+} from "../interfaces/PostInfo.interface";
+import { UserInfoResponse } from "../interfaces/UserInfo.interface";
 
-// const BASE_URI: Readonly<string> = "https://diamondapp.com/api/v0";
 const BASE_URI: Readonly<string> = "https://node.deso.org/api/v0";
-const SAMPLE_USER_INFO = {
-  Username: "TyFischer",
-  PublicKeyBase58Check: "",
-  GetEntriesFollowingUsername: false,
-  LastPublicKeyBase58Check: "",
-  NumToFetch: 0,
-};
-// Request URL: https://node.deso.org/api/v0/get-referral-info-for-user
 
 export const getUserInfo = async (
-  requestedUser: UserInfoRequest = SAMPLE_USER_INFO
+  PublicKeyBase58Check: string
 ): Promise<UserInfoResponse> => {
-  return (await axios.post(`${BASE_URI}/get-single-profile`, requestedUser))
+  const userInfoRequest = {
+    PublicKeyBase58Check,
+  };
+  return (await axios.post(`${BASE_URI}/get-single-profile`, userInfoRequest))
     .data;
 };
 
-export const getUserPicture = (
-  publicKey: string = "BC1YLjMYu2ahUtWgSX34cNLeM9BM9y37cqXzxAjbvPfbxppDh16Jwog"
-): string => {
-  return `${BASE_URI}/get-single-profile-picture/${publicKey}`;
+export const getUserPicture = (PublicKeyBase58Check: string): string => {
+  return `${BASE_URI}/get-single-profile-picture/${PublicKeyBase58Check}`;
 };
 
-export const getUsersStateless = async (
-  requestedUser: UserInfoRequest = SAMPLE_USER_INFO
-) => {
-  return (await axios.post(`${BASE_URI}/get-follows-stateless/`, requestedUser))
+export const getFollowers = async (
+  PublicKeyBase58Check: string
+): Promise<any> => {
+  const request: FollowerInfoRequest = {
+    PublicKeyBase58Check,
+    GetEntriesFollowingUsername: true,
+  };
+  return (await axios.post(`${BASE_URI}/get-follows-stateless`, request)).data;
+};
+
+export const getPostsForPublicKey = async (
+  ReaderPublicKeyBase58Check: string
+): Promise<PostInfoResponse> => {
+  const request: PostInfoRequest = {
+    PublicKeyBase58Check: "",
+    Username: "TyFischer",
+    ReaderPublicKeyBase58Check,
+    NumToFetch: 10,
+  };
+  return (await axios.post(`${BASE_URI}/get-posts-for-public-key`, request))
     .data;
 };
