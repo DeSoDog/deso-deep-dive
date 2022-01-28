@@ -26,7 +26,7 @@ const DisplayPosts = ({ publicKey }: CreatePostProps) => {
           post.PosterPublicKeyBase58Check
         );
         return (
-          <Card key={index} className="mb-10 pb-2">
+          <Card key={index} className="mb-5 pb-2">
             <CardHeader
               avatar={<Avatar src={profilePictureSrc}></Avatar>}
               title={`@${"TyFischer"}`}

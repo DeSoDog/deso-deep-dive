@@ -1,20 +1,38 @@
 import axios from "axios";
-import { FollowerInfoRequest } from "../interfaces/FollowerInfo.interface";
+import {
+  FollowerInfoRequest,
+  FollowerInfoResponse,
+} from "../interfaces/FollowerInfo.interface";
 import {
   PostInfoRequest,
   PostInfoResponse,
 } from "../interfaces/PostInfo.interface";
-import { UserInfoResponse } from "../interfaces/UserInfo.interface";
+import { ProfileInfoResponse } from "../interfaces/ProfileInfo.interface";
+import {
+  UserInfoRequest,
+  UserInfoResponse,
+} from "../interfaces/UserInfo.interface";
 
 const BASE_URI: Readonly<string> = "https://node.deso.org/api/v0";
 
-export const getUserInfo = async (
+export const getProfileInfo = async (
   PublicKeyBase58Check: string
-): Promise<UserInfoResponse> => {
+): Promise<ProfileInfoResponse> => {
   const userInfoRequest = {
     PublicKeyBase58Check,
   };
   return (await axios.post(`${BASE_URI}/get-single-profile`, userInfoRequest))
+    .data;
+};
+
+export const getUserInfoStateless = async (
+  PublicKeysBase58Check: string[]
+): Promise<UserInfoResponse> => {
+  const userInfoRequest: UserInfoRequest = {
+    PublicKeysBase58Check,
+    SkipForLeaderboard: false,
+  };
+  return (await axios.post(`${BASE_URI}/get-users-stateless`, userInfoRequest))
     .data;
 };
 
@@ -24,12 +42,28 @@ export const getUserPicture = (PublicKeyBase58Check: string): string => {
 
 export const getFollowers = async (
   PublicKeyBase58Check: string
-): Promise<any> => {
+): Promise<FollowerInfoResponse> => {
   const request: FollowerInfoRequest = {
     PublicKeyBase58Check,
     GetEntriesFollowingUsername: true,
   };
-  return (await axios.post(`${BASE_URI}/get-follows-stateless`, request)).data;
+  let followerResponse: FollowerInfoResponse = (
+    await axios.post(`${BASE_URI}/get-follows-stateless`, request)
+  ).data;
+  // wasn't a huge fan of the attribute coming back as a dynamic key
+  // makes it hard to work with in the components and it messes with
+  // typescript.
+  // to fix this i added a data attribute to the response interface
+  //  and then applied the same object to it as the dynamic hash
+  const keys = Object.keys(followerResponse.PublicKeyToProfileEntry);
+  if (keys.length > 0) {
+    const data = followerResponse.PublicKeyToProfileEntry[keys[0]];
+    followerResponse.PublicKeyToProfileEntry = {
+      ...followerResponse.PublicKeyToProfileEntry,
+      data,
+    };
+  }
+  return followerResponse;
 };
 
 export const getPostsForPublicKey = async (
