@@ -46,6 +46,7 @@ export const getFollowers = async (
   const request: FollowerInfoRequest = {
     PublicKeyBase58Check,
     GetEntriesFollowingUsername: true,
+    NumToFetch: 50,
   };
   let followerResponse: FollowerInfoResponse = (
     await axios.post(`${BASE_URI}/get-follows-stateless`, request)

@@ -1,8 +1,78 @@
+import { ReactElement, useEffect, useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  AppState,
+  AppStateEnum,
+  MyPublicKey,
+  MyUserInfo,
+  MyUserInfoType,
+} from "../../recoil/AppState.atoms";
+import DisplayFollowerFeed from "../DisplayFollowerFeed";
+import DisplayPosts from "../profile/DisplayPosts";
 import DisplayUser from "../profile/DisplayUser";
 const LayoutContent = () => {
+  const [appState, setAppState] = useRecoilState<AppStateEnum>(AppState);
+  const [user, setUser] = useRecoilState<MyUserInfoType>(MyUserInfo);
+
+  const myPublicKey = useRecoilValue(MyPublicKey);
+  const [appStateContent, setAppStateContent] = useState<ReactElement | null>(
+    null
+  );
+  useEffect(() => {
+    setAppStateContent(generateAppstateContent());
+  }, [appState]);
+
+  const generateAppstateContent = (): ReactElement => {
+    switch (appState) {
+      case AppStateEnum.MY_POST: {
+        return (
+          <>
+            <div className="text-center font-bold text-lg mb-2 font-mono">
+              {user?.profileInfoResponse?.Profile.Username}'s Posts
+            </div>
+            <div>
+              <DisplayPosts publicKey={myPublicKey} />
+              <DisplayPosts publicKey={myPublicKey} />
+              <DisplayPosts publicKey={myPublicKey} />
+              <DisplayPosts publicKey={myPublicKey} />
+            </div>
+          </>
+        );
+      }
+      case AppStateEnum.MY_FOLLOWERS: {
+        return (
+          <>
+            <div className="text-center font-bold text-lg mb-2 font-mono">
+              {user?.profileInfoResponse?.Profile.Username}'s Followers
+              <div>
+                <DisplayFollowerFeed></DisplayFollowerFeed>
+              </div>
+            </div>
+          </>
+        );
+      }
+      case AppStateEnum.MY_FOLLOWERS_POST: {
+        return (
+          <>
+            <div className="text-center font-bold text-lg mb-2 font-mono">
+              {user?.profileInfoResponse?.Profile.Username}'s Feed
+            </div>
+          </>
+        );
+      }
+      default: {
+        return <></>;
+      }
+    }
+  };
   return (
-    <div className="flex w-full mx-4 mt-4">
-      <DisplayUser></DisplayUser>
+    <div className="flex flex-col md:flex-row justify-around w-full mt-4  ">
+      <div className="flex flex-col flex-grow-1">
+        <DisplayUser publicKey={myPublicKey} isMyAccount={true}></DisplayUser>
+      </div>
+      <div>
+        <div className="w-[600px] mx-auto">{appStateContent}</div>
+      </div>
     </div>
   );
 };

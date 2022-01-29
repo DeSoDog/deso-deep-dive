@@ -12,51 +12,27 @@ import {
   getUserInfoStateless,
 } from "../../services/DesoApi";
 import Button from "@mui/material/Button";
-import { useRecoilState, useRecoilValue } from "recoil";
-import {
-  MyPublicKey,
-  MyUserInfo,
-  MyFollowersInfo,
-  MyProfilePicture,
-  MyUserInfoType,
-  FollowerInfoType,
-} from "../../recoil/AppState.atoms";
-import CreatePostInput from "./CreatePostInput";
+import { MyUserInfoType, FollowerInfoType } from "../../recoil/AppState.atoms";
 import { FollowerInfoResponse } from "../../interfaces/FollowerInfo.interface";
 import { getFollowerCount } from "../../services/utils";
-import UserActions from "../UserActions";
 export interface DisplayUserProps {
   publicKey: string;
-  isMyAccount: boolean;
 }
-const DisplayUser = ({ publicKey, isMyAccount }: DisplayUserProps) => {
-  const [user, setUser] = useRecoilState<MyUserInfoType>(MyUserInfo);
-  const [profilePicture, setProfilePicture] = useRecoilState<string | null>(
-    MyProfilePicture
-  );
-  const [userFollowers, setUserFollowers] =
-    useRecoilState<FollowerInfoResponse | null>(MyFollowersInfo);
+const DisplayFollower = ({ publicKey }: DisplayUserProps) => {
   const [profileDescriptionCard, setCard] = useState<ReactElement | null>(null);
-  //  asdfjlaskjflkasdjflkasdjfslkdfjlksdfjjlsfdlksdfjlksdjfsldkfjdlkfjyy
   const [follower, setFollower] = useState<FollowerInfoType | null>(null);
   const [followerPicture, setFollowerPicture] = useState<string | null>(null);
   const [followerFollowers, setFollowerFollowers] =
     useState<FollowerInfoResponse | null>(null);
-
-  //  asdfjlaskjflkasdjflkasdjfslkdfjlksdfjjlsfdlksdfjlksdjfsldkfjdlkfjyy
   useEffect(() => {
-    if (isMyAccount) {
-      getMyInfo(publicKey);
-    } else {
-      getFollowerInfo(publicKey);
-    }
+    getFollowerInfo(publicKey);
   }, []);
 
   useEffect(() => {
-    if (profilePicture && user) {
-      setCard(generateCard(user, profilePicture));
+    if (followerPicture && follower) {
+      setCard(generateCard(follower, followerPicture));
     }
-  }, [profilePicture, user]);
+  }, [followerPicture, follower]);
 
   const getFollowerInfo = async (publicKey: string) => {
     let profileInfoResponse: ProfileInfoResponse;
@@ -69,24 +45,10 @@ const DisplayUser = ({ publicKey, isMyAccount }: DisplayUserProps) => {
       setFollower({ profileInfoResponse, userInfoResponse });
       setFollowerPicture(profilePictureSrc);
       const followers = await getFollowers(publicKey);
-      setUserFollowers(followers);
+      setFollowerFollowers(followers);
     }
   };
 
-  const getMyInfo = async (publicKey: string) => {
-    let profileInfoResponse: ProfileInfoResponse;
-    if (publicKey !== null) {
-      const userInfoResponse = await getUserInfoStateless([publicKey]);
-      profileInfoResponse = await getProfileInfo(publicKey);
-      const profilePictureSrc = getUserPicture(
-        profileInfoResponse?.Profile?.PublicKeyBase58Check
-      );
-      setUser({ profileInfoResponse, userInfoResponse });
-      setProfilePicture(profilePictureSrc);
-      const followers = await getFollowers(publicKey);
-      setUserFollowers(followers);
-    }
-  };
   const generateCard = (
     myUserInfo: MyUserInfoType,
     profilePictureSrc: string
@@ -104,7 +66,7 @@ const DisplayUser = ({ publicKey, isMyAccount }: DisplayUserProps) => {
             <div className="flex justify-start">
               <div className="font-bold">{`@${profileInfoResponse.Profile.Username}`}</div>
               <div className="ml-3 font-semibold">
-                Followers: {userFollowers?.NumFollowers}
+                Followers: {followerFollowers?.NumFollowers}
               </div>
               <div className="ml-3 font-semibold">
                 Following: {getFollowerCount(userInfoResponse)}
@@ -113,34 +75,21 @@ const DisplayUser = ({ publicKey, isMyAccount }: DisplayUserProps) => {
           }
         ></CardHeader>
         <div className="flex justify-around mx-3 my-3"></div>
-        <div className="mx-4 mb-5">
+        <div className="mx-4 mb-5 font-normal">
           {profileInfoResponse.Profile.Description}
         </div>
-        {isMyAccount && (
-          <div className=" ml-4 mr-20">
-            <CreatePostInput></CreatePostInput>
-          </div>
-        )}
-        {!isMyAccount && (
-          <CardActions>
-            <Button className="flex justify-around">follow</Button>
-            <Button className="flex justify-around">tip</Button>
-            <Button className="flex justify-around">message</Button>
-          </CardActions>
-        )}
+        <CardActions>
+          <Button className="flex justify-around">message</Button>
+        </CardActions>
       </Card>
     );
   };
   return (
     <div className="flex flex-col w-[600px] mx-auto ">
-      <div className="text-center  font-bold text-lg mb-2 font-mono">
-        You are viewing {user?.profileInfoResponse?.Profile.Username}'s Page
-      </div>
-      <div className="w">{profileDescriptionCard}</div>
-      <div>
-        <UserActions></UserActions>
-      </div>
+      <div className="text-center  font-bold text-lg mb-2 font-mono"></div>
+      <div>{profileDescriptionCard}</div>
+      <div></div>
     </div>
   );
 };
-export default DisplayUser;
+export default DisplayFollower;

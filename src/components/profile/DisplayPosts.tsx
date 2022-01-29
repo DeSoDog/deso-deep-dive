@@ -13,7 +13,6 @@ const DisplayPosts = ({ publicKey }: CreatePostProps) => {
   }, []);
 
   const getPosts = async (): Promise<void> => {
-    console.log(publicKey);
     const posts: PostInfoResponse = await getPostsForPublicKey(publicKey);
     setPosts(generatePosts(posts));
   };
