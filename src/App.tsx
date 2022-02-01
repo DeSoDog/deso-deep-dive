@@ -1,25 +1,16 @@
-import React, { useEffect } from "react";
-import logo from "./logo.svg";
+import React from "react";
 import "./App.css";
 import LayoutContent from "./components/layout/LayoutContent";
 import { Header } from "./components/layout/Header";
-import { RecoilRoot } from "recoil";
-import {
-  loginWithIdentity,
-  subscribeToIdentity,
-} from "./services/DesoIdentity";
+import { useRecoilValue } from "recoil";
+import { MyPublicKey } from "./recoil/AppState.atoms";
 
 function App() {
-  useEffect(() => {
-    subscribeToIdentity();
-    window.open("https://identity.deso.org/log-in");
-  }, []);
+  const myPublicKey = useRecoilValue(MyPublicKey);
   return (
     <>
-      <RecoilRoot>
-        <Header />
-        <LayoutContent></LayoutContent>
-      </RecoilRoot>
+      <Header />
+      {myPublicKey && <LayoutContent></LayoutContent>}
     </>
   );
 }

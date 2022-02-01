@@ -12,9 +12,8 @@ import {
   getUserInfoStateless,
 } from "../../services/DesoApi";
 import Button from "@mui/material/Button";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import {
-  MyPublicKey,
   MyUserInfo,
   MyFollowersInfo,
   MyProfilePicture,
@@ -37,17 +36,14 @@ const DisplayUser = ({ publicKey, isMyAccount }: DisplayUserProps) => {
   const [userFollowers, setUserFollowers] =
     useRecoilState<FollowerInfoResponse | null>(MyFollowersInfo);
   const [profileDescriptionCard, setCard] = useState<ReactElement | null>(null);
-  //  asdfjlaskjflkasdjflkasdjfslkdfjlksdfjjlsfdlksdfjlksdjfsldkfjdlkfjyy
   const [follower, setFollower] = useState<FollowerInfoType | null>(null);
   const [followerPicture, setFollowerPicture] = useState<string | null>(null);
-  const [followerFollowers, setFollowerFollowers] =
-    useState<FollowerInfoResponse | null>(null);
 
-  //  asdfjlaskjflkasdjflkasdjfslkdfjlksdfjjlsfdlksdfjlksdjfsldkfjdlkfjyy
   useEffect(() => {
     if (isMyAccount) {
+      console.log(publicKey);
       getMyInfo(publicKey);
-    } else {
+    } else if (publicKey) {
       getFollowerInfo(publicKey);
     }
   }, []);
@@ -87,6 +83,7 @@ const DisplayUser = ({ publicKey, isMyAccount }: DisplayUserProps) => {
       setUserFollowers(followers);
     }
   };
+
   const generateCard = (
     myUserInfo: MyUserInfoType,
     profilePictureSrc: string
@@ -131,6 +128,7 @@ const DisplayUser = ({ publicKey, isMyAccount }: DisplayUserProps) => {
       </Card>
     );
   };
+
   return (
     <div className="flex flex-col w-[600px] mx-auto ">
       <div className="text-center  font-bold text-lg mb-2 font-mono">

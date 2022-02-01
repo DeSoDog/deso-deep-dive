@@ -36,7 +36,7 @@ export const getUserInfoStateless = async (
     .data;
 };
 
-export const getUserPicture = (PublicKeyBase58Check: string): string => {
+export const getUserPicture = (PublicKeyBase58Check: string) => {
   return `${BASE_URI}/get-single-profile-picture/${PublicKeyBase58Check}`;
 };
 
@@ -46,7 +46,7 @@ export const getFollowers = async (
   const request: FollowerInfoRequest = {
     PublicKeyBase58Check,
     GetEntriesFollowingUsername: true,
-    NumToFetch: 50,
+    NumToFetch: 10,
   };
   let followerResponse: FollowerInfoResponse = (
     await axios.post(`${BASE_URI}/get-follows-stateless`, request)
@@ -68,11 +68,12 @@ export const getFollowers = async (
 };
 
 export const getPostsForPublicKey = async (
-  ReaderPublicKeyBase58Check: string
+  ReaderPublicKeyBase58Check: string,
+  Username: string
 ): Promise<PostInfoResponse> => {
   const request: PostInfoRequest = {
     PublicKeyBase58Check: "",
-    Username: "TyFischer",
+    Username,
     ReaderPublicKeyBase58Check,
     NumToFetch: 10,
   };

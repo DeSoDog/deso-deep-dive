@@ -14,23 +14,25 @@ import DisplayUser from "./profile/DisplayUser";
 
 const DisplayFollowerFeed = () => {
   const [user, setUser] = useRecoilState<MyUserInfoType>(MyUserInfo);
-
   const [userFollowers, setUserFollowers] =
     useRecoilState<FollowerInfoResponse | null>(MyFollowersInfo);
   const [followerCards, setFollowerCards] = useState<ReactElement[]>([]);
+
   useEffect(() => {
     setFollowerCards(generateFollowerCards());
-    // console.log();
   }, []);
+
   const generateFollowerCards = (): ReactElement[] => {
     let followerCards: ReactElement[] = [];
     for (const publicKey in userFollowers?.PublicKeyToProfileEntry) {
       const follower: FollowerInfo | undefined =
         userFollowers?.PublicKeyToProfileEntry[publicKey];
-      if (follower) {
-        console.log(follower);
+      if (follower && publicKey !== "data") {
         followerCards.push(
-          <DisplayFollower publicKey={publicKey}></DisplayFollower>
+          <DisplayFollower
+            key={publicKey}
+            publicKey={publicKey}
+          ></DisplayFollower>
         );
       }
     }

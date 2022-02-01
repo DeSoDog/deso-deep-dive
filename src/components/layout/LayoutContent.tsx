@@ -20,24 +20,26 @@ const LayoutContent = () => {
   );
   useEffect(() => {
     setAppStateContent(generateAppstateContent());
-  }, [appState]);
+  }, [appState, myPublicKey, user]);
 
   const generateAppstateContent = (): ReactElement => {
     switch (appState) {
       case AppStateEnum.MY_POST: {
-        return (
-          <>
-            <div className="text-center font-bold text-lg mb-2 font-mono">
-              {user?.profileInfoResponse?.Profile.Username}'s Posts
-            </div>
-            <div>
-              <DisplayPosts publicKey={myPublicKey} />
-              <DisplayPosts publicKey={myPublicKey} />
-              <DisplayPosts publicKey={myPublicKey} />
-              <DisplayPosts publicKey={myPublicKey} />
-            </div>
-          </>
-        );
+        if (myPublicKey) {
+          console.log(myPublicKey);
+          return (
+            <>
+              <div className="text-center font-bold text-lg mb-2 font-mono">
+                {user?.profileInfoResponse?.Profile.Username}'s Posts
+              </div>
+              <div>
+                <DisplayPosts publicKey={myPublicKey} />
+              </div>
+            </>
+          );
+        } else {
+          return <></>;
+        }
       }
       case AppStateEnum.MY_FOLLOWERS: {
         return (
@@ -68,7 +70,9 @@ const LayoutContent = () => {
   return (
     <div className="flex flex-col md:flex-row justify-around w-full mt-4  ">
       <div className="flex flex-col flex-grow-1">
-        <DisplayUser publicKey={myPublicKey} isMyAccount={true}></DisplayUser>
+        {myPublicKey !== null && (myPublicKey as string) !== "null" && (
+          <DisplayUser publicKey={myPublicKey} isMyAccount={true}></DisplayUser>
+        )}
       </div>
       <div>
         <div className="w-[600px] mx-auto">{appStateContent}</div>
