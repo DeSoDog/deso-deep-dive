@@ -4,7 +4,10 @@ import { ReactElement, useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { PostInfoResponse } from "../../interfaces/PostInfo.interface";
 import { MyUserInfo, MyUserInfoType } from "../../recoil/AppState.atoms";
-import { getPostsForPublicKey, getUserPicture } from "../../services/DesoApi";
+import {
+  getPostsForPublicKey,
+  getUserPicture,
+} from "../../services/DesoApiRead";
 export interface CreatePostProps {
   publicKey: string;
 }

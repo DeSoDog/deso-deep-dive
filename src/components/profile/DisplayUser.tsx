@@ -10,7 +10,7 @@ import {
   getUserPicture,
   getFollowers,
   getUserInfoStateless,
-} from "../../services/DesoApi";
+} from "../../services/DesoApiRead";
 import Button from "@mui/material/Button";
 import { useRecoilState } from "recoil";
 import {
@@ -41,7 +41,6 @@ const DisplayUser = ({ publicKey, isMyAccount }: DisplayUserProps) => {
 
   useEffect(() => {
     if (isMyAccount) {
-      console.log(publicKey);
       getMyInfo(publicKey);
     } else if (publicKey) {
       getFollowerInfo(publicKey);

@@ -7,6 +7,10 @@ export interface DesoIdentityResponse {
 export interface DesoIdentityLoginResponse extends DesoIdentityResponse {
   payload: LoginInformationPayload;
 }
+export interface DesoIdentitySumbitTransactionResponse
+  extends DesoIdentityResponse {
+  payload: SubmitTransactionPayload;
+}
 
 export interface User {
   hasExtraText: boolean;
@@ -27,4 +31,7 @@ export interface LoginInformationPayload {
   users: Users;
   publicKeyAdded: string;
   signedUp: boolean;
+}
+export interface SubmitTransactionPayload {
+  signedTransactionHex: string;
 }

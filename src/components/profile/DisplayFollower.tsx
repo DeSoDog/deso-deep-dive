@@ -10,7 +10,7 @@ import {
   getUserPicture,
   getFollowers,
   getUserInfoStateless,
-} from "../../services/DesoApi";
+} from "../../services/DesoApiRead";
 import Button from "@mui/material/Button";
 import { MyUserInfoType, FollowerInfoType } from "../../recoil/AppState.atoms";
 import { FollowerInfoResponse } from "../../interfaces/FollowerInfo.interface";

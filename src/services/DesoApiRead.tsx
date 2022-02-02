@@ -13,7 +13,7 @@ import {
   UserInfoResponse,
 } from "../interfaces/UserInfo.interface";
 
-const BASE_URI: Readonly<string> = "https://node.deso.org/api/v0";
+export const BASE_URI: Readonly<string> = "https://node.deso.org/api/v0";
 
 export const getProfileInfo = async (
   PublicKeyBase58Check: string

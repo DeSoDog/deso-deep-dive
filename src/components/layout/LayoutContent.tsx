@@ -26,7 +26,6 @@ const LayoutContent = () => {
     switch (appState) {
       case AppStateEnum.MY_POST: {
         if (myPublicKey) {
-          console.log(myPublicKey);
           return (
             <>
               <div className="text-center font-bold text-lg mb-2 font-mono">
