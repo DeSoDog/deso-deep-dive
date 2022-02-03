@@ -15,6 +15,7 @@ import Button from "@mui/material/Button";
 import { MyUserInfoType, FollowerInfoType } from "../../recoil/AppState.atoms";
 import { FollowerInfoResponse } from "../../interfaces/FollowerInfo.interface";
 import { getFollowerCount } from "../../services/utils";
+import DisplayMessages from "./DisplayMessages";
 export interface DisplayUserProps {
   publicKey: string;
 }
@@ -24,6 +25,7 @@ const DisplayFollower = ({ publicKey }: DisplayUserProps) => {
   const [followerPicture, setFollowerPicture] = useState<string | null>(null);
   const [followerFollowers, setFollowerFollowers] =
     useState<FollowerInfoResponse | null>(null);
+
   useEffect(() => {
     getFollowerInfo(publicKey);
   }, []);
@@ -59,7 +61,7 @@ const DisplayFollower = ({ publicKey }: DisplayUserProps) => {
       return <></>;
     }
     return (
-      <Card variant="outlined" className="mb-5 pb-2">
+      <Card variant="outlined" className="pb-2">
         <CardHeader
           avatar={<Avatar src={profilePictureSrc}></Avatar>}
           subheader={
@@ -78,17 +80,18 @@ const DisplayFollower = ({ publicKey }: DisplayUserProps) => {
         <div className="mx-4 mb-5 font-normal">
           {profileInfoResponse.Profile.Description}
         </div>
-        <CardActions>
-          <Button className="flex justify-around">message</Button>
-        </CardActions>
+
+        <DisplayMessages
+          key={`${publicKey}Messages`}
+          publicKey={publicKey}
+        ></DisplayMessages>
       </Card>
     );
   };
   return (
-    <div className="flex flex-col w-[600px] mx-auto ">
+    <div className="flex flex-col w-[600px] mx-auto">
       <div className="text-center  font-bold text-lg mb-2 font-mono"></div>
       <div>{profileDescriptionCard}</div>
-      <div></div>
     </div>
   );
 };

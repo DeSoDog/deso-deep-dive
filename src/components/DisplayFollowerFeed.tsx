@@ -10,7 +10,6 @@ import {
   MyUserInfoType,
 } from "../recoil/AppState.atoms";
 import DisplayFollower from "./profile/DisplayFollower";
-import DisplayUser from "./profile/DisplayUser";
 
 const DisplayFollowerFeed = () => {
   const [user, setUser] = useRecoilState<MyUserInfoType>(MyUserInfo);
@@ -29,10 +28,12 @@ const DisplayFollowerFeed = () => {
         userFollowers?.PublicKeyToProfileEntry[publicKey];
       if (follower && publicKey !== "data") {
         followerCards.push(
-          <DisplayFollower
-            key={publicKey}
-            publicKey={publicKey}
-          ></DisplayFollower>
+          <>
+            <DisplayFollower
+              key={publicKey}
+              publicKey={publicKey}
+            ></DisplayFollower>
+          </>
         );
       }
     }

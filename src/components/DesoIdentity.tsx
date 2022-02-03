@@ -1,19 +1,25 @@
 import { Button } from "@mui/material";
-import { userInfo } from "os";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import {
+  DesoIdentityDecryptedHexesactionResponse,
   DesoIdentityLoginResponse,
   DesoIdentityResponse,
   DesoIdentitySumbitTransactionResponse,
 } from "../interfaces/DesoIdentity.interface";
-import { LoggedInUser, MyPublicKey } from "../recoil/AppState.atoms";
-import { submitTransaction } from "../services/DesoApiSubmitPost";
+import {
+  DecryptedHexes,
+  LoggedInUser,
+  MyPublicKey,
+} from "../recoil/AppState.atoms";
+import { submitTransaction } from "../services/DesoApiSubmitTransaction";
 let action: "login" | "logout" | null = null;
 let windowPrompt: Window | null = null;
 const Identity = () => {
   const [loggedInUser, setLoggedInUser] = useRecoilState(LoggedInUser);
   const [myPublicKey, setPublicKey] = useRecoilState(MyPublicKey);
+  const [decryptedMessages, setDecryptedMessages] =
+    useRecoilState(DecryptedHexes);
   useEffect(() => {
     window.addEventListener("message", (event) => {
       const execution = determineExecution(event);
@@ -25,6 +31,11 @@ const Identity = () => {
         }
         case "executeWindowCommand": {
           handleWindowExecution(event);
+          break;
+        }
+        case "decryptHexes": {
+          const data: DesoIdentityDecryptedHexesactionResponse = event.data;
+          setDecryptedMessages(data);
           break;
         }
         default: {
@@ -51,22 +62,31 @@ const Identity = () => {
       "toolbar=no, width=800, height=1000, top=0, left=0"
     );
   };
+
   const approve = () => {
     const approve = window.open("https://identity.deso.org/approve");
   };
 
   const determineExecution = (
     event: any
-  ): "dismiss" | "sumbitTransaction" | "executeWindowCommand" => {
+  ):
+    | "dismiss"
+    | "sumbitTransaction"
+    | "executeWindowCommand"
+    | "decryptHexes" => {
     if (!(event.origin === "https://identity.deso.org" && event.source)) {
       // the event is coming from a different Iframe
       return "dismiss";
+    }
+    if (event?.data?.payload?.decryptedHexes) {
+      return "decryptHexes";
     }
     if (event?.data?.payload?.signedTransactionHex) {
       return "sumbitTransaction";
     }
     return "executeWindowCommand";
   };
+
   const handleWindowExecution = (event: any) => {
     const data: DesoIdentityResponse = event.data;
     switch (data.method) {
@@ -108,6 +128,10 @@ const Identity = () => {
         //todo
         break;
       }
+      case "decrypt": {
+        console.log(event);
+        break;
+      }
       default: {
         break;
       }
@@ -115,14 +139,6 @@ const Identity = () => {
   };
   return (
     <>
-      {/* <button
-        onClick={() => {
-          console.log(myPublicKey);
-          console.log(action);
-        }}
-      >
-        state
-      </button> */}
       {!loggedInUser ? (
         <Button
           color="inherit"

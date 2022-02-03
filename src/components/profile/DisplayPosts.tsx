@@ -11,6 +11,7 @@ import {
 export interface CreatePostProps {
   publicKey: string;
 }
+
 const DisplayPosts = ({ publicKey }: CreatePostProps) => {
   const [posts, setPosts] = useState<ReactElement[]>([]);
   const user = useRecoilValue<MyUserInfoType>(MyUserInfo);
@@ -45,7 +46,6 @@ const DisplayPosts = ({ publicKey }: CreatePostProps) => {
               <div className="pl-4">{post.Body}</div>
             </Card>
           );
-          // post.Body;
         });
       }
       if (postElements.length > 0) {
@@ -58,4 +58,5 @@ const DisplayPosts = ({ publicKey }: CreatePostProps) => {
   };
   return <div className="flex flex-col">{posts}</div>;
 };
+
 export default DisplayPosts;

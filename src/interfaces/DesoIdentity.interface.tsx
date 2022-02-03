@@ -11,6 +11,10 @@ export interface DesoIdentitySumbitTransactionResponse
   extends DesoIdentityResponse {
   payload: SubmitTransactionPayload;
 }
+export interface DesoIdentityDecryptedHexesactionResponse
+  extends DesoIdentityResponse {
+  payload: DecryptedHexesPayload;
+}
 
 export interface User {
   hasExtraText: boolean;
@@ -34,4 +38,7 @@ export interface LoginInformationPayload {
 }
 export interface SubmitTransactionPayload {
   signedTransactionHex: string;
+}
+export interface DecryptedHexesPayload {
+  decryptedHexes: { [hex: string]: string };
 }

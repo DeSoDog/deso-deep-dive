@@ -4,10 +4,6 @@ import { TransactionPost } from "../interfaces/Transaction.interface";
 import { BASE_URI } from "./DesoApiRead";
 import { getIdentityIFrame, getSignerInfo, uuid } from "./utils";
 
-export const submitTransaction = async (TransactionHex: string) => {
-  await axios.post(`${BASE_URI}/submit-transaction`, { TransactionHex });
-};
-
 export const sendMessage = () => {};
 export const submitPost = async (
   publicKey: string,

@@ -1,5 +1,8 @@
 import { atom } from "recoil";
-import { User } from "../interfaces/DesoIdentity.interface";
+import {
+  DesoIdentityDecryptedHexesactionResponse,
+  User,
+} from "../interfaces/DesoIdentity.interface";
 import { FollowerInfoResponse } from "../interfaces/FollowerInfo.interface";
 import { ProfileInfoResponse } from "../interfaces/ProfileInfo.interface";
 import { UserInfoResponse } from "../interfaces/UserInfo.interface";
@@ -9,6 +12,12 @@ export enum AppStateEnum {
   MY_FOLLOWERS,
   MY_FOLLOWERS_POST,
 }
+export const DecryptedHexes =
+  atom<DesoIdentityDecryptedHexesactionResponse | null>({
+    key: "decryptedHexes",
+    default: null,
+  });
+
 export const MyPublicKey = atom<string | null>({
   key: "myPublicKey",
   default: null,

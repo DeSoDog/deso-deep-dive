@@ -13,7 +13,6 @@ import DisplayUser from "../profile/DisplayUser";
 const LayoutContent = () => {
   const [appState, setAppState] = useRecoilState<AppStateEnum>(AppState);
   const [user, setUser] = useRecoilState<MyUserInfoType>(MyUserInfo);
-
   const myPublicKey = useRecoilValue(MyPublicKey);
   const [appStateContent, setAppStateContent] = useState<ReactElement | null>(
     null
