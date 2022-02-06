@@ -42,3 +42,18 @@ export interface DecryptMessagesResponse {
   RecipientMessagingPublicKey: string;
   RecipientMessagingGroupKeyName: string;
 }
+
+export interface SendIframeMessageRequest {
+  SenderPublicKeyBase58Check: string;
+  SenderMessagingKeyName: "default-key";
+  RecipientPublicKeyBase58Check: string;
+  RecipientMessagingKeyName: "default-key";
+}
+export interface SendMessageRequest {
+  SenderPublicKeyBase58Check: string;
+  RecipientPublicKeyBase58Check: string;
+  EncryptedMessageText: string;
+  SenderMessagingGroupKeyName: string;
+  RecipientMessagingGroupKeyName: string;
+  MinFeeRateNanosPerKB: number;
+}

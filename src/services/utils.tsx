@@ -37,9 +37,12 @@ export const uuid = () => {
     return v.toString(16);
   });
 };
+
 export const getIdentityIFrame = (): HTMLIFrameElement => {
   const iFrame: HTMLIFrameElement | null = document.getElementById(
     "identity"
   ) as HTMLIFrameElement;
   return iFrame;
 };
+
+export const identityWrapper = () => {};

@@ -19,6 +19,7 @@ import DisplayMessages from "./DisplayMessages";
 export interface DisplayUserProps {
   publicKey: string;
 }
+
 const DisplayFollower = ({ publicKey }: DisplayUserProps) => {
   const [profileDescriptionCard, setCard] = useState<ReactElement | null>(null);
   const [follower, setFollower] = useState<FollowerInfoType | null>(null);

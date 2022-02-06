@@ -3,12 +3,14 @@ import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import {
   DesoIdentityDecryptedHexesactionResponse,
+  DesoIdentityEncryptedResponse,
   DesoIdentityLoginResponse,
   DesoIdentityResponse,
   DesoIdentitySumbitTransactionResponse,
 } from "../interfaces/DesoIdentity.interface";
 import {
   DecryptedHexes,
+  EncryptedMessage,
   LoggedInUser,
   MyPublicKey,
 } from "../recoil/AppState.atoms";
@@ -18,10 +20,14 @@ let windowPrompt: Window | null = null;
 const Identity = () => {
   const [loggedInUser, setLoggedInUser] = useRecoilState(LoggedInUser);
   const [myPublicKey, setPublicKey] = useRecoilState(MyPublicKey);
+
+  const [encryptedMessage, setEncryptedMessage] =
+    useRecoilState(EncryptedMessage);
   const [decryptedMessages, setDecryptedMessages] =
     useRecoilState(DecryptedHexes);
   useEffect(() => {
     window.addEventListener("message", (event) => {
+      console.log(event);
       const execution = determineExecution(event);
       switch (execution) {
         case "sumbitTransaction": {
@@ -36,6 +42,11 @@ const Identity = () => {
         case "decryptHexes": {
           const data: DesoIdentityDecryptedHexesactionResponse = event.data;
           setDecryptedMessages(data);
+          break;
+        }
+        case "encryptMessage": {
+          const data: DesoIdentityEncryptedResponse = event.data;
+          setEncryptedMessage(data);
           break;
         }
         default: {
@@ -73,6 +84,7 @@ const Identity = () => {
     | "dismiss"
     | "sumbitTransaction"
     | "executeWindowCommand"
+    | "encryptMessage"
     | "decryptHexes" => {
     if (!(event.origin === "https://identity.deso.org" && event.source)) {
       // the event is coming from a different Iframe
@@ -83,6 +95,9 @@ const Identity = () => {
     }
     if (event?.data?.payload?.signedTransactionHex) {
       return "sumbitTransaction";
+    }
+    if (event?.data?.payload?.encryptedMessage) {
+      return "encryptMessage";
     }
     return "executeWindowCommand";
   };

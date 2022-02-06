@@ -1,6 +1,7 @@
 import { atom } from "recoil";
 import {
   DesoIdentityDecryptedHexesactionResponse,
+  DesoIdentityEncryptedResponse,
   User,
 } from "../interfaces/DesoIdentity.interface";
 import { FollowerInfoResponse } from "../interfaces/FollowerInfo.interface";
@@ -45,6 +46,11 @@ export const AppState = atom<AppStateEnum>({
 
 export const LoggedInUser = atom<User | null>({
   key: "loggedInUser",
+  default: null,
+});
+
+export const EncryptedMessage = atom<DesoIdentityEncryptedResponse | null>({
+  key: "encryptMessage",
   default: null,
 });
 

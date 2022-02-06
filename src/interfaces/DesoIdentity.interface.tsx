@@ -16,6 +16,10 @@ export interface DesoIdentityDecryptedHexesactionResponse
   payload: DecryptedHexesPayload;
 }
 
+export interface DesoIdentityEncryptedResponse extends DesoIdentityResponse {
+  payload: EncryptedMessagePayload;
+}
+
 export interface User {
   hasExtraText: boolean;
   btcDepositAddress: string;
@@ -41,4 +45,7 @@ export interface SubmitTransactionPayload {
 }
 export interface DecryptedHexesPayload {
   decryptedHexes: { [hex: string]: string };
+}
+export interface EncryptedMessagePayload {
+  encryptedMessage: string;
 }

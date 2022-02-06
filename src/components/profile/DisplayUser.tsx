@@ -51,7 +51,7 @@ const DisplayUser = ({ publicKey, isMyAccount }: DisplayUserProps) => {
     if (profilePicture && user) {
       setCard(generateCard(user, profilePicture));
     }
-  }, [profilePicture, user]);
+  }, [profilePicture, user, userFollowers]);
 
   const getFollowerInfo = async (publicKey: string) => {
     let profileInfoResponse: ProfileInfoResponse;
@@ -79,6 +79,7 @@ const DisplayUser = ({ publicKey, isMyAccount }: DisplayUserProps) => {
       setUser({ profileInfoResponse, userInfoResponse });
       setProfilePicture(profilePictureSrc);
       const followers = await getFollowers(publicKey);
+      console.log(followers);
       setUserFollowers(followers);
     }
   };

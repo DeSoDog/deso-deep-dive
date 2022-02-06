@@ -23,18 +23,5 @@ export default function CreatePostInput() {
       />
       <Button onClick={createPost}>Submit Post</Button>
     </div>
-    // <Paper component="form" className="flex align-center">
-    //   <InputBase
-
-    //     sx={{ ml: 1, flex: 1 }}
-    //     placeholder="Whats on your mind?"
-    //     inputProps={{ "aria-label": "Whats on your mind?" }}
-    //   />
-    //   <IconButton type="submit" className="p-2" aria-label="search">
-    //     <Tooltip title="Post Status" placement="top">
-    //       <PublishIcon></PublishIcon>
-    //     </Tooltip>
-    //   </IconButton>
-    // </Paper>
   );
 }

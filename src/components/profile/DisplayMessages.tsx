@@ -11,9 +11,10 @@ import {
   MyProfilePicture,
   MyPublicKey,
 } from "../../recoil/AppState.atoms";
-import { User } from "../../interfaces/DesoIdentity.interface";
 import { DecryptMessagesResponse } from "../../interfaces/MessageInfo.interface";
 import { getUserPicture } from "../../services/DesoApiRead";
+import { SendMessage } from "./SendMessage";
+import { User } from "../../interfaces/DesoIdentity.interface";
 
 export interface DisplayMessagesProps {
   publicKey: string;
@@ -24,7 +25,7 @@ const DisplayMessages = ({ publicKey }: DisplayMessagesProps) => {
   const [showMessages, setShowMessages] = useState<boolean>(false);
   const [messages, setMessages] = useState<any>(false);
   const [threadCard, setThreadCard] = useState<ReactElement[] | null>(null);
-  const user = useRecoilValue(LoggedInUser);
+  const loggedInUser = useRecoilValue(LoggedInUser);
   const profilePicture = useRecoilValue<string | null>(MyProfilePicture);
   const [followerPicture, setFollowerPicture] = useState<any>(null);
   const [decryptedMessages, setDecryptedMessages] =
@@ -67,7 +68,7 @@ const DisplayMessages = ({ publicKey }: DisplayMessagesProps) => {
               key={index}
               className={`flex justify-start ${
                 x.m.IsSender ? "bg-[#484753]" : "bg-[#88869b]"
-              } py-2 px-2 rounded-lg mx-6 mb-1`}
+              } py-2 px-2 rounded-lg mx-6 mb-3`}
             >
               <Avatar
                 src={x.m.IsSender ? profilePicture : followerPicture}
@@ -85,7 +86,7 @@ const DisplayMessages = ({ publicKey }: DisplayMessagesProps) => {
   };
 
   const getUserMessages = async () => {
-    if (user === null) {
+    if (loggedInUser === null) {
       return;
     }
     const response = await getMessages(
@@ -99,7 +100,7 @@ const DisplayMessages = ({ publicKey }: DisplayMessagesProps) => {
         HoldingsOnly: false,
         SortAlgorithm: "time",
       },
-      user
+      loggedInUser
     );
     setMessages(response);
   };
@@ -118,7 +119,23 @@ const DisplayMessages = ({ publicKey }: DisplayMessagesProps) => {
           {showMessages ? "hide messages" : "show messages"}
         </Button>
       </div>
-      <>{showMessages ? threadCard : <></>}</>
+
+      {showMessages ? (
+        <>
+          <div className="bg-[#4f4b6e] mx-6 mt-3 py-3 rounded-t-lg  max-h-[400px] overflow-auto">
+            {threadCard}
+          </div>
+          <div className="px-7 ">
+            <SendMessage
+              publicKey={publicKey}
+              myPublicKey={myPublicKey as string}
+              loggedInUser={loggedInUser as User}
+            />
+          </div>
+        </>
+      ) : (
+        <></>
+      )}
     </>
   );
 };
