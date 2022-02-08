@@ -1,6 +1,6 @@
+import { UserInfoResponse } from "../chapters/Chapter1/get-users-stateless/GetUserStateless.service";
 import { User } from "../interfaces/DesoIdentity.interface";
 import { TransactionPost } from "../interfaces/Transaction.interface";
-import { UserInfoResponse } from "../interfaces/UserInfo.interface";
 
 export const getFollowerCount = (
   userInfoResponse: UserInfoResponse

@@ -15,7 +15,7 @@ import { MyUserInfoType, FollowerInfoType } from "../../recoil/AppState.atoms";
 import { FollowerInfoResponse } from "../../interfaces/FollowerInfo.interface";
 import { getFollowerCount } from "../../services/utils";
 import DisplayMessages from "./DisplayMessages";
-import { ProfileInfoResponse } from "../../chapters/Chapter1/API/GetSingleProfile";
+import { ProfileInfoResponse } from "../../chapters/Chapter1/get-single-profile/GetSingleProfile.service";
 export interface DisplayUserProps {
   publicKey: string;
 }
@@ -35,7 +35,7 @@ const DisplayFollower = ({ publicKey }: DisplayUserProps) => {
     if (followerPicture && follower) {
       setCard(generateCard(follower, followerPicture));
     }
-  }, [followerPicture, follower]);
+  }, [followerPicture, follower, setFollower]);
 
   const getFollowerInfo = async (publicKey: string) => {
     let profileInfoResponse: ProfileInfoResponse;

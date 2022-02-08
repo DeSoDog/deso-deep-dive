@@ -10,7 +10,7 @@ function App() {
     <Router>
       <Header />
       <Routes>
-        {/* <Route path={"/"} element={CHAPTERS.CHAPTER_0.component()}></Route> */}
+        <Route path={"/"} element={CHAPTERS.CHAPTER_0.component()}></Route>
         <Route
           path={CHAPTERS.CHAPTER_0.route}
           element={CHAPTERS.CHAPTER_0.component()}
@@ -20,8 +20,8 @@ function App() {
           element={CHAPTERS.CHAPTER_1_GET_SINGLE_PROFILE.component()}
         ></Route>
         <Route
-          path={CHAPTERS.CHAPTER_1_GET_SOMETHING_ELSE.route}
-          element={CHAPTERS.CHAPTER_1_GET_SOMETHING_ELSE.component()}
+          path={CHAPTERS.CHAPTER_1_GET_USERS_STATELESS.route}
+          element={CHAPTERS.CHAPTER_1_GET_USERS_STATELESS.component()}
         ></Route>
         <Route
           path={CHAPTERS.CHAPTER_SAMPLE_APP.route}

@@ -1,6 +1,10 @@
 import axios from "axios";
 import { BASE_URI } from "../chapters/Chapter.models";
-import { ProfileInfoResponse } from "../chapters/Chapter1/API/GetSingleProfile";
+import { ProfileInfoResponse } from "../chapters/Chapter1/get-single-profile/GetSingleProfile.service";
+import {
+  UserInfoRequest,
+  UserInfoResponse,
+} from "../chapters/Chapter1/get-users-stateless/GetUserStateless.service";
 import {
   FollowerInfoRequest,
   FollowerInfoResponse,
@@ -9,10 +13,6 @@ import {
   PostInfoRequest,
   PostInfoResponse,
 } from "../interfaces/PostInfo.interface";
-import {
-  UserInfoRequest,
-  UserInfoResponse,
-} from "../interfaces/UserInfo.interface";
 
 export const getProfileInfo = async (
   PublicKeyBase58Check: string

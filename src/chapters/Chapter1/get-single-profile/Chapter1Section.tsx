@@ -1,37 +1,39 @@
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import { PageNavigation } from "../../components/layout/PageNavigation";
-import { PublicKey } from "../Chapter.atom";
-import { Chapter, ChapterInfo, CHAPTERS } from "../Chapter.models";
-import { ChapterApiTemplate } from "../ChapterApiTemplate";
-import { ChapterTemplate } from "../ChapterTemplate";
+import { PageNavigation } from "../../../components/layout/PageNavigation";
+import { PublicKey } from "../../Chapter.atom";
+import { BASE_URI, Chapter, ChapterNavigation } from "../../Chapter.models";
+import { ChapterApiTemplate } from "../../ChapterApiTemplate";
+import { ChapterTemplate } from "../../ChapterTemplate";
 import {
   getSingleProfile,
   ProfileInfoRequest,
   ProfileInfoResponse,
-} from "./API/GetSingleProfile";
+} from "./GetSingleProfile.service";
 
 export interface Chapter1SectionProps {
   selectedChapter: Chapter;
-  chapters: ChapterInfo;
+  chapters: ChapterNavigation;
+  apiCall: (params: any) => any;
 }
 export const Chapter1Section = ({
   selectedChapter,
   chapters,
+  apiCall,
 }: Chapter1SectionProps) => {
   const publicKey = useRecoilValue(PublicKey);
   const [response, setResponse] = useState<ProfileInfoResponse | null>(null);
   const [request, setRequest] = useState<ProfileInfoRequest | null>(null);
   const [endpoint, setEndpoint] = useState<string | null>(null);
   useEffect(() => {}, []);
-  const getSingleProfileInfo = async () => {
-    const profileResponse = await getSingleProfile(publicKey).catch(
-      (e: Error) => alert(e.message)
+  const executeApiCall = async () => {
+    const apiResponse = await apiCall(publicKey).catch((e: Error) =>
+      alert(e.message)
     );
-    if (profileResponse) {
-      setResponse(profileResponse?.response);
-      setEndpoint(profileResponse.endpoint);
-      setRequest(profileResponse.request);
+    if (apiResponse) {
+      setResponse(apiResponse?.response);
+      setEndpoint(`${BASE_URI}/${apiResponse.endpoint}`);
+      setRequest(apiResponse.request);
     }
   };
   return (
@@ -39,7 +41,7 @@ export const Chapter1Section = ({
       title={selectedChapter.title}
       body={
         <ChapterApiTemplate
-          onClick={getSingleProfileInfo}
+          onClick={executeApiCall}
           title="get-single-profile"
           request={request}
           response={response}

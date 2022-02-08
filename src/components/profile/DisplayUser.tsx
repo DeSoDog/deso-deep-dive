@@ -23,7 +23,7 @@ import CreatePostInput from "./CreatePostInput";
 import { FollowerInfoResponse } from "../../interfaces/FollowerInfo.interface";
 import { getFollowerCount } from "../../services/utils";
 import UserActions from "../UserActions";
-import { ProfileInfoResponse } from "../../chapters/Chapter1/API/GetSingleProfile";
+import { ProfileInfoResponse } from "../../chapters/Chapter1/get-single-profile/GetSingleProfile.service";
 export interface DisplayUserProps {
   publicKey: string;
   isMyAccount: boolean;

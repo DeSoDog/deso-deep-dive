@@ -1,12 +1,12 @@
 import { atom } from "recoil";
-import { ProfileInfoResponse } from "../chapters/Chapter1/API/GetSingleProfile";
+import { ProfileInfoResponse } from "../chapters/Chapter1/get-single-profile/GetSingleProfile.service";
+import { UserInfoResponse } from "../chapters/Chapter1/get-users-stateless/GetUserStateless.service";
 import {
   DesoIdentityDecryptedHexesactionResponse,
   DesoIdentityEncryptedResponse,
   User,
 } from "../interfaces/DesoIdentity.interface";
 import { FollowerInfoResponse } from "../interfaces/FollowerInfo.interface";
-import { UserInfoResponse } from "../interfaces/UserInfo.interface";
 
 export enum AppStateEnum {
   MY_POST,

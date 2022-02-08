@@ -1,4 +1,4 @@
-import { ProfileEntryResponse } from "./UserInfo.interface";
+import { CoinEntry, DAOCoinEntry } from "./Coin.interface";
 
 export interface GetMessageRequest {
   PublicKeyBase58Check: string;
@@ -28,7 +28,23 @@ export interface Message {
 export interface OrderedContactsWithMessages {
   PublicKeyBase58Check: string;
   Messages: Message[];
-  ProfileEntryResponse: ProfileEntryResponse;
+  ProfileEntryResponse: {
+    PublicKeyBase58Check: string;
+    Username: string;
+    Description: string;
+    IsHidden: boolean;
+    IsReserved: boolean;
+    IsVerified: boolean;
+    Comments?: any;
+    Posts?: any;
+    CoinEntry: CoinEntry;
+    DAOCoinEntry: DAOCoinEntry;
+    CoinPriceDeSoNanos: number;
+    CoinPriceBitCloutNanos: number;
+    UsersThatHODL?: any;
+    IsFeaturedTutorialWellKnownCreator: boolean;
+    IsFeaturedTutorialUpAndComingCreator: boolean;
+  };
   NumMessagesRead: number;
 }
 export interface DecryptMessagesResponse {
