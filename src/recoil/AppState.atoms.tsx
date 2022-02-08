@@ -53,6 +53,10 @@ export const EncryptedMessage = atom<DesoIdentityEncryptedResponse | null>({
   key: "encryptMessage",
   default: null,
 });
+export const ToggleDrawer = atom<boolean>({
+  key: "toggleDrawer",
+  default: false,
+});
 
 export type MyUserInfoType = {
   profileInfoResponse: ProfileInfoResponse | null;

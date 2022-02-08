@@ -26,15 +26,6 @@ const UserActions = () => {
       >
         View Followers
       </Button>
-      <Button
-        variant="text"
-        size="small"
-        onClick={() => {
-          setAppState(AppStateEnum.MY_FOLLOWERS_POST);
-        }}
-      >
-        View Followers Posts
-      </Button>
     </div>
   );
 };
