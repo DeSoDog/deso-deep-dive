@@ -1,11 +1,11 @@
 import { atom } from "recoil";
+import { ProfileInfoResponse } from "../chapters/Chapter1/API/GetSingleProfile";
 import {
   DesoIdentityDecryptedHexesactionResponse,
   DesoIdentityEncryptedResponse,
   User,
 } from "../interfaces/DesoIdentity.interface";
 import { FollowerInfoResponse } from "../interfaces/FollowerInfo.interface";
-import { ProfileInfoResponse } from "../interfaces/ProfileInfo.interface";
 import { UserInfoResponse } from "../interfaces/UserInfo.interface";
 
 export enum AppStateEnum {
@@ -13,47 +13,48 @@ export enum AppStateEnum {
   MY_FOLLOWERS,
   MY_FOLLOWERS_POST,
 }
-export const DecryptedHexes =
+export const SampleAppDecryptedHexes =
   atom<DesoIdentityDecryptedHexesactionResponse | null>({
     key: "decryptedHexes",
     default: null,
   });
 
-export const MyPublicKey = atom<string | null>({
+export const SampleAppMyPublicKey = atom<string | null>({
   key: "myPublicKey",
   default: null,
 });
 
-export const MyUserInfo = atom<MyUserInfoType>({
+export const SampleAppMyUserInfo = atom<MyUserInfoType>({
   key: "myUserInfo",
   default: null,
 });
 
-export const MyFollowersInfo = atom<FollowerInfoResponse | null>({
+export const SampleAppMyFollowersInfo = atom<FollowerInfoResponse | null>({
   key: "myFollowersInfo",
   default: null,
 });
 
-export const MyProfilePicture = atom<string | null>({
+export const SampleAppMyProfilePicture = atom<string | null>({
   key: "myProfilePicture",
   default: null,
 });
 
-export const AppState = atom<AppStateEnum>({
+export const SampleAppState = atom<AppStateEnum>({
   key: "appState",
   default: AppStateEnum.MY_POST,
 });
 
-export const LoggedInUser = atom<User | null>({
+export const SampleAppLoggedInUser = atom<User | null>({
   key: "loggedInUser",
   default: null,
 });
 
-export const EncryptedMessage = atom<DesoIdentityEncryptedResponse | null>({
-  key: "encryptMessage",
-  default: null,
-});
-export const ToggleDrawer = atom<boolean>({
+export const SampleAppEncryptedMessage =
+  atom<DesoIdentityEncryptedResponse | null>({
+    key: "encryptMessage",
+    default: null,
+  });
+export const SampleAppToggleDrawer = atom<boolean>({
   key: "toggleDrawer",
   default: false,
 });

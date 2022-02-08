@@ -1,7 +1,7 @@
 import axios from "axios";
+import { BASE_URI } from "../chapters/Chapter.models";
 import { User } from "../interfaces/DesoIdentity.interface";
 import { TransactionPost } from "../interfaces/Transaction.interface";
-import { BASE_URI } from "./DesoApiRead";
 import { getIdentityIFrame, getSignerInfo, uuid } from "./utils";
 
 export const sendMessage = () => {};

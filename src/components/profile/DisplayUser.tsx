@@ -3,7 +3,6 @@ import CardHeader from "@mui/material/CardHeader";
 import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
 
-import { ProfileInfoResponse } from "../../interfaces/ProfileInfo.interface";
 import { ReactElement, useEffect, useState } from "react";
 import {
   getProfileInfo,
@@ -14,9 +13,9 @@ import {
 import Button from "@mui/material/Button";
 import { useRecoilState } from "recoil";
 import {
-  MyUserInfo,
-  MyFollowersInfo,
-  MyProfilePicture,
+  SampleAppMyUserInfo,
+  SampleAppMyFollowersInfo,
+  SampleAppMyProfilePicture,
   MyUserInfoType,
   FollowerInfoType,
 } from "../../recoil/AppState.atoms";
@@ -24,17 +23,18 @@ import CreatePostInput from "./CreatePostInput";
 import { FollowerInfoResponse } from "../../interfaces/FollowerInfo.interface";
 import { getFollowerCount } from "../../services/utils";
 import UserActions from "../UserActions";
+import { ProfileInfoResponse } from "../../chapters/Chapter1/API/GetSingleProfile";
 export interface DisplayUserProps {
   publicKey: string;
   isMyAccount: boolean;
 }
 const DisplayUser = ({ publicKey, isMyAccount }: DisplayUserProps) => {
-  const [user, setUser] = useRecoilState<MyUserInfoType>(MyUserInfo);
+  const [user, setUser] = useRecoilState<MyUserInfoType>(SampleAppMyUserInfo);
   const [profilePicture, setProfilePicture] = useRecoilState<string | null>(
-    MyProfilePicture
+    SampleAppMyProfilePicture
   );
   const [userFollowers, setUserFollowers] =
-    useRecoilState<FollowerInfoResponse | null>(MyFollowersInfo);
+    useRecoilState<FollowerInfoResponse | null>(SampleAppMyFollowersInfo);
   const [profileDescriptionCard, setCard] = useState<ReactElement | null>(null);
   const [follower, setFollower] = useState<FollowerInfoType | null>(null);
   const [followerPicture, setFollowerPicture] = useState<string | null>(null);

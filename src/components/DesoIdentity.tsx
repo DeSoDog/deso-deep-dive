@@ -9,22 +9,24 @@ import {
   DesoIdentitySumbitTransactionResponse,
 } from "../interfaces/DesoIdentity.interface";
 import {
-  DecryptedHexes,
-  EncryptedMessage,
-  LoggedInUser,
-  MyPublicKey,
+  SampleAppDecryptedHexes,
+  SampleAppEncryptedMessage,
+  SampleAppLoggedInUser,
+  SampleAppMyPublicKey,
 } from "../recoil/AppState.atoms";
 import { submitTransaction } from "../services/DesoApiSubmitTransaction";
 let action: "login" | "logout" | null = null;
 let windowPrompt: Window | null = null;
 const Identity = () => {
-  const [loggedInUser, setLoggedInUser] = useRecoilState(LoggedInUser);
-  const [myPublicKey, setPublicKey] = useRecoilState(MyPublicKey);
+  const [loggedInUser, setLoggedInUser] = useRecoilState(SampleAppLoggedInUser);
+  const [myPublicKey, setPublicKey] = useRecoilState(SampleAppMyPublicKey);
 
-  const [encryptedMessage, setEncryptedMessage] =
-    useRecoilState(EncryptedMessage);
-  const [decryptedMessages, setDecryptedMessages] =
-    useRecoilState(DecryptedHexes);
+  const [encryptedMessage, setEncryptedMessage] = useRecoilState(
+    SampleAppEncryptedMessage
+  );
+  const [decryptedMessages, setDecryptedMessages] = useRecoilState(
+    SampleAppDecryptedHexes
+  );
   useEffect(() => {
     window.addEventListener("message", (event) => {
       console.log(event);

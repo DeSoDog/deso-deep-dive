@@ -3,7 +3,10 @@ import Card from "@mui/material/Card";
 import { ReactElement, useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { PostInfoResponse } from "../../interfaces/PostInfo.interface";
-import { MyUserInfo, MyUserInfoType } from "../../recoil/AppState.atoms";
+import {
+  SampleAppMyUserInfo,
+  MyUserInfoType,
+} from "../../recoil/AppState.atoms";
 import {
   getPostsForPublicKey,
   getUserPicture,
@@ -14,7 +17,7 @@ export interface CreatePostProps {
 
 const DisplayPosts = ({ publicKey }: CreatePostProps) => {
   const [posts, setPosts] = useState<ReactElement[]>([]);
-  const user = useRecoilValue<MyUserInfoType>(MyUserInfo);
+  const user = useRecoilValue<MyUserInfoType>(SampleAppMyUserInfo);
   useEffect(() => {
     getPosts();
   }, [user]);

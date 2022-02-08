@@ -6,10 +6,10 @@ import Close from "@mui/icons-material/Close";
 import { getMessages } from "../../services/DesoApiSendMessage";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
-  DecryptedHexes,
-  LoggedInUser,
-  MyProfilePicture,
-  MyPublicKey,
+  SampleAppDecryptedHexes,
+  SampleAppLoggedInUser,
+  SampleAppMyProfilePicture,
+  SampleAppMyPublicKey,
 } from "../../recoil/AppState.atoms";
 import { DecryptMessagesResponse } from "../../interfaces/MessageInfo.interface";
 import { getUserPicture } from "../../services/DesoApiRead";
@@ -21,15 +21,18 @@ export interface DisplayMessagesProps {
 }
 
 const DisplayMessages = ({ publicKey }: DisplayMessagesProps) => {
-  const myPublicKey = useRecoilValue(MyPublicKey);
+  const myPublicKey = useRecoilValue(SampleAppMyPublicKey);
   const [showMessages, setShowMessages] = useState<boolean>(false);
   const [messages, setMessages] = useState<any>(false);
   const [threadCard, setThreadCard] = useState<ReactElement[] | null>(null);
-  const loggedInUser = useRecoilValue(LoggedInUser);
-  const profilePicture = useRecoilValue<string | null>(MyProfilePicture);
+  const loggedInUser = useRecoilValue(SampleAppLoggedInUser);
+  const profilePicture = useRecoilValue<string | null>(
+    SampleAppMyProfilePicture
+  );
   const [followerPicture, setFollowerPicture] = useState<any>(null);
-  const [decryptedMessages, setDecryptedMessages] =
-    useRecoilState(DecryptedHexes);
+  const [decryptedMessages, setDecryptedMessages] = useRecoilState(
+    SampleAppDecryptedHexes
+  );
 
   useEffect(() => {
     const followerProfilePic = getUserPicture(publicKey);

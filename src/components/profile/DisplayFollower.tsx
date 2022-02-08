@@ -3,7 +3,6 @@ import CardHeader from "@mui/material/CardHeader";
 import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
 
-import { ProfileInfoResponse } from "../../interfaces/ProfileInfo.interface";
 import { ReactElement, useEffect, useState } from "react";
 import {
   getProfileInfo,
@@ -16,6 +15,7 @@ import { MyUserInfoType, FollowerInfoType } from "../../recoil/AppState.atoms";
 import { FollowerInfoResponse } from "../../interfaces/FollowerInfo.interface";
 import { getFollowerCount } from "../../services/utils";
 import DisplayMessages from "./DisplayMessages";
+import { ProfileInfoResponse } from "../../chapters/Chapter1/API/GetSingleProfile";
 export interface DisplayUserProps {
   publicKey: string;
 }

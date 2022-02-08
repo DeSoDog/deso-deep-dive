@@ -2,7 +2,7 @@ import { Button, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { User } from "../../interfaces/DesoIdentity.interface";
-import { EncryptedMessage } from "../../recoil/AppState.atoms";
+import { SampleAppEncryptedMessage } from "../../recoil/AppState.atoms";
 import { encryptMessage, sendMessage } from "../../services/DesoApiSendMessage";
 
 export interface SendMessageProps {
@@ -15,8 +15,9 @@ export const SendMessage = ({
   myPublicKey,
   loggedInUser,
 }: SendMessageProps) => {
-  const [encryptedMessage, setEncryptedMessage] =
-    useRecoilState(EncryptedMessage);
+  const [encryptedMessage, setEncryptedMessage] = useRecoilState(
+    SampleAppEncryptedMessage
+  );
   const [message, setMessage] = useState<string>("");
   useEffect(() => {
     if (encryptedMessage) {

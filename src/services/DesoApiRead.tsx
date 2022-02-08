@@ -1,4 +1,6 @@
 import axios from "axios";
+import { BASE_URI } from "../chapters/Chapter.models";
+import { ProfileInfoResponse } from "../chapters/Chapter1/API/GetSingleProfile";
 import {
   FollowerInfoRequest,
   FollowerInfoResponse,
@@ -7,13 +9,10 @@ import {
   PostInfoRequest,
   PostInfoResponse,
 } from "../interfaces/PostInfo.interface";
-import { ProfileInfoResponse } from "../interfaces/ProfileInfo.interface";
 import {
   UserInfoRequest,
   UserInfoResponse,
 } from "../interfaces/UserInfo.interface";
-
-export const BASE_URI: Readonly<string> = "https://node.deso.org/api/v0";
 
 export const getProfileInfo = async (
   PublicKeyBase58Check: string

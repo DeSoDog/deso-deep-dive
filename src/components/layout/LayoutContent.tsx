@@ -1,19 +1,19 @@
 import { ReactElement, useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { RecoilRoot, useRecoilState, useRecoilValue } from "recoil";
 import {
-  AppState,
+  SampleAppState,
   AppStateEnum,
-  MyPublicKey,
-  MyUserInfo,
+  SampleAppMyPublicKey,
+  SampleAppMyUserInfo,
   MyUserInfoType,
 } from "../../recoil/AppState.atoms";
 import DisplayFollowerFeed from "../DisplayFollowerFeed";
 import DisplayPosts from "../profile/DisplayPosts";
 import DisplayUser from "../profile/DisplayUser";
 const LayoutContent = () => {
-  const [appState, setAppState] = useRecoilState<AppStateEnum>(AppState);
-  const [user, setUser] = useRecoilState<MyUserInfoType>(MyUserInfo);
-  const myPublicKey = useRecoilValue(MyPublicKey);
+  const [appState, setAppState] = useRecoilState<AppStateEnum>(SampleAppState);
+  const [user, setUser] = useRecoilState<MyUserInfoType>(SampleAppMyUserInfo);
+  const myPublicKey = useRecoilValue(SampleAppMyPublicKey);
   const [appStateContent, setAppStateContent] = useState<ReactElement | null>(
     null
   );

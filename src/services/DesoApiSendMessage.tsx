@@ -5,10 +5,10 @@ import {
   SendIframeMessageRequest,
   SendMessageRequest,
 } from "../interfaces/MessageInfo.interface";
-import { BASE_URI } from "./DesoApiRead";
 import { getIdentityIFrame, uuid } from "./utils";
 import { User } from "../interfaces/DesoIdentity.interface";
 import { submitTransaction } from "./DesoApiSubmitTransaction";
+import { BASE_URI } from "../chapters/Chapter.models";
 
 const DEFAULT_KEY = "default-key";
 export const encryptMessage = async (

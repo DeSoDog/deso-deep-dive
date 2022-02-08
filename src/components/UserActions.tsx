@@ -1,9 +1,9 @@
 import { Button } from "@mui/material";
 import { useRecoilState } from "recoil";
-import { AppState, AppStateEnum } from "../recoil/AppState.atoms";
+import { SampleAppState, AppStateEnum } from "../recoil/AppState.atoms";
 
 const UserActions = () => {
-  const [appState, setAppState] = useRecoilState<AppStateEnum>(AppState);
+  const [appState, setAppState] = useRecoilState<AppStateEnum>(SampleAppState);
   return (
     <div className="flex md:flex-row justify-center">
       <Button

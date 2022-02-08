@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import LayoutContent from "../components/layout/LayoutContent";
 import { Chapter0 } from "./Chapter0";
-import Chapter1 from "./Chapter1";
+import Chapter1 from "./Chapter1/Chapter1";
 
 export const CHAPTERS: Readonly<ChapterInfo> = {
   CHAPTER_0: {
@@ -45,3 +45,5 @@ export interface Chapter {
   route: string;
   component: ReactElement;
 }
+
+export const BASE_URI: Readonly<string> = "https://node.deso.org/api/v0";

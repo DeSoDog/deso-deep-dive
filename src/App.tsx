@@ -7,7 +7,6 @@ import DesoDrawer from "./components/layout/Drawer";
 import { CHAPTERS } from "./chapters/Chapter.models";
 
 function App() {
-  console.log(CHAPTERS.chaptersToArray());
   return (
     <Router>
       <Header />
@@ -21,6 +20,7 @@ function App() {
           path={CHAPTERS.CHAPTER_1.route}
           element={CHAPTERS.CHAPTER_1.component}
         ></Route>
+
         <Route
           path={CHAPTERS.CHAPTER_SAMPLE_APP.route}
           element={CHAPTERS.CHAPTER_SAMPLE_APP.component}

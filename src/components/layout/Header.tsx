@@ -3,10 +3,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Logo from "../../assets/deso-logo.png";
 import Identity from "../DesoIdentity";
 import { useRecoilState } from "recoil";
-import { ToggleDrawer } from "../../recoil/AppState.atoms";
+import { SampleAppToggleDrawer } from "../../recoil/AppState.atoms";
 
 export const Header = () => {
-  const [toggle, setToggleDrawer] = useRecoilState(ToggleDrawer);
+  const [toggle, setToggleDrawer] = useRecoilState(SampleAppToggleDrawer);
   return (
     <>
       <AppBar position="static" className="bg-primary">

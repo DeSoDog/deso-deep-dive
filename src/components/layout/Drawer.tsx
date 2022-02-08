@@ -6,12 +6,12 @@ import ListItem from "@mui/material/ListItem";
 import { Drawer } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { ToggleDrawer } from "../../recoil/AppState.atoms";
+import { SampleAppToggleDrawer } from "../../recoil/AppState.atoms";
 export interface DesoDrawerProps {
   routes: string[];
 }
 export default function DesoDrawer({ routes }: DesoDrawerProps) {
-  const [toggleState, setToggleDrawer] = useRecoilState(ToggleDrawer);
+  const [toggleState, setToggleDrawer] = useRecoilState(SampleAppToggleDrawer);
 
   const toggle =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
