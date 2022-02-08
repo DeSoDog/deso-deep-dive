@@ -1,8 +1,13 @@
 import { Button, Link } from "@mui/material";
 
 import { Link as RouterLink } from "react-router-dom";
+import { Chapter, ChapterInfo } from "./Chapter.models";
 import { ChapterTemplate } from "./ChapterTemplate";
-export const Chapter0 = () => {
+export interface Chapter0Props {
+  selectedChapter: Chapter;
+  Chapters: ChapterInfo;
+}
+export const Chapter0 = ({ selectedChapter, Chapters }: Chapter0Props) => {
   return (
     <ChapterTemplate
       title="Chapter 0: Getting Started"
@@ -33,7 +38,11 @@ export const Chapter0 = () => {
           <div className="flex justify-center h-1/2">
             <div className="mt-auto mb-2">
               <Button variant="contained">
-                <RouterLink to="/chapter1"> Get Started</RouterLink>
+                <RouterLink
+                  to={Chapters.next(selectedChapter)?.route as string}
+                >
+                  Get Started
+                </RouterLink>
               </Button>
             </div>
           </div>

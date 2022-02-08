@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { PageNavigation } from "../../components/layout/PageNavigation";
 import { PublicKey } from "../Chapter.atom";
-import { CHAPTERS } from "../Chapter.models";
+import { Chapter, ChapterInfo, CHAPTERS } from "../Chapter.models";
 import { ChapterApiTemplate } from "../ChapterApiTemplate";
 import { ChapterTemplate } from "../ChapterTemplate";
 import {
@@ -10,7 +10,15 @@ import {
   ProfileInfoRequest,
   ProfileInfoResponse,
 } from "./API/GetSingleProfile";
-export const Chapter1 = () => {
+
+export interface Chapter1SectionProps {
+  selectedChapter: Chapter;
+  chapters: ChapterInfo;
+}
+export const Chapter1Section = ({
+  selectedChapter,
+  chapters,
+}: Chapter1SectionProps) => {
   const publicKey = useRecoilValue(PublicKey);
   const [response, setResponse] = useState<ProfileInfoResponse | null>(null);
   const [request, setRequest] = useState<ProfileInfoRequest | null>(null);
@@ -28,7 +36,7 @@ export const Chapter1 = () => {
   };
   return (
     <ChapterTemplate
-      title={CHAPTERS.CHAPTER_1.title}
+      title={selectedChapter.title}
       body={
         <ChapterApiTemplate
           onClick={getSingleProfileInfo}
@@ -40,11 +48,11 @@ export const Chapter1 = () => {
       }
       navigation={
         <PageNavigation
-          previous={CHAPTERS.CHAPTER_0}
-          next={CHAPTERS.CHAPTER_1}
+          previous={chapters.prev(selectedChapter) as Chapter}
+          next={chapters.next(selectedChapter) as Chapter}
         />
       }
     />
   );
 };
-export default Chapter1;
+export default Chapter1Section;
