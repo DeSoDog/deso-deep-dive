@@ -9,10 +9,9 @@ import { useRecoilState } from "recoil";
 import { SampleAppToggleDrawer } from "../../recoil/AppState.atoms";
 import { ChapterNavigation } from "../../chapters/Chapter.models";
 export interface DesoDrawerProps {
-  routes: string[];
   chapters: ChapterNavigation;
 }
-export default function DesoDrawer({ routes, chapters }: DesoDrawerProps) {
+export default function DesoDrawer({ chapters }: DesoDrawerProps) {
   const [toggleState, setToggleDrawer] = useRecoilState(SampleAppToggleDrawer);
 
   const toggle =
