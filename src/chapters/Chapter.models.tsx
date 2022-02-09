@@ -2,6 +2,7 @@ import { ReactElement } from "react";
 import { Route } from "react-router-dom";
 import LayoutContent from "../components/layout/LayoutContent";
 import { Chapter0 } from "./Chapter0";
+import { getFollowsStateless } from "./Chapter1/get-follows-stateless/GetFollowsStateless.service";
 import { Chapter1Section } from "./Chapter1/get-single-profile/Chapter1Section";
 import { getSingleProfile } from "./Chapter1/get-single-profile/GetSingleProfile.service";
 import { getUserInfoStateless } from "./Chapter1/get-users-stateless/GetUserStateless.service";
@@ -70,7 +71,7 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
             <Chapter1Section
               chapters={CHAPTERS}
               selectedChapter={this}
-              apiCall={getUserInfoStateless}
+              apiCall={getFollowsStateless}
             />
           }
         ></Route>
