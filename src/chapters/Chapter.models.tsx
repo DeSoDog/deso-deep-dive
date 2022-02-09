@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import React, { ReactElement } from "react";
 import { Route } from "react-router-dom";
 import LayoutContent from "../components/layout/LayoutContent";
 import { Chapter0 } from "./Chapter0";
@@ -6,13 +6,13 @@ import { getFollowsStateless } from "./Chapter1/get-follows-stateless/GetFollows
 import { Chapter1Section } from "./Chapter1/get-single-profile/Chapter1Section";
 import { getSingleProfile } from "./Chapter1/get-single-profile/GetSingleProfile.service";
 import { getUserStateless } from "./Chapter1/get-users-stateless/GetUserStateless.service";
-import { ProfileAndFollowerCard } from "./Chapter1/profile-and-follower-card/ProfileAndFollowerCard";
+import { ProfileAndFollowerCard } from "./Chapter1/profile-card/ProfileCard";
 import { SettingUpIdentity } from "./Chapter2/SettingUpIdentity";
 
 export const CHAPTERS: Readonly<ChapterNavigation> = {
   CHAPTER_0: {
-    title: "Chapter 0: Getting Started",
-    route: "/chapter0",
+    title: "Getting Started",
+    route: "/getting-started",
     component: function () {
       return (
         <Route
@@ -24,7 +24,7 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
     },
   },
   CHAPTER_1_GET_SINGLE_PROFILE: {
-    title: "Chapter 1: Get Single Profile",
+    title: "Get Single Profile",
     route: "/chapter1/get-single-profile",
     description: "get-single-profile",
     component: function () {
@@ -44,7 +44,7 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
     },
   },
   CHAPTER_1_GET_USERS_STATELESS: {
-    title: "Chapter 1: Get Users Stateless",
+    title: "Get Users Stateless",
     route: "/chapter1/get-users-stateless",
     description: "get-users-stateless",
     component: function () {
@@ -64,7 +64,7 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
     },
   },
   CHAPTER_1_GET_FOLLOWS_STATELESS: {
-    title: "Chapter 1: Get Follows Stateless",
+    title: "Get Follows Stateless",
     route: "/chapter1/get-follows-stateless",
     description: "get-followers-stateless",
     component: function () {

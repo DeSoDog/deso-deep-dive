@@ -1,19 +1,21 @@
 import * as React from "react";
 import { Button, TextField, Tooltip } from "@mui/material";
-import { submitPost } from "../../services/DesoApiSubmitPost";
 import { useRecoilValue } from "recoil";
 import {
   SampleAppLoggedInUser,
   SampleAppMyPublicKey,
 } from "../../recoil/AppState.atoms";
 import { useState } from "react";
+import { submitPost } from "../../chapters/Chapter3/submit-post";
 export default function CreatePostInput() {
   const myPublicKey = useRecoilValue(SampleAppMyPublicKey);
   const [postBody, setPostBody] = useState<string | null>(null);
   const loggedInUser = useRecoilValue(SampleAppLoggedInUser);
   const createPost = () => {
     if (myPublicKey && postBody && loggedInUser) {
-      submitPost(myPublicKey, loggedInUser, postBody);
+      submitPost(myPublicKey, loggedInUser, postBody).then((response: any) => {
+        console.log("transaction complete", response);
+      });
     }
   };
   return (

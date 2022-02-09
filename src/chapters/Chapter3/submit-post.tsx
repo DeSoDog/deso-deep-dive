@@ -1,19 +1,18 @@
 import axios from "axios";
-import { BASE_URI } from "../chapters/Chapter.models";
-import { User } from "../interfaces/DesoIdentity.interface";
-import { TransactionPost } from "../interfaces/Transaction.interface";
-import { getIdentityIFrame, getSignerInfo, uuid } from "./utils";
+import { User } from "../../interfaces/DesoIdentity.interface";
+import { TransactionPost } from "../../interfaces/Transaction.interface";
+import { getSignerInfo, uuid } from "../../services/utils";
+import { BASE_URI } from "../Chapter.models";
+import { identitySubmitTransaction } from "../Chapter2/IdentityHelper.service";
 
-export const sendMessage = () => {};
 export const submitPost = async (
   publicKey: string,
   user: User,
   body: string,
   postExtraData?: any,
   ParentStakeID?: string,
-
   imageURL?: string[]
-): Promise<void> => {
+): Promise<any> => {
   if (!publicKey) {
     console.log("publicKey is required");
     return;
@@ -24,6 +23,8 @@ export const submitPost = async (
     return;
   }
 
+  // 0. create the identity frame
+  // 1. verify they have a key and body everything else is optional
   const data = {
     UpdaterPublicKeyBase58Check: publicKey,
     PostHashHexToModify: "",
@@ -36,18 +37,18 @@ export const submitPost = async (
     IsHidden: false,
     MinFeeRateNanosPerKB: 2000,
   };
-
+  // 2. Inform the blockchain that a post is on its way
   const response: TransactionPost = (
     await axios.post(`${BASE_URI}/submit-post`, data)
   ).data;
-
+  // 3. get some info for signing a transaction
   const payload = getSignerInfo(user, response);
+
   const request = {
     id: uuid(),
     method: "sign",
     payload,
     service: "identity",
   };
-  const iFrame = getIdentityIFrame();
-  iFrame?.contentWindow?.postMessage(request, "*");
+  return identitySubmitTransaction(request);
 };

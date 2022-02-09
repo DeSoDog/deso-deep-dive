@@ -29,12 +29,11 @@ const Identity = () => {
   );
   useEffect(() => {
     window.addEventListener("message", (event) => {
-      console.log(event);
       const execution = determineExecution(event);
       switch (execution) {
         case "sumbitTransaction": {
           const data: DesoIdentitySumbitTransactionResponse = event.data;
-          submitTransaction(data.payload.signedTransactionHex);
+          // submitTransaction(data.payload.signedTransactionHex);
           break;
         }
         case "executeWindowCommand": {
@@ -43,7 +42,7 @@ const Identity = () => {
         }
         case "decryptHexes": {
           const data: DesoIdentityDecryptedHexesactionResponse = event.data;
-          setDecryptedMessages(data);
+          // setDecryptedMessages(data);
           break;
         }
         case "encryptMessage": {
@@ -146,7 +145,6 @@ const Identity = () => {
         break;
       }
       case "decrypt": {
-        console.log(event);
         break;
       }
       default: {

@@ -40,7 +40,7 @@ export default function DesoDrawer({ chapters }: DesoDrawerProps) {
                 <Link
                   to={`${chapter.chapterContent.route}`}
                   className="ml-2"
-                >{`${chapter.chapterName}`}</Link>
+                >{`${chapter.chapterContent.title}`}</Link>
               </ListItem>
               <Divider />
             </div>

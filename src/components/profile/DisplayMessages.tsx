@@ -1,8 +1,7 @@
-import { Button, Card, CardHeader } from "@mui/material";
+import { Button } from "@mui/material";
 
 import Avatar from "@mui/material/Avatar";
 import { ReactElement, useEffect, useState } from "react";
-import Close from "@mui/icons-material/Close";
 import { getMessages } from "../../services/DesoApiSendMessage";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
