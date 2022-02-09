@@ -6,11 +6,9 @@ import { BASE_URI, Chapter, ChapterNavigation } from "../../Chapter.models";
 import { ChapterApiTemplate } from "../../ChapterApiTemplate";
 import { ChapterTemplate } from "../../ChapterTemplate";
 import {
-  getSingleProfile,
   ProfileInfoRequest,
   ProfileInfoResponse,
 } from "./GetSingleProfile.service";
-
 export interface Chapter1SectionProps {
   selectedChapter: Chapter;
   chapters: ChapterNavigation;
@@ -25,7 +23,16 @@ export const Chapter1Section = ({
   const [response, setResponse] = useState<ProfileInfoResponse | null>(null);
   const [request, setRequest] = useState<ProfileInfoRequest | null>(null);
   const [endpoint, setEndpoint] = useState<string | null>(null);
-  useEffect(() => {}, []);
+  const [chapterTitle, setChapterTitle] = useState<null>(null);
+  useEffect(() => {
+    // clear out the page if they hit go to the next section
+    if (chapterTitle !== selectedChapter.title) {
+      setResponse(null);
+      setEndpoint(null);
+      setRequest(null);
+      setChapterTitle(chapterTitle);
+    }
+  }, [selectedChapter]);
   const executeApiCall = async () => {
     const apiResponse = await apiCall(publicKey).catch((e: Error) =>
       alert(e.message)

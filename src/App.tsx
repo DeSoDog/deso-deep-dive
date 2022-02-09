@@ -6,27 +6,16 @@ import DesoDrawer from "./components/layout/Drawer";
 import { CHAPTERS } from "./chapters/Chapter.models";
 
 function App() {
+  const routes = CHAPTERS.chaptersToArray().map((chapter) =>
+    chapter.chapterContent.component()
+  );
+  console.log(routes);
   return (
     <Router>
       <Header />
       <Routes>
         <Route path={"/"} element={CHAPTERS.CHAPTER_0.component()}></Route>
-        <Route
-          path={CHAPTERS.CHAPTER_0.route}
-          element={CHAPTERS.CHAPTER_0.component()}
-        ></Route>
-        <Route
-          path={CHAPTERS.CHAPTER_1_GET_SINGLE_PROFILE.route}
-          element={CHAPTERS.CHAPTER_1_GET_SINGLE_PROFILE.component()}
-        ></Route>
-        <Route
-          path={CHAPTERS.CHAPTER_1_GET_USERS_STATELESS.route}
-          element={CHAPTERS.CHAPTER_1_GET_USERS_STATELESS.component()}
-        ></Route>
-        <Route
-          path={CHAPTERS.CHAPTER_SAMPLE_APP.route}
-          element={CHAPTERS.CHAPTER_SAMPLE_APP.component()}
-        ></Route>
+        {routes}
       </Routes>
       <DesoDrawer routes={["0", "1"]} />
     </Router>

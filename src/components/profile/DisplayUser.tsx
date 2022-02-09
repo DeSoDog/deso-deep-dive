@@ -7,7 +7,7 @@ import { ReactElement, useEffect, useState } from "react";
 import {
   getProfileInfo,
   getUserPicture,
-  getFollowers,
+  getFollowsStateless,
   getUserInfoStateless,
 } from "../../services/DesoApiRead";
 import Button from "@mui/material/Button";
@@ -20,10 +20,10 @@ import {
   FollowerInfoType,
 } from "../../recoil/AppState.atoms";
 import CreatePostInput from "./CreatePostInput";
-import { FollowerInfoResponse } from "../../interfaces/FollowerInfo.interface";
 import { getFollowerCount } from "../../services/utils";
 import UserActions from "../UserActions";
 import { ProfileInfoResponse } from "../../chapters/Chapter1/get-single-profile/GetSingleProfile.service";
+import { FollowerInfoResponse } from "../../chapters/Chapter1/get-follows-stateless/GetFollowsStateless.service";
 export interface DisplayUserProps {
   publicKey: string;
   isMyAccount: boolean;
@@ -63,7 +63,7 @@ const DisplayUser = ({ publicKey, isMyAccount }: DisplayUserProps) => {
       );
       setFollower({ profileInfoResponse, userInfoResponse });
       setFollowerPicture(profilePictureSrc);
-      const followers = await getFollowers(publicKey);
+      const followers = await getFollowsStateless(publicKey);
       setUserFollowers(followers);
     }
   };
@@ -78,7 +78,7 @@ const DisplayUser = ({ publicKey, isMyAccount }: DisplayUserProps) => {
       );
       setUser({ profileInfoResponse, userInfoResponse });
       setProfilePicture(profilePictureSrc);
-      const followers = await getFollowers(publicKey);
+      const followers = await getFollowsStateless(publicKey);
       console.log(followers);
       setUserFollowers(followers);
     }

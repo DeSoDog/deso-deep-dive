@@ -1,4 +1,5 @@
 import { ReactElement } from "react";
+import { Route } from "react-router-dom";
 import LayoutContent from "../components/layout/LayoutContent";
 import { Chapter0 } from "./Chapter0";
 import { Chapter1Section } from "./Chapter1/get-single-profile/Chapter1Section";
@@ -10,41 +11,85 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
     title: "Chapter 0: Getting Started",
     route: "/chapter0",
     component: function () {
-      return <Chapter0 Chapters={CHAPTERS} selectedChapter={this} />;
+      return (
+        <Route
+          key={this.title}
+          path={this.route}
+          element={<Chapter0 Chapters={CHAPTERS} selectedChapter={this} />}
+        ></Route>
+      );
     },
   },
   CHAPTER_1_GET_SINGLE_PROFILE: {
     title: "Chapter 1: Get Single Profile",
     route: "/chapter1/get-single-profile",
-    apiCall: getSingleProfile,
     component: function () {
       return (
-        <Chapter1Section
-          chapters={CHAPTERS}
-          selectedChapter={this}
-          apiCall={this.apiCall}
-        />
+        <Route
+          key={this.title}
+          path={this.route}
+          element={
+            <Chapter1Section
+              chapters={CHAPTERS}
+              selectedChapter={this}
+              apiCall={getSingleProfile}
+            />
+          }
+        ></Route>
       );
     },
   },
   CHAPTER_1_GET_USERS_STATELESS: {
-    title: "Chapter 1: Get Something Else",
+    title: "Chapter 1: Get User Stateless",
     route: "/chapter1/get-something-else",
-    apiCall: getUserInfoStateless,
     component: function () {
       return (
-        <Chapter1Section
-          chapters={CHAPTERS}
-          selectedChapter={this}
-          apiCall={this.apiCall}
-        />
+        <Route
+          key={this.title}
+          path={this.route}
+          element={
+            <Chapter1Section
+              chapters={CHAPTERS}
+              selectedChapter={this}
+              apiCall={getUserInfoStateless}
+            />
+          }
+        ></Route>
       );
     },
   },
+  CHAPTER_1_GET_FOLLOWS_STATELESS: {
+    title: "Chapter 1: Get Followers Stateless",
+    route: "/chapter1/get-follows-stateless",
+    component: function () {
+      return (
+        <Route
+          key={this.title}
+          path={this.route}
+          element={
+            <Chapter1Section
+              chapters={CHAPTERS}
+              selectedChapter={this}
+              apiCall={getUserInfoStateless}
+            />
+          }
+        ></Route>
+      );
+    },
+  },
+
   CHAPTER_SAMPLE_APP: {
     title: "Chapter4: Sample App",
     route: "/sample-app",
-    component: () => <LayoutContent />,
+    component: function () {
+      return (
+        <Route
+          key={this.title}
+          path={this.route}
+          element={<LayoutContent />}
+        ></Route>
+      );
+    },
   },
   chaptersToArray: function () {
     const chapterArray: { chapterName: string; chapterContent: Chapter }[] = [];
@@ -91,6 +136,7 @@ export interface ChapterNavigation {
   CHAPTER_0: Chapter;
   CHAPTER_1_GET_SINGLE_PROFILE: Chapter;
   CHAPTER_1_GET_USERS_STATELESS: Chapter;
+  CHAPTER_1_GET_FOLLOWS_STATELESS: Chapter;
   CHAPTER_SAMPLE_APP: Chapter;
   next: (currentChapter: Chapter) => Chapter | null;
   prev: (currentChapter: Chapter) => Chapter | null;
@@ -102,7 +148,6 @@ export interface Chapter {
   title: string;
   route: string;
   component: () => ReactElement;
-  apiCall?: any;
 }
 
 export const BASE_URI: Readonly<string> = "https://node.deso.org/api/v0";

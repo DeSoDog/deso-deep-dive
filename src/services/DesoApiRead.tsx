@@ -1,14 +1,14 @@
 import axios from "axios";
 import { BASE_URI } from "../chapters/Chapter.models";
+import {
+  FollowerInfoRequest,
+  FollowerInfoResponse,
+} from "../chapters/Chapter1/get-follows-stateless/GetFollowsStateless.service";
 import { ProfileInfoResponse } from "../chapters/Chapter1/get-single-profile/GetSingleProfile.service";
 import {
   UserInfoRequest,
   UserInfoResponse,
 } from "../chapters/Chapter1/get-users-stateless/GetUserStateless.service";
-import {
-  FollowerInfoRequest,
-  FollowerInfoResponse,
-} from "../interfaces/FollowerInfo.interface";
 import {
   PostInfoRequest,
   PostInfoResponse,
@@ -39,7 +39,7 @@ export const getUserPicture = (PublicKeyBase58Check: string) => {
   return `${BASE_URI}/get-single-profile-picture/${PublicKeyBase58Check}`;
 };
 
-export const getFollowers = async (
+export const getFollowsStateless = async (
   PublicKeyBase58Check: string
 ): Promise<FollowerInfoResponse> => {
   const request: FollowerInfoRequest = {

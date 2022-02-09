@@ -1,21 +1,20 @@
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
-import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
 
 import { ReactElement, useEffect, useState } from "react";
 import {
   getProfileInfo,
   getUserPicture,
-  getFollowers,
+  getFollowsStateless,
   getUserInfoStateless,
 } from "../../services/DesoApiRead";
 import Button from "@mui/material/Button";
 import { MyUserInfoType, FollowerInfoType } from "../../recoil/AppState.atoms";
-import { FollowerInfoResponse } from "../../interfaces/FollowerInfo.interface";
 import { getFollowerCount } from "../../services/utils";
 import DisplayMessages from "./DisplayMessages";
 import { ProfileInfoResponse } from "../../chapters/Chapter1/get-single-profile/GetSingleProfile.service";
+import { FollowerInfoResponse } from "../../chapters/Chapter1/get-follows-stateless/GetFollowsStateless.service";
 export interface DisplayUserProps {
   publicKey: string;
 }
@@ -47,7 +46,7 @@ const DisplayFollower = ({ publicKey }: DisplayUserProps) => {
       );
       setFollower({ profileInfoResponse, userInfoResponse });
       setFollowerPicture(profilePictureSrc);
-      const followers = await getFollowers(publicKey);
+      const followers = await getFollowsStateless(publicKey);
       setFollowerFollowers(followers);
     }
   };

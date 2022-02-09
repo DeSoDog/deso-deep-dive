@@ -1,9 +1,6 @@
 import { ReactElement, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import {
-  FollowerInfo,
-  FollowerInfoResponse,
-} from "../interfaces/FollowerInfo.interface";
+import { FollowerInfoResponse } from "../chapters/Chapter1/get-follows-stateless/GetFollowsStateless.service";
 import {
   SampleAppMyFollowersInfo,
   SampleAppMyUserInfo,
@@ -24,7 +21,7 @@ const DisplayFollowerFeed = () => {
   const generateFollowerCards = (): ReactElement[] => {
     let followerCards: ReactElement[] = [];
     for (const publicKey in userFollowers?.PublicKeyToProfileEntry) {
-      const follower: FollowerInfo | undefined =
+      const follower: any | undefined =
         userFollowers?.PublicKeyToProfileEntry[publicKey];
       if (follower && publicKey !== "data") {
         followerCards.push(
