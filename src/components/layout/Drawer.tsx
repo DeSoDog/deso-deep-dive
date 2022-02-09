@@ -7,10 +7,12 @@ import { Drawer } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { SampleAppToggleDrawer } from "../../recoil/AppState.atoms";
+import { ChapterNavigation } from "../../chapters/Chapter.models";
 export interface DesoDrawerProps {
   routes: string[];
+  chapters: ChapterNavigation;
 }
-export default function DesoDrawer({ routes }: DesoDrawerProps) {
+export default function DesoDrawer({ routes, chapters }: DesoDrawerProps) {
   const [toggleState, setToggleDrawer] = useRecoilState(SampleAppToggleDrawer);
 
   const toggle =
@@ -32,23 +34,19 @@ export default function DesoDrawer({ routes }: DesoDrawerProps) {
         Deso Deep Dive
       </h1>
       <List>
-        {routes.map((text, index) => (
-          <div key={text}>
-            <ListItem button className="flex justify-center">
-              <Link
-                to={`chapter${text}`}
-                className="ml-2"
-              >{`Chapter ${text}`}</Link>
-            </ListItem>
-            <Divider />
-          </div>
-        ))}
-
-        <ListItem button className="flex justify-center">
-          <Link to={`sample-app`} className="ml-2">
-            sample app
-          </Link>
-        </ListItem>
+        {chapters.chaptersToArray().map((chapter) => {
+          return (
+            <div key={chapter.chapterName}>
+              <ListItem button className="flex justify-center">
+                <Link
+                  to={`${chapter.chapterContent.route}`}
+                  className="ml-2"
+                >{`${chapter.chapterName}`}</Link>
+              </ListItem>
+              <Divider />
+            </div>
+          );
+        })}
       </List>
     </Box>
   );

@@ -2,7 +2,7 @@ import axios from "axios";
 import { CoinEntry, DAOCoinEntry } from "../../../interfaces/Coin.interface";
 import { BASE_URI } from "../../Chapter.models";
 
-export const getUserInfoStateless = async (
+export const getUserStateless = async (
   PublicKeysBase58Check: string
 ): Promise<{
   request: UserInfoRequest;

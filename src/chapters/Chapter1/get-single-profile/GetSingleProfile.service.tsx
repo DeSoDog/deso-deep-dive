@@ -37,13 +37,13 @@ export interface ProfileInfoResponse {
     IsHidden: boolean;
     IsReserved: boolean;
     IsVerified: boolean;
-    Comments?: null;
-    Posts?: null;
+    Comments?: any;
+    Posts?: any;
     CoinEntry: CoinEntry;
     DAOCoinEntry: DAOCoinEntry;
     CoinPriceDeSoNanos: number;
     CoinPriceBitCloutNanos: number;
-    UsersThatHODL?: null;
+    UsersThatHODL?: any;
     IsFeaturedTutorialWellKnownCreator: boolean;
     IsFeaturedTutorialUpAndComingCreator: boolean;
   };

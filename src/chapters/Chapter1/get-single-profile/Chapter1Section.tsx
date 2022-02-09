@@ -49,7 +49,7 @@ export const Chapter1Section = ({
       body={
         <ChapterApiTemplate
           onClick={executeApiCall}
-          title="get-single-profile"
+          title={selectedChapter.description ?? ""}
           request={request}
           response={response}
           endpoint={endpoint}

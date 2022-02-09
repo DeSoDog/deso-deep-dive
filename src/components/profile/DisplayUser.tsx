@@ -36,15 +36,9 @@ const DisplayUser = ({ publicKey, isMyAccount }: DisplayUserProps) => {
   const [userFollowers, setUserFollowers] =
     useRecoilState<FollowerInfoResponse | null>(SampleAppMyFollowersInfo);
   const [profileDescriptionCard, setCard] = useState<ReactElement | null>(null);
-  const [follower, setFollower] = useState<FollowerInfoType | null>(null);
-  const [followerPicture, setFollowerPicture] = useState<string | null>(null);
 
   useEffect(() => {
-    if (isMyAccount) {
-      getMyInfo(publicKey);
-    } else if (publicKey) {
-      getFollowerInfo(publicKey);
-    }
+    getMyInfo(publicKey);
   }, []);
 
   useEffect(() => {
@@ -52,21 +46,6 @@ const DisplayUser = ({ publicKey, isMyAccount }: DisplayUserProps) => {
       setCard(generateCard(user, profilePicture));
     }
   }, [profilePicture, user, userFollowers]);
-
-  const getFollowerInfo = async (publicKey: string) => {
-    let profileInfoResponse: ProfileInfoResponse;
-    if (publicKey !== null) {
-      const userInfoResponse = await getUserInfoStateless([publicKey]);
-      profileInfoResponse = await getProfileInfo(publicKey);
-      const profilePictureSrc = getUserPicture(
-        profileInfoResponse?.Profile?.PublicKeyBase58Check
-      );
-      setFollower({ profileInfoResponse, userInfoResponse });
-      setFollowerPicture(profilePictureSrc);
-      const followers = await getFollowsStateless(publicKey);
-      setUserFollowers(followers);
-    }
-  };
 
   const getMyInfo = async (publicKey: string) => {
     let profileInfoResponse: ProfileInfoResponse;
@@ -118,26 +97,19 @@ const DisplayUser = ({ publicKey, isMyAccount }: DisplayUserProps) => {
             <CreatePostInput></CreatePostInput>
           </div>
         )}
-        {!isMyAccount && (
-          <CardActions>
-            <Button className="flex justify-around">follow</Button>
-            <Button className="flex justify-around">tip</Button>
-            <Button className="flex justify-around">message</Button>
-          </CardActions>
-        )}
       </Card>
     );
   };
 
   return (
     <div className="flex flex-col w-[600px] mx-auto ">
-      <div className="text-center  font-bold text-lg mb-2 font-mono">
-        You are viewing {user?.profileInfoResponse?.Profile.Username}'s Page
-      </div>
+      {isMyAccount && (
+        <div className="text-center  font-bold text-lg mb-2 font-mono">
+          You are viewing {user?.profileInfoResponse?.Profile.Username}'s Page
+        </div>
+      )}
       <div className="w">{profileDescriptionCard}</div>
-      <div>
-        <UserActions></UserActions>
-      </div>
+      <div>{isMyAccount && <UserActions></UserActions>}</div>
     </div>
   );
 };

@@ -15,9 +15,11 @@ function App() {
       <Header />
       <Routes>
         <Route path={"/"} element={CHAPTERS.CHAPTER_0.component()}></Route>
+        <Route path={""} element={CHAPTERS.CHAPTER_0.component()}></Route>
+
         {routes}
       </Routes>
-      <DesoDrawer routes={["0", "1"]} />
+      <DesoDrawer routes={["0", "1"]} chapters={CHAPTERS} />
     </Router>
   );
 }

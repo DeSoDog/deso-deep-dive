@@ -34,7 +34,13 @@ const DisplayFollower = ({ publicKey }: DisplayUserProps) => {
     if (followerPicture && follower) {
       setCard(generateCard(follower, followerPicture));
     }
-  }, [followerPicture, follower, setFollower]);
+  }, [
+    followerPicture,
+    follower,
+    setFollower,
+    setFollowerFollowers,
+    followerFollowers,
+  ]);
 
   const getFollowerInfo = async (publicKey: string) => {
     let profileInfoResponse: ProfileInfoResponse;
