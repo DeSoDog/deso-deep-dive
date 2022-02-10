@@ -6,7 +6,7 @@ import {
 } from "../../interfaces/MessageInfo.interface";
 import { uuid } from "../../services/utils";
 import { BASE_URI } from "../Chapter.models";
-import { identityDecrypt } from "../Chapter2/IdentityHelper.service";
+import { identityDecrypt } from "../Chapter2/IdentityDecryption.service";
 
 export const getMessages = async (
   request: GetMessageRequest,

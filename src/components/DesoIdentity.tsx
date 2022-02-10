@@ -1,20 +1,17 @@
 import { Button } from "@mui/material";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
+import { identityLogin } from "../chapters/Chapter2/IdentityLogin";
 import {
-  DesoIdentityDecryptedHexesactionResponse,
   DesoIdentityEncryptedResponse,
   DesoIdentityLoginResponse,
   DesoIdentityResponse,
-  DesoIdentitySumbitTransactionResponse,
 } from "../interfaces/DesoIdentity.interface";
 import {
-  SampleAppDecryptedHexes,
   SampleAppEncryptedMessage,
   SampleAppLoggedInUser,
   SampleAppMyPublicKey,
 } from "../recoil/AppState.atoms";
-import { submitTransaction } from "../services/DesoApiSubmitTransaction";
 let action: "login" | "logout" | null = null;
 let windowPrompt: Window | null = null;
 const Identity = () => {
@@ -24,25 +21,12 @@ const Identity = () => {
   const [encryptedMessage, setEncryptedMessage] = useRecoilState(
     SampleAppEncryptedMessage
   );
-  const [decryptedMessages, setDecryptedMessages] = useRecoilState(
-    SampleAppDecryptedHexes
-  );
   useEffect(() => {
     window.addEventListener("message", (event) => {
       const execution = determineExecution(event);
       switch (execution) {
-        case "sumbitTransaction": {
-          const data: DesoIdentitySumbitTransactionResponse = event.data;
-          // submitTransaction(data.payload.signedTransactionHex);
-          break;
-        }
         case "executeWindowCommand": {
           handleWindowExecution(event);
-          break;
-        }
-        case "decryptHexes": {
-          const data: DesoIdentityDecryptedHexesactionResponse = event.data;
-          // setDecryptedMessages(data);
           break;
         }
         case "encryptMessage": {
@@ -56,15 +40,6 @@ const Identity = () => {
       }
     });
   }, []);
-
-  const login = () => {
-    action = "login";
-    windowPrompt = window.open(
-      "https://identity.deso.org/log-in?accessLevelRequest=4&hideJumio=true",
-      null as unknown as any,
-      "toolbar=no, width=800, height=1000, top=0, left=0"
-    );
-  };
 
   const logout = (myPublicKey: string | null) => {
     action = "logout";
@@ -81,21 +56,10 @@ const Identity = () => {
 
   const determineExecution = (
     event: any
-  ):
-    | "dismiss"
-    | "sumbitTransaction"
-    | "executeWindowCommand"
-    | "encryptMessage"
-    | "decryptHexes" => {
+  ): "dismiss" | "executeWindowCommand" | "encryptMessage" => {
     if (!(event.origin === "https://identity.deso.org" && event.source)) {
       // the event is coming from a different Iframe
       return "dismiss";
-    }
-    if (event?.data?.payload?.decryptedHexes) {
-      return "decryptHexes";
-    }
-    if (event?.data?.payload?.signedTransactionHex) {
-      return "sumbitTransaction";
     }
     if (event?.data?.payload?.encryptedMessage) {
       return "encryptMessage";
@@ -120,31 +84,20 @@ const Identity = () => {
       case "login": {
         // user is not logged in open login prompt
         if (action === "login") {
-          const loginData: DesoIdentityLoginResponse = data;
-          const publicKey = loginData.payload.publicKeyAdded;
-          const loggedInUser = loginData.payload.users[publicKey];
-          if (loggedInUser) {
-            setLoggedInUser(loggedInUser);
-            setPublicKey(publicKey);
-            windowPrompt?.close();
-          }
+          // const loginData: DesoIdentityLoginResponse = data;
+          // const publicKey = loginData.payload.publicKeyAdded;
+          // const loggedInUser = loginData.payload.users[publicKey];
+          // if (loggedInUser) {
+          //   setLoggedInUser(loggedInUser);
+          //   setPublicKey(publicKey);
+          //   windowPrompt?.close();
+          // }
         } else if (action === "logout") {
           // user is already logged in so this must be the logout call
           windowPrompt?.close();
           setLoggedInUser(null);
           setPublicKey(null);
         }
-        break;
-      }
-      case "signUp": {
-        //todo
-        break;
-      }
-      case "approve": {
-        //todo
-        break;
-      }
-      case "decrypt": {
         break;
       }
       default: {
@@ -158,7 +111,10 @@ const Identity = () => {
         <Button
           color="inherit"
           onClick={() => {
-            login();
+            identityLogin().then(({ loggedInUser, publicKey }) => {
+              setLoggedInUser(loggedInUser);
+              setPublicKey(publicKey);
+            });
           }}
         >
           Log In
