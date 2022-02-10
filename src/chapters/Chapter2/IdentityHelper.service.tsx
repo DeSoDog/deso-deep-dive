@@ -1,3 +1,4 @@
+import { DecryptMessagesResponse } from "../../interfaces/MessageInfo.interface";
 import { submitTransaction } from "../../services/DesoApiSubmitTransaction";
 
 export function identitySubmitTransaction(request: any): Promise<any> {
@@ -22,13 +23,18 @@ export function identitySubmitTransaction(request: any): Promise<any> {
             reject();
           });
       }
-      console.log(event);
     };
     window.addEventListener("message", windowHandler);
   });
 }
-
+export interface PayloadHasEncryptedMessages {
+  payload: { encryptedMessages: any[] };
+}
 export function identityDecrypt(request: any): Promise<any> {
+  if (!request?.payload?.encryptedMessages) {
+    throw Error("Encrypted Messages are were not Included");
+  }
+
   const iframe: HTMLIFrameElement | null = document.getElementById(
     "identity"
   ) as HTMLIFrameElement;
@@ -38,19 +44,19 @@ export function identityDecrypt(request: any): Promise<any> {
   iframe.contentWindow?.postMessage(request, "*");
   return new Promise((resolve, reject) => {
     const windowHandler = (event: any) => {
-      if (event?.data?.payload?.decryptedHexes) {
-        console.log(event);
-        return submitTransaction(event?.data?.payload?.signedTransactionHex)
-          .then((response) => {
-            window.removeEventListener("message", windowHandler);
-            resolve(response);
-          })
-          .catch(() => {
-            window.removeEventListener("message", windowHandler);
-            reject();
-          });
+      if (!event?.data?.payload?.decryptedHexes) {
+        return;
       }
-      console.log(event);
+      const decryptedHexes = event?.data?.payload?.decryptedHexes;
+      const encryptedMessages = request.payload?.encryptedMessages;
+      const thread = (encryptedMessages as DecryptMessagesResponse[])?.map(
+        (m) => {
+          const decryptedMessage = decryptedHexes[m.EncryptedHex];
+          return { m, decryptedMessage };
+          // return message;
+        }
+      );
+      resolve(thread);
     };
     window.addEventListener("message", windowHandler);
   });

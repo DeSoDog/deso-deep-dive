@@ -9,7 +9,6 @@ import {
   getFollowsStateless,
   getUserInfoStateless,
 } from "../../services/DesoApiRead";
-import Button from "@mui/material/Button";
 import { MyUserInfoType, FollowerInfoType } from "../../recoil/AppState.atoms";
 import { getFollowerCount } from "../../services/utils";
 import DisplayMessages from "./DisplayMessages";

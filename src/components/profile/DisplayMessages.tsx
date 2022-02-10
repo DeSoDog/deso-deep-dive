@@ -2,7 +2,6 @@ import { Button } from "@mui/material";
 
 import Avatar from "@mui/material/Avatar";
 import { ReactElement, useEffect, useState } from "react";
-import { getMessages } from "../../services/DesoApiSendMessage";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   SampleAppDecryptedHexes,
@@ -14,6 +13,7 @@ import { DecryptMessagesResponse } from "../../interfaces/MessageInfo.interface"
 import { getUserPicture } from "../../services/DesoApiRead";
 import { SendMessage } from "./SendMessage";
 import { User } from "../../interfaces/DesoIdentity.interface";
+import { getMessages } from "../../chapters/Chapter3/get-messages-stateless";
 
 export interface DisplayMessagesProps {
   publicKey: string;
@@ -42,26 +42,20 @@ const DisplayMessages = ({ publicKey }: DisplayMessagesProps) => {
     if (!decryptedMessages?.payload?.decryptedHexes) {
       return;
     }
-    const thread = (messages?.encryptedMessages as DecryptMessagesResponse[])
-      ?.map((m) => {
-        const decryptedMessage =
-          decryptedMessages?.payload?.decryptedHexes[m.EncryptedHex];
-        return { m, decryptedMessage };
-        // return message;
-      })
-      .filter((m) => {
-        return (
-          m.m.RecipientMessagingPublicKey === publicKey ||
-          m.m.SenderMessagingPublicKey === publicKey
-        );
-        // m.m.
-      });
-    if (thread) {
-      setThreadCard(genereateThread(thread));
-    }
+    // const thread = (messages?.encryptedMessages as DecryptMessagesResponse[])
+    //   .filter((m) => {
+    //     return (
+    //       m.m.RecipientMessagingPublicKey === publicKey ||
+    //       m.m.SenderMessagingPublicKey === publicKey
+    //     );
+    //     // m.m.
+    //   });
+    // if (thread) {
+    // setThreadCard(genereateThread(thread));
+    // }
   }, [setDecryptedMessages, decryptedMessages]);
 
-  const genereateThread = (thread: any[]) => {
+  const generateThread = (thread: any[]) => {
     if (thread) {
       return thread.map((x, index) => {
         return (
@@ -104,7 +98,8 @@ const DisplayMessages = ({ publicKey }: DisplayMessagesProps) => {
       },
       loggedInUser
     );
-    setMessages(response);
+
+    setThreadCard(generateThread(response));
   };
 
   return (

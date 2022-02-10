@@ -6,7 +6,7 @@ import {
 } from "../../interfaces/MessageInfo.interface";
 import { uuid } from "../../services/utils";
 import { BASE_URI } from "../Chapter.models";
-import { identitySubmitTransaction } from "../Chapter2/IdentityHelper.service";
+import { identityDecrypt } from "../Chapter2/IdentityHelper.service";
 
 export const getMessages = async (
   request: GetMessageRequest,
@@ -46,5 +46,5 @@ export const getMessages = async (
     },
     service: "identity",
   };
-  identitySubmitTransaction(iFrameRequest);
+  return identityDecrypt(iFrameRequest);
 };
