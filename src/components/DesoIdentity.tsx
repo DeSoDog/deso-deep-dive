@@ -1,20 +1,15 @@
 import { Button } from "@mui/material";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { PublicKey } from "../chapters/Chapter.atom";
-import { identityLogin } from "../chapters/Chapter2/IdentityLogin";
-import { IdentityLogout } from "../chapters/Chapter2/IdentityLogout.service";
-import {
-  DesoIdentityEncryptedResponse,
-  DesoIdentityResponse,
-} from "../interfaces/DesoIdentity.interface";
+import { IdentityInitialize } from "../chapters/Identity/IdentityInitialize";
+import { identityLogin } from "../chapters/Identity/IdentityLogin";
+import { IdentityLogout } from "../chapters/Identity/IdentityLogout.service";
+import { DesoIdentityEncryptedResponse } from "../interfaces/DesoIdentity.interface";
 import {
   SampleAppEncryptedMessage,
   SampleAppLoggedInUser,
   SampleAppMyPublicKey,
 } from "../recoil/AppState.atoms";
-let action: "login" | "logout" | null = null;
-let windowPrompt: Window | null = null;
 const Identity = () => {
   const [loggedInUser, setLoggedInUser] = useRecoilState(SampleAppLoggedInUser);
   const [myPublicKey, setPublicKey] = useRecoilState(SampleAppMyPublicKey);
@@ -23,13 +18,10 @@ const Identity = () => {
     SampleAppEncryptedMessage
   );
   useEffect(() => {
+    IdentityInitialize();
     window.addEventListener("message", (event) => {
       const execution = determineExecution(event);
       switch (execution) {
-        case "executeWindowCommand": {
-          handleWindowExecution(event);
-          break;
-        }
         case "encryptMessage": {
           const data: DesoIdentityEncryptedResponse = event.data;
           setEncryptedMessage(data);
@@ -59,25 +51,6 @@ const Identity = () => {
     return "executeWindowCommand";
   };
 
-  const handleWindowExecution = (event: any) => {
-    const data: DesoIdentityResponse = event.data;
-    switch (data.method) {
-      case "initialize": {
-        event.source.postMessage(
-          {
-            id: data.id,
-            service: "identity",
-            payload: {},
-          },
-          "https://identity.deso.org" as WindowPostMessageOptions
-        );
-        break;
-      }
-      default: {
-        break;
-      }
-    }
-  };
   return (
     <>
       {!loggedInUser ? (

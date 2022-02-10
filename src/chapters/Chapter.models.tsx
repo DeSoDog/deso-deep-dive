@@ -2,12 +2,12 @@ import React, { ReactElement } from "react";
 import { Route } from "react-router-dom";
 import LayoutContent from "../components/layout/LayoutContent";
 import { Chapter0 } from "./Chapter0";
-import { getFollowsStateless } from "./Chapter1/get-follows-stateless/GetFollowsStateless.service";
-import { Chapter1Section } from "./Chapter1/get-single-profile/Chapter1Section";
-import { getSingleProfile } from "./Chapter1/get-single-profile/GetSingleProfile.service";
-import { getUserStateless } from "./Chapter1/get-users-stateless/GetUserStateless.service";
-import { ProfileAndFollowerCard } from "./Chapter1/profile-card/ProfileCard";
-import { SettingUpIdentity } from "./Chapter2/SettingUpIdentity";
+import { getFollowsStateless } from "./Read/get-follows-stateless/GetFollowsStateless.service";
+import { Chapter1Section } from "./Read/ReadSection";
+import { getSingleProfile } from "./Read/get-single-profile/GetSingleProfile.service";
+import { getUserStateless } from "./Read/get-users-stateless/GetUserStateless.service";
+import { ProfileAndFollowerCard } from "./Read/profile-card/ProfileCard";
+import { IdentityInitialize } from "./Identity/IdentitySection";
 
 export const CHAPTERS: Readonly<ChapterNavigation> = {
   CHAPTER_0: {
@@ -109,7 +109,7 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
         <Route
           key={this.title}
           path={this.route}
-          element={<SettingUpIdentity />}
+          element={<IdentityInitialize />}
         ></Route>
       );
     },

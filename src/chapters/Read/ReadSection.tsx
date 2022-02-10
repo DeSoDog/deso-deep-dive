@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import { PageNavigation } from "../../../components/layout/PageNavigation";
-import { PublicKey } from "../../Chapter.atom";
-import { BASE_URI, Chapter, ChapterNavigation } from "../../Chapter.models";
-import { ChapterApiTemplate } from "../../ChapterApiTemplate";
-import { ChapterTemplate } from "../../ChapterTemplate";
+import { PageNavigation } from "../../components/layout/PageNavigation";
+import { PublicKey } from "../Chapter.atom";
+import { BASE_URI, Chapter, ChapterNavigation } from "../Chapter.models";
+import { ChapterApiTemplate } from "../ChapterApiTemplate";
+import { ChapterTemplate } from "../ChapterTemplate";
 import {
   ProfileInfoRequest,
   ProfileInfoResponse,
-} from "./GetSingleProfile.service";
+} from "./get-single-profile/GetSingleProfile.service";
 export interface Chapter1SectionProps {
   selectedChapter: Chapter;
   chapters: ChapterNavigation;

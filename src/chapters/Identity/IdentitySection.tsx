@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-export const SettingUpIdentity = () => {
+export const IdentityInitialize = () => {
   useEffect(() => {
     // console.log(createIFrame());
   }, []);
