@@ -5,7 +5,7 @@ export interface ChapterApiTemplateProps {
   onClick: () => void;
   title: string;
 }
-export const ChapterApiTemplate = ({
+export const ChapterReadTemplate = ({
   request,
   response,
   endpoint,

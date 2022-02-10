@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import { PageNavigation } from "../../components/layout/PageNavigation";
 import { PublicKey } from "../Chapter.atom";
 import { BASE_URI, Chapter, ChapterNavigation } from "../Chapter.models";
-import { ChapterApiTemplate } from "../ChapterApiTemplate";
+import { ChapterReadTemplate } from "./ChapterReadTemplate";
 import { ChapterTemplate } from "../ChapterTemplate";
 import {
   ProfileInfoRequest,
@@ -47,7 +47,7 @@ export const Chapter1Section = ({
     <ChapterTemplate
       title={selectedChapter.title}
       body={
-        <ChapterApiTemplate
+        <ChapterReadTemplate
           onClick={executeApiCall}
           title={selectedChapter.description ?? ""}
           request={request}

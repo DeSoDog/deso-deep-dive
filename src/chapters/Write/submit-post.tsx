@@ -3,7 +3,7 @@ import { User } from "../../interfaces/DesoIdentity.interface";
 import { TransactionPost } from "../../interfaces/Transaction.interface";
 import { getSignerInfo, uuid } from "../../services/utils";
 import { BASE_URI } from "../Chapter.models";
-import { identitySubmitTransaction } from "../Identity/IdentitySubmitTransaction.service";
+import { identitySubmitTransaction } from "../Identity/sign-transaction/IdentitySubmitTransaction.service";
 
 export const submitPost = async (
   publicKey: string,

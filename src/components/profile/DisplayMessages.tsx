@@ -13,7 +13,7 @@ import { DecryptMessagesResponse } from "../../interfaces/MessageInfo.interface"
 import { getUserPicture } from "../../services/DesoApiRead";
 import { SendMessage } from "./SendMessage";
 import { User } from "../../interfaces/DesoIdentity.interface";
-import { getMessages } from "../../chapters/Chapter3/get-messages-stateless";
+import { getMessages } from "../../chapters/Write/get-messages-stateless";
 
 export interface DisplayMessagesProps {
   publicKey: string;

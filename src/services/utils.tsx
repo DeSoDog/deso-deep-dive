@@ -1,4 +1,4 @@
-import { UserInfoResponse } from "../chapters/Chapter1/get-users-stateless/GetUserStateless.service";
+import { UserInfoResponse } from "../chapters/Read/get-users-stateless/GetUserStateless.service";
 import { User } from "../interfaces/DesoIdentity.interface";
 import { TransactionPost } from "../interfaces/Transaction.interface";
 

@@ -12,8 +12,8 @@ import {
 import { MyUserInfoType, FollowerInfoType } from "../../recoil/AppState.atoms";
 import { getFollowerCount } from "../../services/utils";
 import DisplayMessages from "./DisplayMessages";
-import { ProfileInfoResponse } from "../../chapters/Chapter1/get-single-profile/GetSingleProfile.service";
-import { FollowerInfoResponse } from "../../chapters/Chapter1/get-follows-stateless/GetFollowsStateless.service";
+import { ProfileInfoResponse } from "../../chapters/Read/get-single-profile/GetSingleProfile.service";
+import { FollowerInfoResponse } from "../../chapters/Read/get-follows-stateless/GetFollowsStateless.service";
 export interface DisplayUserProps {
   publicKey: string;
 }

@@ -22,8 +22,8 @@ import {
 import CreatePostInput from "./CreatePostInput";
 import { getFollowerCount } from "../../services/utils";
 import UserActions from "../UserActions";
-import { ProfileInfoResponse } from "../../chapters/Chapter1/get-single-profile/GetSingleProfile.service";
-import { FollowerInfoResponse } from "../../chapters/Chapter1/get-follows-stateless/GetFollowsStateless.service";
+import { ProfileInfoResponse } from "../../chapters/Read/get-single-profile/GetSingleProfile.service";
+import { FollowerInfoResponse } from "../../chapters/Read/get-follows-stateless/GetFollowsStateless.service";
 export interface DisplayUserProps {
   publicKey: string;
   isMyAccount: boolean;

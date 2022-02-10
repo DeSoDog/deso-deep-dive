@@ -1,4 +1,4 @@
-import { User } from "../../interfaces/DesoIdentity.interface";
+import { User } from "../../../interfaces/DesoIdentity.interface";
 
 export const identityLogin = (): Promise<{
   publicKey: string;

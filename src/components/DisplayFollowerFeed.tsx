@@ -1,6 +1,6 @@
 import { ReactElement, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { FollowerInfoResponse } from "../chapters/Chapter1/get-follows-stateless/GetFollowsStateless.service";
+import { FollowerInfoResponse } from "../chapters/Read/get-follows-stateless/GetFollowsStateless.service";
 import {
   SampleAppMyFollowersInfo,
   SampleAppMyUserInfo,

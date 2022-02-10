@@ -1,4 +1,4 @@
-import { submitTransaction } from "../../services/DesoApiSubmitTransaction";
+import { submitTransaction } from "../../../services/DesoApiSubmitTransaction";
 
 export function identitySubmitTransaction(request: any): Promise<any> {
   const iframe: HTMLIFrameElement | null = document.getElementById(

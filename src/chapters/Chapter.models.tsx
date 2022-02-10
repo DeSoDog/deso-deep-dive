@@ -7,25 +7,32 @@ import { Chapter1Section } from "./Read/ReadSection";
 import { getSingleProfile } from "./Read/get-single-profile/GetSingleProfile.service";
 import { getUserStateless } from "./Read/get-users-stateless/GetUserStateless.service";
 import { ProfileAndFollowerCard } from "./Read/profile-card/ProfileCard";
-import { IdentityInitialize } from "./Identity/IdentitySection";
+import { IdentityInitializePage } from "./Identity/identity-initialize/IdentityInitializePage";
 
 export const CHAPTERS: Readonly<ChapterNavigation> = {
-  CHAPTER_0: {
+  GETTING_STARTED: {
     title: "Getting Started",
     route: "/getting-started",
     component: function () {
       return (
-        <Route
-          key={this.title}
-          path={this.route}
-          element={<Chapter0 Chapters={CHAPTERS} selectedChapter={this} />}
-        ></Route>
+        <>
+          <Route
+            key={this.title}
+            path="*"
+            element={<Chapter0 Chapters={CHAPTERS} selectedChapter={this} />}
+          ></Route>
+          <Route
+            key={this.title}
+            path={this.route}
+            element={<Chapter0 Chapters={CHAPTERS} selectedChapter={this} />}
+          ></Route>
+        </>
       );
     },
   },
-  CHAPTER_1_GET_SINGLE_PROFILE: {
+  READ_GET_SINGLE_PROFILE: {
     title: "Get Single Profile",
-    route: "/chapter1/get-single-profile",
+    route: "/read/get-single-profile",
     description: "get-single-profile",
     component: function () {
       return (
@@ -43,9 +50,9 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
       );
     },
   },
-  CHAPTER_1_GET_USERS_STATELESS: {
+  READ_GET_USERS_STATELESS: {
     title: "Get Users Stateless",
-    route: "/chapter1/get-users-stateless",
+    route: "/read/get-users-stateless",
     description: "get-users-stateless",
     component: function () {
       return (
@@ -63,9 +70,9 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
       );
     },
   },
-  CHAPTER_1_GET_FOLLOWS_STATELESS: {
+  READ_GET_FOLLOWS_STATELESS: {
     title: "Get Follows Stateless",
-    route: "/chapter1/get-follows-stateless",
+    route: "/read/get-follows-stateless",
     description: "get-followers-stateless",
     component: function () {
       return (
@@ -83,9 +90,9 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
       );
     },
   },
-  CHAPTER_1_PROFILE_CARD: {
+  READ_PROFILE_CARD: {
     title: "Profile Card",
-    route: "/chapter1/profile-cards",
+    route: "/read/profile-cards",
     component: function () {
       return (
         <Route
@@ -101,21 +108,81 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
       );
     },
   },
-  CHAPTER_2_SETTING_UP_IDENTITY: {
-    title: "Setting Up Identity",
-    route: "/chapter2/setting-up-identity",
+  IDENTITY_INITIALIZE: {
+    title: "Identity Initialize",
+    route: "/identity/identity-initialize",
     component: function () {
       return (
         <Route
           key={this.title}
           path={this.route}
-          element={<IdentityInitialize />}
+          element={
+            <IdentityInitializePage
+              chapters={CHAPTERS}
+              selectedChapter={this}
+            />
+          }
         ></Route>
       );
     },
   },
-  CHAPTER_SAMPLE_APP: {
-    title: "Chapter4: Sample App",
+
+  IDENTITY_LOGIN: {
+    title: "Identity Login",
+    route: "/identity/identity-login",
+    component: function () {
+      return (
+        <Route
+          key={this.title}
+          path={this.route}
+          element={
+            <IdentityInitializePage
+              chapters={CHAPTERS}
+              selectedChapter={this}
+            />
+          }
+        ></Route>
+      );
+    },
+  },
+  IDENTITY_LOGOUT: {
+    title: "Identity Logout",
+    route: "/identity/identity-logout",
+    component: function () {
+      return (
+        <Route
+          key={this.title}
+          path={this.route}
+          element={
+            <IdentityInitializePage
+              chapters={CHAPTERS}
+              selectedChapter={this}
+            />
+          }
+        ></Route>
+      );
+    },
+  },
+  IDENTITY_DECRYPT: {
+    title: "Identity Decrypt",
+    route: "/identity/identity-decrypt",
+    component: function () {
+      return (
+        <Route
+          key={this.title}
+          path={this.route}
+          element={
+            <IdentityInitializePage
+              chapters={CHAPTERS}
+              selectedChapter={this}
+            />
+          }
+        ></Route>
+      );
+    },
+  },
+  SAMPLE_APP: {
+    title: "Sample App",
     route: "/sample-app",
     component: function () {
       return (
@@ -170,13 +237,16 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
 };
 
 export interface ChapterNavigation {
-  CHAPTER_0: Chapter;
-  CHAPTER_1_GET_SINGLE_PROFILE: Chapter;
-  CHAPTER_1_GET_USERS_STATELESS: Chapter;
-  CHAPTER_1_GET_FOLLOWS_STATELESS: Chapter;
-  CHAPTER_1_PROFILE_CARD: Chapter;
-  CHAPTER_2_SETTING_UP_IDENTITY: Chapter;
-  CHAPTER_SAMPLE_APP: Chapter;
+  GETTING_STARTED: Chapter;
+  READ_GET_SINGLE_PROFILE: Chapter;
+  READ_GET_USERS_STATELESS: Chapter;
+  READ_GET_FOLLOWS_STATELESS: Chapter;
+  READ_PROFILE_CARD: Chapter;
+  IDENTITY_INITIALIZE: Chapter;
+  IDENTITY_LOGIN: Chapter;
+  IDENTITY_LOGOUT: Chapter;
+  IDENTITY_DECRYPT: Chapter;
+  SAMPLE_APP: Chapter;
   next: (currentChapter: Chapter) => Chapter | null;
   prev: (currentChapter: Chapter) => Chapter | null;
   chaptersToArray: () => { chapterName: string; chapterContent: Chapter }[];

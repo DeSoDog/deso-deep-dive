@@ -6,7 +6,7 @@ import {
   SampleAppMyPublicKey,
 } from "../../recoil/AppState.atoms";
 import { useState } from "react";
-import { submitPost } from "../../chapters/Chapter3/submit-post";
+import { submitPost } from "../../chapters/Write/submit-post";
 export default function CreatePostInput() {
   const myPublicKey = useRecoilValue(SampleAppMyPublicKey);
   const [postBody, setPostBody] = useState<string | null>(null);

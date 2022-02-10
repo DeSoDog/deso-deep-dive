@@ -1,9 +1,9 @@
 import { Button } from "@mui/material";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { IdentityInitialize } from "../chapters/Identity/IdentityInitialize";
-import { identityLogin } from "../chapters/Identity/IdentityLogin";
-import { IdentityLogout } from "../chapters/Identity/IdentityLogout.service";
+import { IdentityInitialize } from "../chapters/Identity/identity-initialize/IdentityInitialize";
+import { identityLogin } from "../chapters/Identity/identity-login/IdentityLogin";
+import { IdentityLogout } from "../chapters/Identity/identity-logout/IdentityLogout.service";
 import { DesoIdentityEncryptedResponse } from "../interfaces/DesoIdentity.interface";
 import {
   SampleAppEncryptedMessage,
@@ -78,21 +78,6 @@ const Identity = () => {
           Log out
         </Button>
       )}
-
-      <iframe
-        title="desoidentity"
-        id="identity"
-        src="https://identity.deso.org/embed?v=2"
-        style={{
-          height: "100vh",
-          width: "100vw",
-          display: "none",
-          position: "fixed",
-          zIndex: 1000,
-          left: 0,
-          top: 0,
-        }}
-      ></iframe>
     </>
   );
 };

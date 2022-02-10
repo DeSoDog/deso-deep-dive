@@ -3,12 +3,12 @@ import { BASE_URI } from "../chapters/Chapter.models";
 import {
   FollowerInfoRequest,
   FollowerInfoResponse,
-} from "../chapters/Chapter1/get-follows-stateless/GetFollowsStateless.service";
-import { ProfileInfoResponse } from "../chapters/Chapter1/get-single-profile/GetSingleProfile.service";
+} from "../chapters/Read/get-follows-stateless/GetFollowsStateless.service";
+import { ProfileInfoResponse } from "../chapters/Read/get-single-profile/GetSingleProfile.service";
 import {
   UserInfoRequest,
   UserInfoResponse,
-} from "../chapters/Chapter1/get-users-stateless/GetUserStateless.service";
+} from "../chapters/Read/get-users-stateless/GetUserStateless.service";
 import {
   PostInfoRequest,
   PostInfoResponse,

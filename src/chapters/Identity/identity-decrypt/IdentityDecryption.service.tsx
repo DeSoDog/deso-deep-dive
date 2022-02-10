@@ -1,4 +1,4 @@
-import { DecryptMessagesResponse } from "../../interfaces/MessageInfo.interface";
+import { DecryptMessagesResponse } from "../../../interfaces/MessageInfo.interface";
 
 export interface PayloadHasEncryptedMessages {
   payload: { encryptedMessages: any[] };
