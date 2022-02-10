@@ -1,10 +1,11 @@
 import { Button } from "@mui/material";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
+import { PublicKey } from "../chapters/Chapter.atom";
 import { identityLogin } from "../chapters/Chapter2/IdentityLogin";
+import { IdentityLogout } from "../chapters/Chapter2/IdentityLogout.service";
 import {
   DesoIdentityEncryptedResponse,
-  DesoIdentityLoginResponse,
   DesoIdentityResponse,
 } from "../interfaces/DesoIdentity.interface";
 import {
@@ -41,15 +42,6 @@ const Identity = () => {
     });
   }, []);
 
-  const logout = (myPublicKey: string | null) => {
-    action = "logout";
-    windowPrompt = window.open(
-      `https://identity.deso.org/logout?publicKey=${myPublicKey}`,
-      null as unknown as any,
-      "toolbar=no, width=800, height=1000, top=0, left=0"
-    );
-  };
-
   const approve = () => {
     const approve = window.open("https://identity.deso.org/approve");
   };
@@ -81,25 +73,6 @@ const Identity = () => {
         );
         break;
       }
-      case "login": {
-        // user is not logged in open login prompt
-        if (action === "login") {
-          // const loginData: DesoIdentityLoginResponse = data;
-          // const publicKey = loginData.payload.publicKeyAdded;
-          // const loggedInUser = loginData.payload.users[publicKey];
-          // if (loggedInUser) {
-          //   setLoggedInUser(loggedInUser);
-          //   setPublicKey(publicKey);
-          //   windowPrompt?.close();
-          // }
-        } else if (action === "logout") {
-          // user is already logged in so this must be the logout call
-          windowPrompt?.close();
-          setLoggedInUser(null);
-          setPublicKey(null);
-        }
-        break;
-      }
       default: {
         break;
       }
@@ -123,7 +96,10 @@ const Identity = () => {
         <Button
           color="inherit"
           onClick={() => {
-            logout(myPublicKey);
+            IdentityLogout(myPublicKey as string).then(() => {
+              setLoggedInUser(null);
+              setPublicKey(null);
+            });
           }}
         >
           Log out
