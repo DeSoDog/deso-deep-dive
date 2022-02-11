@@ -48,6 +48,7 @@ export const Chapter1Section = ({
       title={selectedChapter.title}
       body={
         <ChapterReadTemplate
+          githubSource={selectedChapter.githubSource}
           onClick={executeApiCall}
           title={selectedChapter.description ?? ""}
           request={request}

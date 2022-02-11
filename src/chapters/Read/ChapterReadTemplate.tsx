@@ -1,17 +1,28 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { CopyBlock, nord } from "react-code-blocks";
 export interface ChapterApiTemplateProps {
   request: any;
   response: any;
   endpoint: string | null;
   onClick: () => void;
   title: string;
+  githubSource: string;
 }
 export const ChapterReadTemplate = ({
   request,
   response,
   endpoint,
   title,
+  githubSource,
   onClick,
 }: ChapterApiTemplateProps) => {
+  const [code, setCode] = useState(null);
+  useEffect(() => {
+    axios.get(githubSource).then((response) => {
+      setCode(response.data);
+    });
+  }, []);
   return (
     <div>
       <div className=" rounded-lg min-h-[300px] p-2">
@@ -25,20 +36,42 @@ export const ChapterReadTemplate = ({
           </span>{" "}
           to call {title}
         </div>
-        <div>EndPoint:</div>
-        <div className="overflow-auto min-h-[50px] max-h-[100px] bg-[#dadada] p-2">
-          {endpoint && JSON.stringify(endpoint, null, 2)}
-        </div>
-        <div>Request:</div>
-        <div className="overflow-auto min-h-[150px] max-h-[100px] bg-[#dadada] p-2">
-          {request && JSON.stringify(request, null, 2)}
-        </div>
-        <div className="mt-2">Response:</div>
-        <div className="overflow-auto min-h-[300px] max-h-[300px] bg-[#dadada] p-2">
-          <p className=" whitespace-pre-wrap ">
-            {response && JSON.stringify(response, null, 2)}
-          </p>
-        </div>{" "}
+        <div className="font-lg font-semibold">EndPoint:</div>
+        {endpoint && (
+          <CopyBlock
+            text={JSON.stringify(endpoint, null, 2)}
+            language="json"
+            wrapLines={true}
+            theme={nord}
+          />
+        )}
+        <div className="font-lg font-semibold">Request:</div>
+        {request && (
+          <CopyBlock
+            text={JSON.stringify(request, null, 2)}
+            language="json"
+            wrapLines={true}
+            theme={nord}
+          />
+        )}
+        <div className="font-lg font-semibold">Response:</div>
+        {response && (
+          <CopyBlock
+            text={JSON.stringify(response, null, 2)}
+            language="json"
+            wrapLines={true}
+            theme={nord}
+          />
+        )}
+        <div className="font-lg font-semibold">Github:</div>
+        {response && (
+          <CopyBlock
+            text={code}
+            language="json"
+            wrapLines={true}
+            theme={nord}
+          />
+        )}
       </div>
     </div>
   );

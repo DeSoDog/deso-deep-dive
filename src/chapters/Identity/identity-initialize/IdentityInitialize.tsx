@@ -22,13 +22,13 @@ export const IdentityInitialize = (): Promise<any> => {
     getIdentityFrame(true);
   });
 };
-export const getIdentityFrame = (createNewIdentityFrame = false) => {
+export const getIdentityFrame = (createNewIdentityFrame = false): void => {
   let frame = document.getElementById("identity");
   if (frame && createNewIdentityFrame) {
     frame.remove();
   }
   if (!createNewIdentityFrame) {
-    return frame;
+    return;
   }
 
   frame = document.createElement("iframe");

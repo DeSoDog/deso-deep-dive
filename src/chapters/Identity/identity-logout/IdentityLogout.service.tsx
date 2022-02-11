@@ -1,4 +1,4 @@
-export const IdentityLogout = (myPublicKey: string): Promise<void> => {
+export const IdentityLogout = (myPublicKey: string): Promise<boolean> => {
   const prompt = window.open(
     `https://identity.deso.org/logout?publicKey=${myPublicKey}`,
     null as unknown as any,
@@ -10,7 +10,7 @@ export const IdentityLogout = (myPublicKey: string): Promise<void> => {
       console.log(event.data.method);
       if (event.data.method === "login") {
         prompt?.close();
-        resolve();
+        resolve(true);
       }
     };
     window.addEventListener("message", windowHandler);

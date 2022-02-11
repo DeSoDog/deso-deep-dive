@@ -10,22 +10,18 @@ export const identityLogin = (): Promise<{
     null as unknown as any,
     "toolbar=no, width=800, height=1000, top=0, left=0"
   );
-
   return new Promise((resolve, reject) => {
     const windowHandler = (event: any) => {
-      console.log(event);
       const publicKey = event.data?.payload?.publicKeyAdded;
       if (!publicKey) {
         return;
       }
-
       const loggedInUser = event.data.payload.users[publicKey];
       prompt?.close();
       resolve({ publicKey, loggedInUser });
 
       window.removeEventListener("message", windowHandler);
     };
-
     getIdentityFrame();
     window.addEventListener("message", windowHandler);
   });

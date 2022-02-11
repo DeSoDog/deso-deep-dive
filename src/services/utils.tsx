@@ -1,3 +1,5 @@
+import axios from "axios";
+import { CopyBlock, nord } from "react-code-blocks";
 import { UserInfoResponse } from "../chapters/Read/get-users-stateless/GetUserStateless.service";
 import { User } from "../interfaces/DesoIdentity.interface";
 import { TransactionPost } from "../interfaces/Transaction.interface";
@@ -38,11 +40,16 @@ export const uuid = () => {
   });
 };
 
-export const getIdentityIFrame = (): HTMLIFrameElement => {
-  const iFrame: HTMLIFrameElement | null = document.getElementById(
-    "identity"
-  ) as HTMLIFrameElement;
-  return iFrame;
+export const getSourceFromGithub = async (url: string) => {
+  const response = await axios.get(url);
+  console.log(response.data);
+  return (
+    <CopyBlock
+      codeBlock
+      text={response.data}
+      language="tsx"
+      wrapLines={true}
+      theme={nord}
+    />
+  );
 };
-
-export const identityWrapper = () => {};

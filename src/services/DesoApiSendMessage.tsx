@@ -1,14 +1,12 @@
 import axios from "axios";
 import {
-  GetMessageRequest,
-  OrderedContactsWithMessages,
   SendIframeMessageRequest,
   SendMessageRequest,
 } from "../interfaces/MessageInfo.interface";
-import { getIdentityIFrame, uuid } from "./utils";
 import { User } from "../interfaces/DesoIdentity.interface";
 import { submitTransaction } from "./DesoApiSubmitTransaction";
 import { BASE_URI } from "../chapters/Chapter.models";
+import { getIdentityFrame } from "../chapters/Identity/identity-initialize/IdentityInitialize";
 
 const DEFAULT_KEY = "default-key";
 export const encryptMessage = async (
@@ -35,8 +33,8 @@ export const encryptMessage = async (
     },
     service: "identity",
   };
-  const iFrame = getIdentityIFrame();
-  iFrame?.contentWindow?.postMessage(iFrameRequest, "*");
+  // const iFrame = getIdentityFrame();
+  // iFrame?.contentWindow?.postMessage(iFrameRequest, "*");
 };
 export const sendMessage = async (request: SendMessageRequest) => {
   const response = (

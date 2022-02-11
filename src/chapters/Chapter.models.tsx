@@ -1,4 +1,3 @@
-import React, { ReactElement } from "react";
 import { Route } from "react-router-dom";
 import LayoutContent from "../components/layout/LayoutContent";
 import { Chapter0 } from "./Chapter0";
@@ -9,25 +8,21 @@ import { getUserStateless } from "./Read/get-users-stateless/GetUserStateless.se
 import { ProfileAndFollowerCard } from "./Read/profile-card/ProfileCard";
 import { IdentityInitializePage } from "./Identity/identity-initialize/IdentityInitializePage";
 import { IdentityLoginPage } from "./Identity/identity-login/IdentitiyLoginPage";
+import { ReactElement } from "react";
+import { IdentityLogoutPage } from "./Identity/identity-logout/IdentityLogoutPage";
 
 export const CHAPTERS: Readonly<ChapterNavigation> = {
   GETTING_STARTED: {
     title: "Getting Started",
     route: "/getting-started",
+    githubSource: "N/A",
     component: function () {
       return (
-        <>
-          <Route
-            key={this.title}
-            path="*"
-            element={<Chapter0 Chapters={CHAPTERS} selectedChapter={this} />}
-          ></Route>
-          <Route
-            key={this.title}
-            path={this.route}
-            element={<Chapter0 Chapters={CHAPTERS} selectedChapter={this} />}
-          ></Route>
-        </>
+        <Route
+          key={this.title}
+          path="*"
+          element={<Chapter0 Chapters={CHAPTERS} selectedChapter={this} />}
+        ></Route>
       );
     },
   },
@@ -35,6 +30,8 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
     title: "Get Single Profile",
     route: "/read/get-single-profile",
     description: "get-single-profile",
+    githubSource:
+      "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Identity/identity-initialize/IdentityInitialize.tsx",
     component: function () {
       return (
         <Route
@@ -55,6 +52,8 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
     title: "Get Users Stateless",
     route: "/read/get-users-stateless",
     description: "get-users-stateless",
+    githubSource:
+      "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Read/get-users-stateless/GetUserStateless.service.tsx",
     component: function () {
       return (
         <Route
@@ -75,6 +74,8 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
     title: "Get Follows Stateless",
     route: "/read/get-follows-stateless",
     description: "get-followers-stateless",
+    githubSource:
+      "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Read/get-follows-stateless/GetFollowsStateless.service.tsx",
     component: function () {
       return (
         <Route
@@ -94,6 +95,8 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
   READ_PROFILE_CARD: {
     title: "Profile Card",
     route: "/read/profile-cards",
+    githubSource:
+      "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/components/profile/DisplayUser.tsx",
     component: function () {
       return (
         <Route
@@ -110,8 +113,10 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
     },
   },
   IDENTITY_INITIALIZE: {
-    title: "Identity Initialize",
+    title: "Initialize",
     route: "/identity/identity-initialize",
+    githubSource:
+      "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Identity/identity-initialize/IdentityInitialize.tsx",
     component: function () {
       return (
         <Route
@@ -129,8 +134,10 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
   },
 
   IDENTITY_LOGIN: {
-    title: "Identity Login",
+    title: "Login",
     route: "/identity/identity-login",
+    githubSource:
+      "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Identity/identity-login/IdentityLogin.tsx",
     component: function () {
       return (
         <Route
@@ -144,26 +151,26 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
     },
   },
   IDENTITY_LOGOUT: {
-    title: "Identity Logout",
+    title: "Logout",
     route: "/identity/identity-logout",
+    githubSource:
+      "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Identity/identity-logout/IdentityLogout.service.tsx",
     component: function () {
       return (
         <Route
           key={this.title}
           path={this.route}
           element={
-            <IdentityInitializePage
-              chapters={CHAPTERS}
-              selectedChapter={this}
-            />
+            <IdentityLogoutPage chapters={CHAPTERS} selectedChapter={this} />
           }
         ></Route>
       );
     },
   },
   IDENTITY_DECRYPT: {
-    title: "Identity Decrypt",
+    title: "Decrypt",
     route: "/identity/identity-decrypt",
+    githubSource: "N/A",
     component: function () {
       return (
         <Route
@@ -182,6 +189,7 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
   SAMPLE_APP: {
     title: "Sample App",
     route: "/sample-app",
+    githubSource: "N/A",
     component: function () {
       return (
         <Route
@@ -202,6 +210,7 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
         });
       }
     }
+
     return chapterArray;
   },
   prev: function (currentChapter: Chapter) {
@@ -255,6 +264,7 @@ export interface Chapter {
   title: string;
   route: string;
   description?: string;
+  githubSource: string;
   component: () => ReactElement;
 }
 
