@@ -8,6 +8,7 @@ import { getSingleProfile } from "./Read/get-single-profile/GetSingleProfile.ser
 import { getUserStateless } from "./Read/get-users-stateless/GetUserStateless.service";
 import { ProfileAndFollowerCard } from "./Read/profile-card/ProfileCard";
 import { IdentityInitializePage } from "./Identity/identity-initialize/IdentityInitializePage";
+import { IdentityLoginPage } from "./Identity/identity-login/IdentitiyLoginPage";
 
 export const CHAPTERS: Readonly<ChapterNavigation> = {
   GETTING_STARTED: {
@@ -136,10 +137,7 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
           key={this.title}
           path={this.route}
           element={
-            <IdentityInitializePage
-              chapters={CHAPTERS}
-              selectedChapter={this}
-            />
+            <IdentityLoginPage chapters={CHAPTERS} selectedChapter={this} />
           }
         ></Route>
       );

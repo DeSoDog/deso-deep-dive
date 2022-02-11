@@ -14,11 +14,11 @@ export const IdentityInitialize = (): Promise<any> => {
           "https://identity.deso.org" as WindowPostMessageOptions
         );
 
-        window.removeEventListener("message", windowHandler);
         resolve(event.data);
       }
     };
     window.addEventListener("message", windowHandler);
+
     getIdentityFrame(true);
   });
 };
@@ -26,6 +26,9 @@ export const getIdentityFrame = (createNewIdentityFrame = false) => {
   let frame = document.getElementById("identity");
   if (frame && createNewIdentityFrame) {
     frame.remove();
+  }
+  if (!createNewIdentityFrame) {
+    return frame;
   }
 
   frame = document.createElement("iframe");

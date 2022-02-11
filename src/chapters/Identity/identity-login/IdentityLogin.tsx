@@ -1,4 +1,5 @@
 import { User } from "../../../interfaces/DesoIdentity.interface";
+import { getIdentityFrame } from "../identity-initialize/IdentityInitialize";
 
 export const identityLogin = (): Promise<{
   publicKey: string;
@@ -9,12 +10,6 @@ export const identityLogin = (): Promise<{
     null as unknown as any,
     "toolbar=no, width=800, height=1000, top=0, left=0"
   );
-  const iframe: HTMLIFrameElement | null = document.getElementById(
-    "identity"
-  ) as HTMLIFrameElement;
-  if (iframe === null) {
-    throw Error("Iframe with id identity does not exist");
-  }
 
   return new Promise((resolve, reject) => {
     const windowHandler = (event: any) => {
@@ -27,7 +22,11 @@ export const identityLogin = (): Promise<{
       const loggedInUser = event.data.payload.users[publicKey];
       prompt?.close();
       resolve({ publicKey, loggedInUser });
+
+      window.removeEventListener("message", windowHandler);
     };
+
+    getIdentityFrame();
     window.addEventListener("message", windowHandler);
   });
 };
