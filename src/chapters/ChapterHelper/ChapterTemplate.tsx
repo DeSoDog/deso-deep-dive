@@ -4,16 +4,12 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/system/Box";
 export interface ChapterTemplateProps {
   title: string;
-  body: ReactElement;
   tabs?: TabItem[];
   navigation: ReactElement;
+  body?: any;
 }
 
-export const ChapterTemplate = ({
-  body,
-  tabs,
-  navigation,
-}: ChapterTemplateProps) => {
+export const ChapterTemplate = ({ tabs, navigation }: ChapterTemplateProps) => {
   return <div>{tabs && <DeSoTabs tabs={tabs} navigation={navigation} />}</div>;
 };
 
@@ -75,7 +71,7 @@ export default function DeSoTabs({ tabs, navigation }: TabProps) {
       </Box>
       {tabs.map((tab, index) => {
         return (
-          <TabPanel value={value} index={index}>
+          <TabPanel key={index} value={value} index={index}>
             {tab.subTitle}
             {tab.content}
           </TabPanel>

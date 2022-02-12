@@ -12,6 +12,7 @@ import { IdentityLogoutPage } from "../Identity/identity-logout/IdentityLogoutPa
 import { DecryptMessagesPage } from "../Write/decrypt/DecryptMessagesPage";
 
 import { Link as MaterialLink } from "@mui/material";
+import { CommonPageSectionTitles, PageSection } from "./PageSections";
 export const CHAPTERS: Readonly<ChapterNavigation> = {
   READ_GET_SINGLE_PROFILE: {
     title: "Get Single Profile",
@@ -21,7 +22,7 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
       "https://docs.deso.org/backend/blockchain-data/api/user-endpoints#get-single-profile",
     ],
     githubSource: [
-      "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Identity/identity-initialize/IdentityInitialize.tsx",
+      "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Read/get-single-profile/GetSingleProfile.service.tsx",
     ],
     component: function () {
       return (
@@ -30,6 +31,18 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
           path={this.route}
           element={
             <Chapter1Section
+              tabs={[
+                {
+                  title: CommonPageSectionTitles.OVERVIEW,
+                  content: PageSection(
+                    "get-single-profile",
+                    <div>
+                      As it sounds, get-single-profile, fetches various data
+                      around a single profile such as{" "}
+                    </div>
+                  ),
+                },
+              ]}
               chapters={CHAPTERS}
               selectedChapter={this}
               apiCall={getSingleProfile}

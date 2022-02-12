@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { PageNavigation } from "../../components/layout/PageNavigation";
 import { PublicKey } from "../ChapterHelper/Chapter.atom";
@@ -8,26 +8,34 @@ import {
   ChapterNavigation,
 } from "../ChapterHelper/Chapter.models";
 import { ChapterReadTemplate } from "./ChapterReadTemplate";
-import { ChapterTemplate } from "../ChapterHelper/ChapterTemplate";
+import { ChapterTemplate, TabItem } from "../ChapterHelper/ChapterTemplate";
 import {
   ProfileInfoRequest,
   ProfileInfoResponse,
 } from "./get-single-profile/GetSingleProfile.service";
+import { getSourceFromGithub } from "../../services/utils";
+import {
+  CommonPageSectionTitles,
+  PageSection,
+} from "../ChapterHelper/PageSections";
 export interface Chapter1SectionProps {
   selectedChapter: Chapter;
   chapters: ChapterNavigation;
+  tabs: TabItem[];
   apiCall: (params: any) => any;
 }
 export const Chapter1Section = ({
   selectedChapter,
   chapters,
   apiCall,
+  tabs,
 }: Chapter1SectionProps) => {
   const publicKey = useRecoilValue(PublicKey);
   const [response, setResponse] = useState<ProfileInfoResponse | null>(null);
   const [request, setRequest] = useState<ProfileInfoRequest | null>(null);
   const [endpoint, setEndpoint] = useState<string | null>(null);
   const [chapterTitle, setChapterTitle] = useState<null>(null);
+  const [code, setCode] = useState<ReactElement[]>([]);
   useEffect(() => {
     // clear out the page if they hit go to the next section
     if (chapterTitle !== selectedChapter.title) {
@@ -36,6 +44,8 @@ export const Chapter1Section = ({
       setRequest(null);
       setChapterTitle(chapterTitle);
     }
+
+    getSourceFromGithub(selectedChapter.githubSource).then(setCode);
   }, [selectedChapter]);
   const executeApiCall = async () => {
     const apiResponse = await apiCall(publicKey).catch((e: Error) =>
@@ -50,17 +60,20 @@ export const Chapter1Section = ({
   return (
     <ChapterTemplate
       title={selectedChapter.title}
-      tabs={[{ title: "Overview", content: <div></div> }]}
-      body={
-        <ChapterReadTemplate
-          githubSource={selectedChapter.githubSource}
-          onClick={executeApiCall}
-          title={selectedChapter.description ?? ""}
-          request={request}
-          response={response}
-          endpoint={endpoint}
-        />
-      }
+      tabs={[
+        ...tabs,
+        {
+          content: PageSection("", <>{code}</>),
+          title: CommonPageSectionTitles.CODE,
+        },
+        {
+          content: PageSection(
+            CommonPageSectionTitles.ADDITIONAL_DOCUMENTATION,
+            <>{chapters.documentationToLink(selectedChapter)}</>
+          ),
+          title: CommonPageSectionTitles.DOCUMENTATION,
+        },
+      ]}
       navigation={
         <PageNavigation
           previous={chapters.prev(selectedChapter) as Chapter}
