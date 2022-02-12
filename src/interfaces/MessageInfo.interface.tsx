@@ -1,4 +1,4 @@
-import { CoinEntry, DAOCoinEntry } from "./Coin.interface";
+import { CoinEntry, DAOCoinEntry } from "../chapters/Interfaces/Coin.interface";
 
 export interface GetMessageRequest {
   PublicKeyBase58Check: string;

@@ -1,4 +1,4 @@
-import { CoinEntry, DAOCoinEntry } from "../../../interfaces/Coin.interface";
+import { CoinEntry, DAOCoinEntry } from "../../Interfaces/Coin.interface";
 import axios from "axios";
 import { BASE_URI } from "../../ChapterHelper/Chapter.models";
 export const getSingleProfile = async (

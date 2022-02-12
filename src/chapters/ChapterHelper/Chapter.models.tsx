@@ -69,6 +69,7 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
           path={this.route}
           element={
             <Chapter1Section
+              tabs={[]}
               chapters={CHAPTERS}
               selectedChapter={this}
               apiCall={getUserStateless}
@@ -95,6 +96,7 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
           path={this.route}
           element={
             <Chapter1Section
+              tabs={[]}
               chapters={CHAPTERS}
               selectedChapter={this}
               apiCall={getFollowsStateless}

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CoinEntry, DAOCoinEntry } from "../../../interfaces/Coin.interface";
+import { CoinEntry, DAOCoinEntry } from "../../Interfaces/Coin.interface";
 import { BASE_URI } from "../../ChapterHelper/Chapter.models";
 
 export const getFollowsStateless = async (

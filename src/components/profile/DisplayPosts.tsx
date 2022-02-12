@@ -2,7 +2,7 @@ import { Avatar, CardHeader } from "@mui/material";
 import Card from "@mui/material/Card";
 import { ReactElement, useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import { PostInfoResponse } from "../../interfaces/PostInfo.interface";
+import { PostInfoResponse } from "../../chapters/Interfaces/Post.interface";
 import {
   SampleAppMyUserInfo,
   MyUserInfoType,

@@ -1,30 +1,3 @@
-import { CoinEntry, DAOCoinEntry } from "./Coin.interface";
-
-export interface PostInfoRequest {
-  PublicKeyBase58Check?: string;
-  Username?: string;
-  ReaderPublicKeyBase58Check?: string;
-  LastPostHashHex?: string;
-  NumToFetch?: number;
-  MediaRequired?: boolean;
-}
-
-export interface PostEntryReaderState {
-  LikedByReader: boolean;
-  DiamondLevelBestowed: number;
-  RepostedByReader: boolean;
-  RepostPostHashHex: string;
-}
-
-export interface PostExtraData {
-  Language: string;
-  Node: string;
-}
-
-export interface AdditionalDESORoyaltiesMap {}
-
-export interface AdditionalCoinRoyaltiesMap {}
-
 export interface Post {
   PostHashHex: string;
   PosterPublicKeyBase58Check: string;
@@ -73,3 +46,28 @@ export interface PostInfoResponse {
   Posts: Post[];
   LastPostHashHex: string;
 }
+
+export interface PostInfoRequest {
+  PublicKeyBase58Check?: string;
+  Username?: string;
+  ReaderPublicKeyBase58Check?: string;
+  LastPostHashHex?: string;
+  NumToFetch?: number;
+  MediaRequired?: boolean;
+}
+
+export interface PostEntryReaderState {
+  LikedByReader: boolean;
+  DiamondLevelBestowed: number;
+  RepostedByReader: boolean;
+  RepostPostHashHex: string;
+}
+
+export interface PostExtraData {
+  Language: string;
+  Node: string;
+}
+
+export interface AdditionalDESORoyaltiesMap {}
+
+export interface AdditionalCoinRoyaltiesMap {}
