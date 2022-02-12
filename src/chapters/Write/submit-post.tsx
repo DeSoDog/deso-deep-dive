@@ -1,8 +1,8 @@
 import axios from "axios";
 import { TransactionPost } from "../../interfaces/Transaction.interface";
 import { getSignerInfo, uuid } from "../../services/utils";
-import { BASE_URI } from "../Chapter.models";
-import { identitySubmitTransaction } from "../Identity/sign-transaction/IdentitySubmitTransaction.service";
+import { BASE_URI } from "../ChapterHelper/Chapter.models";
+import { identitySignTransaction } from "../Identity/sign-transaction/IdentitySubmitTransaction.service";
 import { User } from "../Interfaces/User";
 
 export const submitPost = async (
@@ -50,5 +50,5 @@ export const submitPost = async (
     payload,
     service: "identity",
   };
-  return identitySubmitTransaction(request);
+  return identitySignTransaction(request);
 };

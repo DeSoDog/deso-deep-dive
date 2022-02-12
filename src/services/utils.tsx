@@ -46,16 +46,19 @@ export const getSourceFromGithub = async (
 ): Promise<ReactElement[]> => {
   const blocks = Promise.all(
     urls.map(async (url, index) => {
+      const blockName = url.split("/").pop();
       const response = await axios.get(url);
       return (
-        <CopyBlock
-          key={index}
-          codeBlock
-          text={response.data}
-          language="tsx"
-          wrapLines={true}
-          theme={nord}
-        />
+        <div key={index}>
+          <div className=" font-semibold">{blockName}:</div>
+          <CopyBlock
+            codeBlock
+            text={response.data}
+            language="tsx"
+            wrapLines={true}
+            theme={nord}
+          />
+        </div>
       );
     })
   );

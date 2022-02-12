@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { PageNavigation } from "../../../components/layout/PageNavigation";
 import { getSourceFromGithub } from "../../../services/utils";
-import { PublicKey } from "../../Chapter.atom";
-import { Chapter, ChapterNavigation } from "../../Chapter.models";
-import { ChapterTemplate } from "../../ChapterTemplate";
+import { PublicKey } from "../../ChapterHelper/Chapter.atom";
+import { Chapter, ChapterNavigation } from "../../ChapterHelper/Chapter.models";
+import { ChapterTemplate } from "../../ChapterHelper/ChapterTemplate";
 import { LoginCodeBlocks } from "../identity-login/CodeBlocks";
 import { IdentityLogout } from "./IdentityLogout.service";
 

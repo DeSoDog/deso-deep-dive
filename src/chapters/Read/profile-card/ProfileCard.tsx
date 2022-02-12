@@ -1,6 +1,6 @@
 import { PageNavigation } from "../../../components/layout/PageNavigation";
-import { Chapter, ChapterNavigation } from "../../Chapter.models";
-import { ChapterTemplate } from "../../ChapterTemplate";
+import { Chapter, ChapterNavigation } from "../../ChapterHelper/Chapter.models";
+import { ChapterTemplate } from "../../ChapterHelper/ChapterTemplate";
 import { useEffect, useState } from "react";
 import {
   getSingleProfile,
@@ -15,7 +15,7 @@ import {
   UserInfoResponse,
 } from "../get-users-stateless/GetUserStateless.service";
 import { useRecoilValue } from "recoil";
-import { PublicKey } from "../../Chapter.atom";
+import { PublicKey } from "../../ChapterHelper/Chapter.atom";
 import DisplayUser from "../../../components/profile/DisplayUser";
 import { Button, Link } from "@mui/material";
 import { getSourceFromGithub } from "../../../services/utils";

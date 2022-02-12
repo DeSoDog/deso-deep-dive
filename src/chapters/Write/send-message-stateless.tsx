@@ -1,7 +1,7 @@
 import axios from "axios";
 import { SendMessageRequest } from "../../interfaces/MessageInfo.interface";
 import { submitTransaction } from "../../services/DesoApiSubmitTransaction";
-import { BASE_URI } from "../Chapter.models";
+import { BASE_URI } from "../ChapterHelper/Chapter.models";
 
 export const sendMessage = async (request: SendMessageRequest) => {
   const response = (

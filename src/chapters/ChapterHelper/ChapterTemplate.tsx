@@ -14,16 +14,7 @@ export const ChapterTemplate = ({
   tabs,
   navigation,
 }: ChapterTemplateProps) => {
-  return (
-    <div className="mx-auto mt-5  max-w-[1600px] bg-[#fff] pb-2">
-      {/* <h1 className=" font-semibold text-3xl text-center  py-2">{title}</h1> */}
-
-      {tabs && <DeSoTabs tabs={tabs} />}
-      <div className="p-4">{body}</div>
-      <div className="p-4"></div>
-      <div className="mb-4 w-full">{navigation}</div>
-    </div>
-  );
+  return <div>{tabs && <DeSoTabs tabs={tabs} navigation={navigation} />}</div>;
 };
 
 const TabPanel = (props: any) => {
@@ -36,7 +27,7 @@ const TabPanel = (props: any) => {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && <div className="p-3">{children}</div>}
+      {value === index && <div className="p-3">{children} </div>}
     </div>
   );
 };
@@ -50,22 +41,26 @@ function a11yProps(index: number) {
 
 export interface TabItem {
   title: string;
-  subTitle: ReactElement;
+  subTitle?: ReactElement;
   content: ReactElement;
 }
 
 export interface TabProps {
   tabs: TabItem[];
+  navigation: ReactElement;
 }
 
-export default function DeSoTabs({ tabs }: TabProps) {
+export default function DeSoTabs({ tabs, navigation }: TabProps) {
   const [value, setValue] = useState(0);
   const handleChange = (event: any, newValue: number) => {
     setValue(newValue);
   };
   return (
-    <div className="w-full">
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+    <div className="mx-auto mt-5 max-w-[1160px] pb-2 w-full bg-[#fff] min-h-[800px] rounded-lg">
+      <Box
+        className="flex justify-between"
+        sx={{ borderBottom: 1, borderColor: "divider" }}
+      >
         <Tabs
           value={value}
           onChange={handleChange}
@@ -75,6 +70,8 @@ export default function DeSoTabs({ tabs }: TabProps) {
             return <Tab label={tab.title} {...a11yProps(index)} />;
           })}
         </Tabs>
+
+        {navigation}
       </Box>
       {tabs.map((tab, index) => {
         return (

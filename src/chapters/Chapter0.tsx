@@ -1,8 +1,8 @@
 import { Button, Link } from "@mui/material";
 
 import { Link as RouterLink } from "react-router-dom";
-import { Chapter, ChapterNavigation } from "./Chapter.models";
-import { ChapterTemplate } from "./ChapterTemplate";
+import { Chapter, ChapterNavigation } from "./ChapterHelper/Chapter.models";
+import { ChapterTemplate } from "./ChapterHelper/ChapterTemplate";
 export interface Chapter0Props {
   selectedChapter: Chapter;
   Chapters: ChapterNavigation;

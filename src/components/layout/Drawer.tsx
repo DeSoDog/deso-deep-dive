@@ -7,7 +7,7 @@ import { Drawer } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { SampleAppToggleDrawer } from "../../recoil/AppState.atoms";
-import { ChapterNavigation } from "../../chapters/Chapter.models";
+import { ChapterNavigation } from "../../chapters/ChapterHelper/Chapter.models";
 export interface DesoDrawerProps {
   chapters: ChapterNavigation;
 }

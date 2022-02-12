@@ -4,7 +4,7 @@ import {
   OrderedContactsWithMessages,
 } from "../../interfaces/MessageInfo.interface";
 import { uuid } from "../../services/utils";
-import { BASE_URI } from "../Chapter.models";
+import { BASE_URI } from "../ChapterHelper/Chapter.models";
 import { identityDecrypt } from "../Identity/identity-decrypt/IdentityDecryption.service";
 import { User } from "../Interfaces/User";
 

@@ -1,6 +1,6 @@
 import { CoinEntry, DAOCoinEntry } from "../../../interfaces/Coin.interface";
 import axios from "axios";
-import { BASE_URI } from "../../Chapter.models";
+import { BASE_URI } from "../../ChapterHelper/Chapter.models";
 export const getSingleProfile = async (
   PublicKeyBase58Check: string
 ): Promise<{

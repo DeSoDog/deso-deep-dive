@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { PageNavigation } from "../../../components/layout/PageNavigation";
 import { getSourceFromGithub, jsonBlock } from "../../../services/utils";
-import { Chapter, ChapterNavigation } from "../../Chapter.models";
-import { ChapterTemplate } from "../../ChapterTemplate";
+import { Chapter, ChapterNavigation } from "../../ChapterHelper/Chapter.models";
+import { ChapterTemplate } from "../../ChapterHelper/ChapterTemplate";
 import { ChapterIdentityTemplate } from "../ChapterIdentityTemplate";
 import { IdentityInitialize } from "./IdentityInitialize";
 

@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { PageNavigation } from "../../components/layout/PageNavigation";
-import { PublicKey } from "../Chapter.atom";
-import { BASE_URI, Chapter, ChapterNavigation } from "../Chapter.models";
+import { PublicKey } from "../ChapterHelper/Chapter.atom";
+import {
+  BASE_URI,
+  Chapter,
+  ChapterNavigation,
+} from "../ChapterHelper/Chapter.models";
 import { ChapterReadTemplate } from "./ChapterReadTemplate";
-import { ChapterTemplate } from "../ChapterTemplate";
+import { ChapterTemplate } from "../ChapterHelper/ChapterTemplate";
 import {
   ProfileInfoRequest,
   ProfileInfoResponse,
@@ -46,6 +50,7 @@ export const Chapter1Section = ({
   return (
     <ChapterTemplate
       title={selectedChapter.title}
+      tabs={[{ title: "Overview", content: <div></div> }]}
       body={
         <ChapterReadTemplate
           githubSource={selectedChapter.githubSource}

@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
 import { PageNavigation } from "../../../components/layout/PageNavigation";
-import { Chapter, ChapterNavigation } from "../../Chapter.models";
-import { ChapterTemplate } from "../../ChapterTemplate";
 import { identityLogin } from "./IdentityLogin";
 import { LoginCodeBlocks } from "./CodeBlocks";
 import { getSourceFromGithub, jsonBlock } from "../../../services/utils";
 import { useRecoilState } from "recoil";
-import { LoggedInUser, PublicKey } from "../../Chapter.atom";
 import { User } from "../../Interfaces/User";
+import { LoggedInUser, PublicKey } from "../../ChapterHelper/Chapter.atom";
+import { Chapter, ChapterNavigation } from "../../ChapterHelper/Chapter.models";
+import ChapterTemplate from "../../ChapterHelper/ChapterTemplate";
+import { Link } from "@mui/material";
+import {
+  PageSection,
+  CommonPageSectionTitles,
+} from "../../ChapterHelper/PageSections";
 
 // https://github.com/highlightjs/highlight.js/blob/main/src/languages/typescript.js
 export interface IdentityLoginProps {
@@ -30,15 +35,21 @@ export const IdentityLoginPage = ({
   return (
     <>
       <ChapterTemplate
-        title={selectedChapter.title}
         tabs={[
           {
-            title: "Overview",
-            subTitle: <div>Overview</div>,
+            title: "overview",
             content: (
               <>
-                <div>
-                  <div className="font-semibold text-lg">
+                {PageSection(
+                  "Login",
+                  `In order to write data to the chain, decrypt personal
+                  messages, or various other tasks, we must first login to the
+                  DeSo chain. The simplest way to handle this is by making use
+                  of the identity services window api`
+                )}
+                {PageSection(
+                  CommonPageSectionTitles.TRY_IT_OUT,
+                  <div>
                     Click{" "}
                     <span
                       className="cursor-pointer text-[#1776cf] hover:text-[#fff]"
@@ -51,58 +62,56 @@ export const IdentityLoginPage = ({
                     >
                       here
                     </span>{" "}
-                    to login with Identity.
+                    to call the login prompt
                   </div>
-                </div>{" "}
-                <div className="font-semibold">What just happened?</div>
-                <div className="list-decimal p-2">
-                  <li className="font-semibold">
-                    We called the identity login page with window.open() to
-                    prompt the user to login.
-                  </li>
-                  <li className="font-semibold">
-                    Then we created a new handler for the "message" event.
-                  </li>
-                  <li className="font-semibold">
-                    Once the user selects one of the login in options our Iframe
-                    will emit an event with our logged in user's data.
-                  </li>
-                </div>
+                )}
+                {PageSection(
+                  <>
+                    {loggedInUser && (
+                      <div>{CommonPageSectionTitles.WHAT_HAPPENED}</div>
+                    )}
+                  </>,
+                  <div>
+                    {loggedInUser && (
+                      <>
+                        <div className="list-decimal ">
+                          <li className="font-semibold">
+                            We called the identity login page with window.open()
+                            to prompt the user to login.
+                            {LoginCodeBlocks.section1}
+                          </li>
+                          <li className="font-semibold">
+                            Then we created a new handler for the "message"
+                            event.
+                            {LoginCodeBlocks.section2}
+                          </li>
+                          <li className="font-semibold">
+                            Once the user selects one of the login in options
+                            our Iframe will emit an event with our logged in
+                            user's data.
+                            {loggedInUser && jsonBlock(loggedInUser)}
+                          </li>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                )}
               </>
             ),
           },
-          {
-            title: "BreakDown",
-            subTitle: <div>What just happened?</div>,
-            content: (
-              <div>
-                {loggedInUser && (
-                  <>
-                    <div className="font-semibold">1.</div>
-                    {LoginCodeBlocks.section1}
-                    <div className="font-semibold">2.</div>
-                    {LoginCodeBlocks.section2}
-                    <div className="font-semibold">3.</div>
-                    {loggedInUser && jsonBlock(loggedInUser)}
-                  </>
-                )}
-              </div>
-            ),
-          },
+
           {
             title: "Code",
-            subTitle: (
-              <div>Want to use this in your project? Copy the following </div>
-            ),
-            content: (
-              <>
-                <div className="font-semibold text-lg">Github:</div>
-                {loggedInUser && code}
-              </>
+            content: PageSection("", code),
+          },
+          {
+            title: "Documentation",
+            content: PageSection(
+              CommonPageSectionTitles.ADDITIONAL_DOCUMENTATION,
+              <>{chapters.documentationToLink(selectedChapter)}</>
             ),
           },
         ]}
-        body={<div></div>}
         navigation={
           <PageNavigation
             previous={chapters.prev(selectedChapter) as Chapter}
