@@ -47,17 +47,6 @@ export interface OrderedContactsWithMessages {
   };
   NumMessagesRead: number;
 }
-export interface DecryptMessagesResponse {
-  EncryptedHex: string;
-  PublicKey: string;
-  IsSender: boolean;
-  Legacy: boolean;
-  Version: number;
-  SenderMessagingPublicKey: string;
-  SenderMessagingGroupKeyName: string;
-  RecipientMessagingPublicKey: string;
-  RecipientMessagingGroupKeyName: string;
-}
 
 export interface SendIframeMessageRequest {
   SenderPublicKeyBase58Check: string;

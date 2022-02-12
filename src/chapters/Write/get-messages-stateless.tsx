@@ -11,7 +11,7 @@ import { identityDecrypt } from "../Identity/identity-decrypt/IdentityDecryption
 export const getMessages = async (
   request: GetMessageRequest,
   user: User
-): Promise<any> => {
+): Promise<{ thread: any; response: any }> => {
   const response = (
     await axios.post(`${BASE_URI}/get-messages-stateless`, request)
   ).data;
@@ -46,5 +46,5 @@ export const getMessages = async (
     },
     service: "identity",
   };
-  return identityDecrypt(iFrameRequest);
+  return identityDecrypt(iFrameRequest, response);
 };

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { CopyBlock, nord } from "react-code-blocks";
-export const IdentityInitializeCodeBlocks = {
+export const CodeBlocks = {
   section1: (
     <CopyBlock
       codeBlock
@@ -10,7 +10,6 @@ export const IdentityInitializeCodeBlocks = {
       theme={nord}
     />
   ),
-
   section2: (
     <CopyBlock
       codeBlock
@@ -20,29 +19,4 @@ export const IdentityInitializeCodeBlocks = {
       theme={nord}
     />
   ),
-  sectionRuntime: (json: any) => {
-    return (
-      <CopyBlock
-        codeBlock
-        text={JSON.stringify(json, null, 2)}
-        language="json"
-        wrapLines={true}
-        theme={nord}
-      />
-    );
-  },
-  getSourceFromGithub: async () => {
-    const response = await axios.get(
-      "https://github.com/DeSoDog/deso-deep-dive/blob/master/src/chapters/Identity/identity-initialize/IdentityInitialize.tsx"
-    );
-    return (
-      <CopyBlock
-        codeBlock
-        text={response.data}
-        language="tsx"
-        wrapLines={true}
-        theme={nord}
-      />
-    );
-  },
 };

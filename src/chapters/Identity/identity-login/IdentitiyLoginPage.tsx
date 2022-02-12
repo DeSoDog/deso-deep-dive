@@ -3,8 +3,11 @@ import { PageNavigation } from "../../../components/layout/PageNavigation";
 import { Chapter, ChapterNavigation } from "../../Chapter.models";
 import { ChapterTemplate } from "../../ChapterTemplate";
 import { identityLogin } from "./IdentityLogin";
-import { IdentityLoginCodeBlocks } from "./CodeBlocks";
-import { getSourceFromGithub } from "../../../services/utils";
+import { LoginCodeBlocks } from "./CodeBlocks";
+import { getSourceFromGithub, jsonBlock } from "../../../services/utils";
+import { useRecoilState } from "recoil";
+import { LoggedInUser, PublicKey } from "../../Chapter.atom";
+import { User } from "../../../interfaces/DesoIdentity.interface";
 
 // https://github.com/highlightjs/highlight.js/blob/main/src/languages/typescript.js
 export interface IdentityLoginProps {
@@ -15,16 +18,20 @@ export const IdentityLoginPage = ({
   selectedChapter,
   chapters,
 }: IdentityLoginProps) => {
-  const [response, setResponse] = useState<any | null>(null);
   const [code, setCode] = useState<any | null>(null);
+
+  const [loggedInUser, setLoggedInUser] = useRecoilState<User | null>(
+    LoggedInUser
+  );
+  const [publicKey, setPublicKey] = useRecoilState<string>(PublicKey);
 
   useEffect(() => {
     getSourceFromGithub(selectedChapter.githubSource).then(setCode);
-  }, [setResponse, response]);
+  }, [setLoggedInUser, loggedInUser]);
   return (
     <>
       <ChapterTemplate
-        title="Login With Identity"
+        title={selectedChapter.title}
         body={
           <div>
             <div className="p-2">
@@ -34,7 +41,8 @@ export const IdentityLoginPage = ({
                   className="cursor-pointer text-[#1776cf] hover:text-[#fff]"
                   onClick={() => {
                     identityLogin().then((response) => {
-                      setResponse(response);
+                      setLoggedInUser(response.loggedInUser);
+                      setPublicKey(response.publicKey);
                     });
                   }}
                 >
@@ -43,7 +51,7 @@ export const IdentityLoginPage = ({
                 to login with Identity.
               </div>
             </div>
-            {response && (
+            {loggedInUser && (
               <>
                 <div className="font-semibold">What just happened?</div>
                 <div className="list-decimal p-2">
@@ -58,15 +66,14 @@ export const IdentityLoginPage = ({
                     Once the user selects one of the login in options our Iframe
                     will emit an event with our logged in user's data.
                     <div className="font-semibold">1.</div>
-                    {IdentityLoginCodeBlocks.section1}
+                    {LoginCodeBlocks.section1}
                     <div className="font-semibold">2.</div>
-                    {IdentityLoginCodeBlocks.section2}
+                    {LoginCodeBlocks.section2}
                     <div className="font-semibold">3.</div>
-                    {response &&
-                      IdentityLoginCodeBlocks.sectionRuntime(response)}
+                    {loggedInUser && jsonBlock(loggedInUser)}
                   </li>
                   <div className="font-semibold text-lg">Github:</div>
-                  {response && code}
+                  {loggedInUser && code}
                 </div>
               </>
             )}

@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { PageNavigation } from "../../../components/layout/PageNavigation";
-import { getSourceFromGithub } from "../../../services/utils";
+import { getSourceFromGithub, jsonBlock } from "../../../services/utils";
 import { Chapter, ChapterNavigation } from "../../Chapter.models";
 import { ChapterTemplate } from "../../ChapterTemplate";
 import { ChapterIdentityTemplate } from "../ChapterIdentityTemplate";
-import { IdentityLoginCodeBlocks } from "../identity-login/CodeBlocks";
 import { IdentityInitialize } from "./IdentityInitialize";
 
 export interface IdentityInitializeProps {
@@ -29,7 +28,7 @@ export const IdentityInitializePage = ({
   }, [setInitializedResponse, initializedResponse]);
   return (
     <ChapterTemplate
-      title="Initialize Identity"
+      title={selectedChapter.title}
       body={
         <ChapterIdentityTemplate
           onClick={() => {
@@ -61,15 +60,14 @@ export const IdentityInitializePage = ({
                 <div className="font-semibold">
                   Initial message from IdentityFrame:
                 </div>
-                {initializedResponse &&
-                  IdentityLoginCodeBlocks.sectionRuntime(initializedResponse)}
+                {initializedResponse && jsonBlock(initializedResponse)}
                 <div>
                   {" "}
                   <div className="font-semibold">
                     The message we send in response to the IdentityFrame:
                   </div>
                   {initializedResponse &&
-                    IdentityLoginCodeBlocks.sectionRuntime({
+                    jsonBlock({
                       id: initializedResponse.id,
                       service: "identity",
                       payload: {},

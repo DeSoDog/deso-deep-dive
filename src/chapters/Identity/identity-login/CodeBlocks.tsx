@@ -1,5 +1,5 @@
 import { CopyBlock, nord } from "react-code-blocks";
-export const IdentityLoginCodeBlocks = {
+export const LoginCodeBlocks = {
   section1: (
     <CopyBlock
       codeBlock
@@ -26,15 +26,4 @@ null as unknown, "toolbar=no, width=800, height=1000, top=0, left=0" );`}
       theme={nord}
     />
   ),
-  sectionRuntime: (json: any) => {
-    return (
-      <CopyBlock
-        codeBlock
-        text={JSON.stringify(json, null, 2)}
-        language="json"
-        wrapLines={true}
-        theme={nord}
-      />
-    );
-  },
 };

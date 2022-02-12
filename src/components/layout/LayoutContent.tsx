@@ -72,7 +72,7 @@ const LayoutContent = () => {
           <DisplayUser publicKey={myPublicKey} isMyAccount={true}></DisplayUser>
         )}
         {!(myPublicKey !== null && (myPublicKey as string) !== "null") && (
-          <div className="mx-auto ">you need to login first</div>
+          <div className="mx-auto text-[#fff] ">you need to login first</div>
         )}
       </div>
       <div>

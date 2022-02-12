@@ -1,13 +1,14 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { CopyBlock, nord } from "react-code-blocks";
+import { getSourceFromGithub } from "../../services/utils";
 export interface ChapterApiTemplateProps {
   request: any;
   response: any;
   endpoint: string | null;
   onClick: () => void;
   title: string;
-  githubSource: string;
+  githubSource: string[];
 }
 export const ChapterReadTemplate = ({
   request,
@@ -17,10 +18,10 @@ export const ChapterReadTemplate = ({
   githubSource,
   onClick,
 }: ChapterApiTemplateProps) => {
-  const [code, setCode] = useState(null);
+  const [code, setCode] = useState<ReactElement[]>([]);
   useEffect(() => {
-    axios.get(githubSource).then((response) => {
-      setCode(response.data);
+    getSourceFromGithub(githubSource).then((response) => {
+      setCode(response);
     });
   }, []);
   return (
@@ -64,14 +65,7 @@ export const ChapterReadTemplate = ({
           />
         )}
         <div className="font-lg font-semibold">Github:</div>
-        {response && (
-          <CopyBlock
-            text={code}
-            language="json"
-            wrapLines={true}
-            theme={nord}
-          />
-        )}
+        {response && code}
       </div>
     </div>
   );

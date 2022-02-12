@@ -1,9 +1,23 @@
-import { DecryptMessagesResponse } from "../../../interfaces/MessageInfo.interface";
+export interface DecryptMessagesResponse {
+  EncryptedHex: string;
+  PublicKey: string;
+  IsSender: boolean;
+  Legacy: boolean;
+  Version: number;
+  SenderMessagingPublicKey: string;
+  SenderMessagingGroupKeyName: string;
+  RecipientMessagingPublicKey: string;
+  RecipientMessagingGroupKeyName: string;
+}
 
 export interface PayloadHasEncryptedMessages {
   payload: { encryptedMessages: any[] };
 }
-export function identityDecrypt(request: any): Promise<any> {
+
+export function identityDecrypt(
+  request: any,
+  response: any
+): Promise<{ thread: any; response: any }> {
   if (!request?.payload?.encryptedMessages) {
     throw Error("Encrypted Messages are were not Included");
   }
@@ -29,7 +43,7 @@ export function identityDecrypt(request: any): Promise<any> {
           // return message;
         }
       );
-      resolve(thread);
+      resolve({ thread, response });
     };
     window.addEventListener("message", windowHandler);
   });

@@ -9,7 +9,6 @@ import {
   SampleAppMyProfilePicture,
   SampleAppMyPublicKey,
 } from "../../recoil/AppState.atoms";
-import { DecryptMessagesResponse } from "../../interfaces/MessageInfo.interface";
 import { getUserPicture } from "../../services/DesoApiRead";
 import { SendMessage } from "./SendMessage";
 import { User } from "../../interfaces/DesoIdentity.interface";
@@ -22,7 +21,6 @@ export interface DisplayMessagesProps {
 const DisplayMessages = ({ publicKey }: DisplayMessagesProps) => {
   const myPublicKey = useRecoilValue(SampleAppMyPublicKey);
   const [showMessages, setShowMessages] = useState<boolean>(false);
-  const [messages, setMessages] = useState<any>(false);
   const [threadCard, setThreadCard] = useState<ReactElement[] | null>(null);
   const loggedInUser = useRecoilValue(SampleAppLoggedInUser);
   const profilePicture = useRecoilValue<string | null>(
@@ -38,22 +36,7 @@ const DisplayMessages = ({ publicKey }: DisplayMessagesProps) => {
     setFollowerPicture(followerProfilePic);
   }, []);
 
-  useEffect(() => {
-    if (!decryptedMessages?.payload?.decryptedHexes) {
-      return;
-    }
-    // const thread = (messages?.encryptedMessages as DecryptMessagesResponse[])
-    //   .filter((m) => {
-    //     return (
-    //       m.m.RecipientMessagingPublicKey === publicKey ||
-    //       m.m.SenderMessagingPublicKey === publicKey
-    //     );
-    //     // m.m.
-    //   });
-    // if (thread) {
-    // setThreadCard(genereateThread(thread));
-    // }
-  }, [setDecryptedMessages, decryptedMessages]);
+  useEffect(() => {}, [setDecryptedMessages, decryptedMessages]);
 
   const generateThread = (thread: any[]) => {
     if (thread) {
@@ -98,8 +81,7 @@ const DisplayMessages = ({ publicKey }: DisplayMessagesProps) => {
       },
       loggedInUser
     );
-
-    setThreadCard(generateThread(response));
+    setThreadCard(generateThread(response.thread));
   };
 
   return (

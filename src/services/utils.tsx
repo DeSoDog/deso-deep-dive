@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ReactElement } from "react";
 import { CopyBlock, nord } from "react-code-blocks";
 import { UserInfoResponse } from "../chapters/Read/get-users-stateless/GetUserStateless.service";
 import { User } from "../interfaces/DesoIdentity.interface";
@@ -40,16 +41,46 @@ export const uuid = () => {
   });
 };
 
-export const getSourceFromGithub = async (url: string) => {
-  const response = await axios.get(url);
-  console.log(response.data);
-  return (
-    <CopyBlock
-      codeBlock
-      text={response.data}
-      language="tsx"
-      wrapLines={true}
-      theme={nord}
-    />
+export const getSourceFromGithub = async (
+  urls: string[]
+): Promise<ReactElement[]> => {
+  const blocks = Promise.all(
+    urls.map(async (url, index) => {
+      const response = await axios.get(url);
+      return (
+        <CopyBlock
+          key={index}
+          codeBlock
+          text={response.data}
+          language="tsx"
+          wrapLines={true}
+          theme={nord}
+        />
+      );
+    })
   );
+  return blocks;
+};
+export const jsonBlock = (json: string | Object): ReactElement => {
+  if (json instanceof String) {
+    return (
+      <CopyBlock
+        codeBlock
+        text={json}
+        language="json"
+        wrapLines={true}
+        theme={nord}
+      />
+    );
+  } else {
+    return (
+      <CopyBlock
+        codeBlock
+        text={JSON.stringify(json, null, 2)}
+        language="json"
+        wrapLines={true}
+        theme={nord}
+      />
+    );
+  }
 };

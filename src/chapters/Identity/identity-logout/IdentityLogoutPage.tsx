@@ -5,7 +5,7 @@ import { getSourceFromGithub } from "../../../services/utils";
 import { PublicKey } from "../../Chapter.atom";
 import { Chapter, ChapterNavigation } from "../../Chapter.models";
 import { ChapterTemplate } from "../../ChapterTemplate";
-import { IdentityLoginCodeBlocks } from "../identity-login/CodeBlocks";
+import { LoginCodeBlocks } from "../identity-login/CodeBlocks";
 import { IdentityLogout } from "./IdentityLogout.service";
 
 export interface IdentityLogoutProps {
@@ -64,9 +64,9 @@ export const IdentityLogoutPage = ({
                 </li>
               </div>
               <div className="font-semibold">1.</div>
-              {IdentityLoginCodeBlocks.section1}
+              {LoginCodeBlocks.section1}
               <div className="font-semibold">2.</div>
-              {IdentityLoginCodeBlocks.section2}
+              {LoginCodeBlocks.section2}
               <div className="font-semibold text-lg">Github:</div>
               {response && code}
             </>
