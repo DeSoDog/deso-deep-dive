@@ -1,3 +1,5 @@
+import { Users } from "../chapters/Interfaces/User";
+
 export interface DesoIdentityResponse {
   id: string;
   service: string;
@@ -18,21 +20,6 @@ export interface DesoIdentityDecryptedHexesactionResponse
 
 export interface DesoIdentityEncryptedResponse extends DesoIdentityResponse {
   payload: EncryptedMessagePayload;
-}
-
-export interface User {
-  hasExtraText: boolean;
-  btcDepositAddress: string;
-  ethDepositAddress: string;
-  version: number;
-  encryptedSeedHex: string;
-  network: string;
-  accessLevel: number;
-  accessLevelHmac: string;
-}
-
-export interface Users {
-  [user: string]: User;
 }
 
 export interface LoginInformationPayload {

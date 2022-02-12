@@ -1,5 +1,4 @@
 import axios from "axios";
-import { User } from "../../interfaces/DesoIdentity.interface";
 import {
   GetMessageRequest,
   OrderedContactsWithMessages,
@@ -7,6 +6,7 @@ import {
 import { uuid } from "../../services/utils";
 import { BASE_URI } from "../Chapter.models";
 import { identityDecrypt } from "../Identity/identity-decrypt/IdentityDecryption.service";
+import { User } from "../Interfaces/User";
 
 export const getMessages = async (
   request: GetMessageRequest,

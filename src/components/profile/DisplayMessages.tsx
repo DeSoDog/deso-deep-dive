@@ -11,8 +11,8 @@ import {
 } from "../../recoil/AppState.atoms";
 import { getUserPicture } from "../../services/DesoApiRead";
 import { SendMessage } from "./SendMessage";
-import { User } from "../../interfaces/DesoIdentity.interface";
 import { getMessages } from "../../chapters/Write/get-messages-stateless";
+import { User } from "../../chapters/Interfaces/User";
 
 export interface DisplayMessagesProps {
   publicKey: string;

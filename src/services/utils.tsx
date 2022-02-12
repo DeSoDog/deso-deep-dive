@@ -1,8 +1,8 @@
 import axios from "axios";
 import { ReactElement } from "react";
 import { CopyBlock, nord } from "react-code-blocks";
+import { User } from "../chapters/Interfaces/User";
 import { UserInfoResponse } from "../chapters/Read/get-users-stateless/GetUserStateless.service";
-import { User } from "../interfaces/DesoIdentity.interface";
 import { TransactionPost } from "../interfaces/Transaction.interface";
 
 export const getFollowerCount = (

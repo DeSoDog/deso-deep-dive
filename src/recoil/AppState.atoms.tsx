@@ -1,11 +1,11 @@
 import { atom } from "recoil";
+import { User } from "../chapters/Interfaces/User";
 import { FollowerInfoResponse } from "../chapters/Read/get-follows-stateless/GetFollowsStateless.service";
 import { ProfileInfoResponse } from "../chapters/Read/get-single-profile/GetSingleProfile.service";
 import { UserInfoResponse } from "../chapters/Read/get-users-stateless/GetUserStateless.service";
 import {
   DesoIdentityDecryptedHexesactionResponse,
   DesoIdentityEncryptedResponse,
-  User,
 } from "../interfaces/DesoIdentity.interface";
 
 export enum AppStateEnum {
@@ -13,6 +13,7 @@ export enum AppStateEnum {
   MY_FOLLOWERS,
   MY_FOLLOWERS_POST,
 }
+
 export const SampleAppDecryptedHexes =
   atom<DesoIdentityDecryptedHexesactionResponse | null>({
     key: "decryptedHexes",

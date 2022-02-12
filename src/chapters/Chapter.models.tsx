@@ -144,7 +144,7 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
     route: "/identity/identity-login",
     githubSource: [
       "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Identity/identity-login/IdentityLogin.tsx",
-      "",
+      "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Identity/identity-initialize/GetIdentityFrame.tsx",
     ],
     component: function () {
       return (

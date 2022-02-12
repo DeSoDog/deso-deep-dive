@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { PageNavigation } from "../../../components/layout/PageNavigation";
-import { User } from "../../../interfaces/DesoIdentity.interface";
 import { GetMessageRequest } from "../../../interfaces/MessageInfo.interface";
 import { jsonBlock } from "../../../services/utils";
 import { LoggedInUser, PublicKey } from "../../Chapter.atom";
@@ -9,6 +8,7 @@ import { Chapter, ChapterNavigation } from "../../Chapter.models";
 import { ChapterTemplate } from "../../ChapterTemplate";
 import { IdentityInitialize } from "../../Identity/identity-initialize/IdentityInitialize";
 import { identityLogin } from "../../Identity/identity-login/IdentityLogin";
+import { User } from "../../Interfaces/User";
 import { getMessages } from "../get-messages-stateless";
 
 export interface DecryptMessagesProps {

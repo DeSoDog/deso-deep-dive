@@ -1,7 +1,7 @@
 import { Button, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { User } from "../../interfaces/DesoIdentity.interface";
+import { User } from "../../chapters/Interfaces/User";
 import { SampleAppEncryptedMessage } from "../../recoil/AppState.atoms";
 import { encryptMessage, sendMessage } from "../../services/DesoApiSendMessage";
 

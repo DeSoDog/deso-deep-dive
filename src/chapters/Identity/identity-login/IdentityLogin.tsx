@@ -1,4 +1,4 @@
-import { User } from "../../../interfaces/DesoIdentity.interface";
+import { User } from "../../Interfaces/User";
 import { getIdentityFrame } from "../identity-initialize/GetIdentityFrame";
 
 export const identityLogin = (): Promise<{

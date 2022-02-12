@@ -3,11 +3,10 @@ import {
   SendIframeMessageRequest,
   SendMessageRequest,
 } from "../interfaces/MessageInfo.interface";
-import { User } from "../interfaces/DesoIdentity.interface";
 import { submitTransaction } from "./DesoApiSubmitTransaction";
 import { BASE_URI } from "../chapters/Chapter.models";
+import { User } from "../chapters/Interfaces/User";
 
-const DEFAULT_KEY = "default-key";
 export const encryptMessage = async (
   request: SendIframeMessageRequest,
   messageToSend: string,
@@ -32,6 +31,7 @@ export const encryptMessage = async (
     },
     service: "identity",
   };
+  // TODO
 };
 export const sendMessage = async (request: SendMessageRequest) => {
   const response = (

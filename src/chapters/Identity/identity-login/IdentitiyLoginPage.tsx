@@ -7,7 +7,7 @@ import { LoginCodeBlocks } from "./CodeBlocks";
 import { getSourceFromGithub, jsonBlock } from "../../../services/utils";
 import { useRecoilState } from "recoil";
 import { LoggedInUser, PublicKey } from "../../Chapter.atom";
-import { User } from "../../../interfaces/DesoIdentity.interface";
+import { User } from "../../Interfaces/User";
 
 // https://github.com/highlightjs/highlight.js/blob/main/src/languages/typescript.js
 export interface IdentityLoginProps {
@@ -19,7 +19,6 @@ export const IdentityLoginPage = ({
   chapters,
 }: IdentityLoginProps) => {
   const [code, setCode] = useState<any | null>(null);
-
   const [loggedInUser, setLoggedInUser] = useRecoilState<User | null>(
     LoggedInUser
   );
