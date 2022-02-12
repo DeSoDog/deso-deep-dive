@@ -32,27 +32,29 @@ export const IdentityLoginPage = ({
     <>
       <ChapterTemplate
         title={selectedChapter.title}
-        body={
-          <div>
-            <div className="p-2">
-              <div className="font-semibold text-lg">
-                Click{" "}
-                <span
-                  className="cursor-pointer text-[#1776cf] hover:text-[#fff]"
-                  onClick={() => {
-                    identityLogin().then((response) => {
-                      setLoggedInUser(response.loggedInUser);
-                      setPublicKey(response.publicKey);
-                    });
-                  }}
-                >
-                  here
-                </span>{" "}
-                to login with Identity.
-              </div>
-            </div>
-            {loggedInUser && (
+        tabs={[
+          {
+            title: "Overview",
+            subTitle: <div>Overview</div>,
+            content: (
               <>
+                <div>
+                  <div className="font-semibold text-lg">
+                    Click{" "}
+                    <span
+                      className="cursor-pointer text-[#1776cf] hover:text-[#fff]"
+                      onClick={() => {
+                        identityLogin().then((response) => {
+                          setLoggedInUser(response.loggedInUser);
+                          setPublicKey(response.publicKey);
+                        });
+                      }}
+                    >
+                      here
+                    </span>{" "}
+                    to login with Identity.
+                  </div>
+                </div>{" "}
                 <div className="font-semibold">What just happened?</div>
                 <div className="list-decimal p-2">
                   <li className="font-semibold">
@@ -65,20 +67,43 @@ export const IdentityLoginPage = ({
                   <li className="font-semibold">
                     Once the user selects one of the login in options our Iframe
                     will emit an event with our logged in user's data.
+                  </li>
+                </div>
+              </>
+            ),
+          },
+          {
+            title: "BreakDown",
+            subTitle: <div>What just happened?</div>,
+            content: (
+              <div>
+                {loggedInUser && (
+                  <>
                     <div className="font-semibold">1.</div>
                     {LoginCodeBlocks.section1}
                     <div className="font-semibold">2.</div>
                     {LoginCodeBlocks.section2}
                     <div className="font-semibold">3.</div>
                     {loggedInUser && jsonBlock(loggedInUser)}
-                  </li>
-                  <div className="font-semibold text-lg">Github:</div>
-                  {loggedInUser && code}
-                </div>
+                  </>
+                )}
+              </div>
+            ),
+          },
+          {
+            title: "Code",
+            subTitle: (
+              <div>Want to use this in your project? Copy the following </div>
+            ),
+            content: (
+              <>
+                <div className="font-semibold text-lg">Github:</div>
+                {loggedInUser && code}
               </>
-            )}
-          </div>
-        }
+            ),
+          },
+        ]}
+        body={<div></div>}
         navigation={
           <PageNavigation
             previous={chapters.prev(selectedChapter) as Chapter}

@@ -1,5 +1,5 @@
 import { User } from "../../../interfaces/DesoIdentity.interface";
-import { getIdentityFrame } from "../identity-initialize/IdentityInitialize";
+import { getIdentityFrame } from "../identity-initialize/GetIdentityFrame";
 
 export const identityLogin = (): Promise<{
   publicKey: string;
