@@ -5,6 +5,10 @@ import { getSourceFromGithub } from "../../../services/utils";
 import { PublicKey } from "../../ChapterHelper/Chapter.atom";
 import { Chapter, ChapterNavigation } from "../../ChapterHelper/Chapter.models";
 import { ChapterTemplate } from "../../ChapterHelper/ChapterTemplate";
+import {
+  CommonPageSectionTitles,
+  PageSection,
+} from "../../ChapterHelper/PageSections";
 import { LoginCodeBlocks } from "../identity-login/CodeBlocks";
 import { IdentityLogout } from "./IdentityLogout.service";
 
@@ -17,9 +21,7 @@ export const IdentityLogoutPage = ({
   selectedChapter,
   chapters,
 }: IdentityLogoutProps) => {
-  const [initializedResponse, setInitializedResponse] = useState<any | null>(
-    null
-  );
+  const [logoutResponse, setLogoutResponse] = useState<any | null>(null);
 
   const [myPublicKey, setPublicKey] = useRecoilState(PublicKey);
   const [response, setResponse] = useState<any | null>(null);
@@ -28,51 +30,92 @@ export const IdentityLogoutPage = ({
     getSourceFromGithub(selectedChapter.githubSource).then((response) => {
       setCode(response);
     });
-  }, [setInitializedResponse, initializedResponse]);
+  }, [setLogoutResponse, logoutResponse]);
   return (
     <ChapterTemplate
       title={selectedChapter.title}
-      body={
-        <div>
-          <div className="p-2">
-            <div className="font-semibold text-lg">
-              Click{" "}
-              <span
-                className="cursor-pointer text-[#1776cf] hover:text-[#fff]"
-                onClick={() => {
-                  IdentityLogout(myPublicKey).then((response) => {
-                    setResponse(response);
-                  });
-                }}
-              >
-                here
-              </span>{" "}
-              to logout with Identity.
-            </div>
-          </div>
-          {response && (
+      tabs={[
+        {
+          title: CommonPageSectionTitles.OVERVIEW,
+          content: (
             <>
-              <div className="font-semibold">What just happened?</div>
-              <div className="list-decimal p-2">
-                <li className="font-semibold">
-                  We called the identity logout page with window.open() to
-                  prompt the user to logout.
-                </li>
-                <li className="font-semibold">
-                  Then we created a new handler for the "message" event. In this
-                  case all it does is close the prompt
-                </li>
-              </div>
-              <div className="font-semibold">1.</div>
-              {LoginCodeBlocks.section1}
-              <div className="font-semibold">2.</div>
-              {LoginCodeBlocks.section2}
-              <div className="font-semibold text-lg">Github:</div>
-              {response && code}
+              {PageSection(
+                "Logout",
+                "After a user has logged in they can end their session with identity by calling logout"
+              )}
+              {PageSection(
+                CommonPageSectionTitles.TRY_IT_OUT,
+                <div>
+                  Click{" "}
+                  <span
+                    className="cursor-pointer text-[#1776cf] hover:text-[#fff]"
+                    onClick={() => {
+                      IdentityLogout(myPublicKey).then((response) => {
+                        setResponse(response);
+                      });
+                    }}
+                  >
+                    here
+                  </span>{" "}
+                  to call the logout prompt
+                </div>
+              )}
+              {PageSection(
+                CommonPageSectionTitles.WHAT_HAPPENED,
+                <>
+                  <div className="list-decimal">
+                    <li>
+                      We called the identity logout page with window.open() to
+                      prompt the user to logout.
+                      {LoginCodeBlocks.section1}
+                    </li>
+                    <li>
+                      Then we created a new handler for the "message" event. In
+                      this case all it does is close the prompt
+                      {LoginCodeBlocks.section2}
+                    </li>
+                  </div>
+                </>
+              )}
             </>
-          )}
-        </div>
-      }
+          ),
+        },
+        {
+          title: "Code",
+          content: PageSection("", code),
+        },
+        {
+          title: "Documentation",
+          content: PageSection(
+            CommonPageSectionTitles.ADDITIONAL_DOCUMENTATION,
+            <>{chapters.documentationToLink(selectedChapter)}</>
+          ),
+        },
+      ]}
+      // body={
+      //     {response && (
+      //       <>
+      //         <div className="font-semibold">What just happened?</div>
+      //         <div className="list-decimal p-2">
+      //           <li className="font-semibold">
+      //             We called the identity logout page with window.open() to
+      //             prompt the user to logout.
+      //           </li>
+      //           <li className="font-semibold">
+      //             Then we created a new handler for the "message" event. In this
+      //             case all it does is close the prompt
+      //           </li>
+      //         </div>
+      //         <div className="font-semibold">1.</div>
+      //         {LoginCodeBlocks.section1}
+      //         <div className="font-semibold">2.</div>
+      //         {LoginCodeBlocks.section2}
+      //         <div className="font-semibold text-lg">Github:</div>
+      //         {response && code}
+      //       </>
+      //     )}
+      //   </div>
+      // }
       navigation={
         <PageNavigation
           previous={chapters.prev(selectedChapter) as Chapter}

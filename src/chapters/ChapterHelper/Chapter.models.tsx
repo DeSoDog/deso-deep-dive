@@ -4,7 +4,6 @@ import { getFollowsStateless } from "../Read/get-follows-stateless/GetFollowsSta
 import { Chapter1Section } from "../Read/ReadSection";
 import { getSingleProfile } from "../Read/get-single-profile/GetSingleProfile.service";
 import { getUserStateless } from "../Read/get-users-stateless/GetUserStateless.service";
-import { ProfileAndFollowerCard } from "../Read/profile-card/ProfileCard";
 import { IdentityInitializePage } from "../Identity/identity-initialize/IdentityInitializePage";
 import { IdentityLoginPage } from "../Identity/identity-login/IdentitiyLoginPage";
 import { ReactElement } from "react";
@@ -31,18 +30,17 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
           path={this.route}
           element={
             <Chapter1Section
-              tabs={[
-                {
-                  title: CommonPageSectionTitles.OVERVIEW,
-                  content: PageSection(
-                    "get-single-profile",
-                    <div>
-                      As it sounds, get-single-profile, fetches various data
-                      around a single profile such as{" "}
-                    </div>
-                  ),
-                },
-              ]}
+              tabs={[]}
+              requestText="Then we Assembled our request object. PublicKeyBase58Check is the public key of the user you're requesting."
+              responseText=""
+              pretext={PageSection(
+                CommonPageSectionTitles.OVERVIEW,
+                <div>
+                  As it sounds get-single-profile, fetches various data around a
+                  single profile. This call is useful if you want common display
+                  data for a user.{" "}
+                </div>
+              )}
               chapters={CHAPTERS}
               selectedChapter={this}
               apiCall={getSingleProfile}
@@ -69,6 +67,15 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
           path={this.route}
           element={
             <Chapter1Section
+              pretext={PageSection(
+                CommonPageSectionTitles.OVERVIEW,
+                <div>
+                  get-users-stateless will query all information on a user or
+                  users
+                </div>
+              )}
+              requestText="Then we assembled  our request object where PublicKeysBased58Check is any array of users that we want to query. and skipForLeaderboard which return only the profile entry object"
+              responseText=""
               tabs={[]}
               chapters={CHAPTERS}
               selectedChapter={this}
@@ -96,6 +103,15 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
           path={this.route}
           element={
             <Chapter1Section
+              pretext={PageSection(
+                CommonPageSectionTitles.OVERVIEW,
+                <div>
+                  Similar to the get-users-stateless, but Instead it will return
+                  an array of followers for a specific account.{" "}
+                </div>
+              )}
+              requestText="Then we provide PublicKeyBase58Check which tell the endpoint who's followers to query"
+              responseText=""
               tabs={[]}
               chapters={CHAPTERS}
               selectedChapter={this}
@@ -106,34 +122,35 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
       );
     },
   },
-  READ_PROFILE_CARD: {
-    title: "Profile Card",
-    route: "/read/profile-cards",
-    documentation: [],
-    githubSource: [
-      "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/components/profile/DisplayUser.tsx",
-    ],
-    component: function () {
-      return (
-        <Route
-          key={this.title}
-          path={this.route}
-          element={
-            <ProfileAndFollowerCard
-              selectedChapter={this}
-              chapters={CHAPTERS}
-            />
-          }
-        ></Route>
-      );
-    },
-  },
+  // READ_PROFILE_CARD: {
+  //   title: "Profile Card",
+  //   route: "/read/profile-cards",
+  //   documentation: [],
+  //   githubSource: [
+  //     "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/components/profile/DisplayUser.tsx",
+  //   ],
+  //   component: function () {
+  //     return (
+  //       <Route
+  //         key={this.title}
+  //         path={this.route}
+  //         element={
+  //           <ProfileAndFollowerCard
+  //             selectedChapter={this}
+  //             chapters={CHAPTERS}
+  //           />
+  //         }
+  //       ></Route>
+  //     );
+  //   },
+  // },
   IDENTITY_INITIALIZE: {
     title: "Initialize",
     route: "/identity/identity-initialize",
     documentation: ["https://docs.deso.org/identity/concepts#initialize"],
     githubSource: [
       "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Identity/identity-initialize/IdentityInitialize.tsx",
+      "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Identity/identity-initialize/GetIdentityFrame.tsx",
     ],
     component: function () {
       return (
@@ -289,7 +306,7 @@ export interface ChapterNavigation {
   READ_GET_SINGLE_PROFILE: Chapter;
   READ_GET_USERS_STATELESS: Chapter;
   READ_GET_FOLLOWS_STATELESS: Chapter;
-  READ_PROFILE_CARD: Chapter;
+  // READ_PROFILE_CARD: Chapter;
   IDENTITY_INITIALIZE: Chapter;
   IDENTITY_LOGIN: Chapter;
   IDENTITY_LOGOUT: Chapter;

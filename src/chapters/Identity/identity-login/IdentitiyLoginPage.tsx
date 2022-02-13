@@ -37,7 +37,7 @@ export const IdentityLoginPage = ({
       <ChapterTemplate
         tabs={[
           {
-            title: "overview",
+            title: CommonPageSectionTitles.OVERVIEW,
             content: (
               <>
                 {PageSection(
@@ -45,7 +45,7 @@ export const IdentityLoginPage = ({
                   `In order to write data to the chain, decrypt personal
                   messages, or various other tasks, we must first login to the
                   DeSo chain. The simplest way to handle this is by making use
-                  of the identity services window api`
+                  of the identity services window api.`
                 )}
                 {PageSection(
                   CommonPageSectionTitles.TRY_IT_OUT,
@@ -62,7 +62,7 @@ export const IdentityLoginPage = ({
                     >
                       here
                     </span>{" "}
-                    to call the login prompt
+                    to call the login prompt.
                   </div>
                 )}
                 {PageSection(
@@ -75,17 +75,17 @@ export const IdentityLoginPage = ({
                     {loggedInUser && (
                       <>
                         <div className="list-decimal ">
-                          <li className="font-semibold">
+                          <li>
                             We called the identity login page with window.open()
                             to prompt the user to login.
                             {LoginCodeBlocks.section1}
                           </li>
-                          <li className="font-semibold">
+                          <li>
                             Then we created a new handler for the "message"
                             event.
                             {LoginCodeBlocks.section2}
                           </li>
-                          <li className="font-semibold">
+                          <li>
                             Once the user selects one of the login in options
                             our Iframe will emit an event with our logged in
                             user's data.

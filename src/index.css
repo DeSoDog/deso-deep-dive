@@ -8,13 +8,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  background: rgb(2, 0, 36);
+  background: rgb(0, 1, 13);
   background: linear-gradient(
-    90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(9, 9, 121, 1) 81%,
-    rgb(0, 38, 82) 100%
+    180deg,
+    rgba(0, 1, 13, 1) 0%,
+    rgba(0, 2, 20, 1) 0%,
+    rgba(0, 22, 255, 1) 48%,
+    rgba(0, 0, 0, 1) 88%
   );
 }
 

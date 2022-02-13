@@ -7,13 +7,12 @@ import {
   Chapter,
   ChapterNavigation,
 } from "../ChapterHelper/Chapter.models";
-import { ChapterReadTemplate } from "./ChapterReadTemplate";
 import { ChapterTemplate, TabItem } from "../ChapterHelper/ChapterTemplate";
 import {
   ProfileInfoRequest,
   ProfileInfoResponse,
 } from "./get-single-profile/GetSingleProfile.service";
-import { getSourceFromGithub } from "../../services/utils";
+import { getSourceFromGithub, jsonBlock } from "../../services/utils";
 import {
   CommonPageSectionTitles,
   PageSection,
@@ -22,6 +21,9 @@ export interface Chapter1SectionProps {
   selectedChapter: Chapter;
   chapters: ChapterNavigation;
   tabs: TabItem[];
+  pretext?: ReactElement;
+  responseText: string;
+  requestText: string;
   apiCall: (params: any) => any;
 }
 export const Chapter1Section = ({
@@ -29,6 +31,9 @@ export const Chapter1Section = ({
   chapters,
   apiCall,
   tabs,
+  pretext,
+  responseText,
+  requestText,
 }: Chapter1SectionProps) => {
   const publicKey = useRecoilValue(PublicKey);
   const [response, setResponse] = useState<ProfileInfoResponse | null>(null);
@@ -61,7 +66,48 @@ export const Chapter1Section = ({
     <ChapterTemplate
       title={selectedChapter.title}
       tabs={[
-        ...tabs,
+        {
+          title: CommonPageSectionTitles.OVERVIEW,
+          content: (
+            <>
+              {pretext}
+              {PageSection(
+                CommonPageSectionTitles.TRY_IT_OUT,
+                <div>
+                  Click{" "}
+                  <span
+                    className="cursor-pointer text-[#1776cf] hover:text-[#fff]"
+                    onClick={executeApiCall}
+                  >
+                    here
+                  </span>{" "}
+                  to call {selectedChapter.title}.
+                </div>
+              )}
+              {response &&
+                PageSection(
+                  CommonPageSectionTitles.WHAT_HAPPENED,
+                  <div className="list-decimal">
+                    <li className="mb-2">
+                      First we pointed our http client to{" "}
+                      {selectedChapter.description}
+                      {endpoint && jsonBlock(endpoint)}
+                    </li>
+                    <li className="mb-2">
+                      {requestText}
+
+                      {request && jsonBlock(request)}
+                    </li>
+                    <li className="mb-2">
+                      Finally we get the response. See below to see what fields
+                      are returned.
+                      {response && jsonBlock(response)}
+                    </li>
+                  </div>
+                )}
+            </>
+          ),
+        },
         {
           content: PageSection("", <>{code}</>),
           title: CommonPageSectionTitles.CODE,
