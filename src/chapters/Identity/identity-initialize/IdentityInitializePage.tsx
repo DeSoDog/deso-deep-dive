@@ -7,7 +7,6 @@ import {
   CommonPageSectionTitles,
   PageSection,
 } from "../../ChapterHelper/PageSections";
-import { ChapterIdentityTemplate } from "../ChapterIdentityTemplate";
 import { IdentityInitialize } from "./IdentityInitialize";
 
 export interface IdentityInitializeProps {

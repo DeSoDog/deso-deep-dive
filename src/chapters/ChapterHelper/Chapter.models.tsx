@@ -43,14 +43,14 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
                         <div>
                           DeSo developer hub is rich in resources to help you
                           build your DeSo app. Currently the page supports
-                          interactive endpoints that help you build connect,
-                          read, and write to the DeSo chain.
+                          interactive endpoints that help you connect, read, and
+                          write to the DeSo chain.
                         </div>
                       )}
                       {PageSection(
                         "Tabs",
                         <div>
-                          While navigation through each page you'll see some
+                          While navigating through each page you'll see some
                           common tabs such as Overview, Code, and Documentation.
                           <div className="ml-2 my-2">
                             <span className="font-semibold">Overview:</span>{" "}
@@ -61,7 +61,7 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
                             <span className="font-semibold"> Code:</span>{" "}
                             Provides the source code to execute call. This means
                             you can easily copy these files into your own app or
-                            just inspect them for inspiration.
+                            just inspect them for inspiration.build
                           </div>
                           <div className="ml-2 mt-2">
                             <span className="font-semibold">
@@ -69,6 +69,10 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
                             </span>{" "}
                             Provides links to formal Deso documentation to
                             provide a more in depth explanation.
+                          </div>
+                          <div className="text-center">
+                            Hit the Arrow icon in the top right of this section
+                            to get started.
                           </div>
                         </div>
                       )}

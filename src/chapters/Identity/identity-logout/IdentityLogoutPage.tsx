@@ -36,7 +36,7 @@ export const IdentityLogoutPage = ({
       title={selectedChapter.title}
       tabs={[
         {
-          title: CommonPageSectionTitles.OVERVIEW,
+          title: `${CommonPageSectionTitles.OVERVIEW} ${selectedChapter.title}`,
           content: (
             <>
               {PageSection(

@@ -31,7 +31,7 @@ export const encryptMessage = async (
     },
     service: "identity",
   };
-  // TODO
+  console.log(iFrameRequest);
 };
 export const sendMessage = async (request: SendMessageRequest) => {
   const response = (

@@ -73,10 +73,7 @@ const SampleApp = () => {
         variant="outlined"
         className="bg-[#fff] w-2/5 px-3 mt-20 mx-auto mb-5 "
       >
-        <CardHeader
-          title=" Below you'll find a basic application that you can build with
-          different endpoints covered in different sections."
-        ></CardHeader>
+        <CardHeader title=" Below you'll find a basic DeSo application."></CardHeader>
         <div className="ml-4 mb-3">
           For implementation details see{" "}
           <Link
