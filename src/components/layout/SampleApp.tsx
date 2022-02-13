@@ -11,7 +11,7 @@ import DisplayPosts from "../profile/DisplayPosts";
 import DisplayUser from "../profile/DisplayUser";
 
 import { PublicKey } from "../../chapters/ChapterHelper/Chapter.atom";
-import { Card, CardHeader } from "@mui/material";
+import { Card, CardHeader, Link } from "@mui/material";
 const SampleApp = () => {
   const [appState, setAppState] = useRecoilState<AppStateEnum>(SampleAppState);
   const [user, setUser] = useRecoilState<MyUserInfoType>(SampleAppMyUserInfo);
@@ -29,7 +29,7 @@ const SampleApp = () => {
         if (myPublicKey) {
           return (
             <>
-              <div className="text-center font-bold text-lg mb-2 font-mono">
+              <div className="text-center font-bold text-lg mb-2 font-mono text-[#fff]">
                 {user?.profileInfoResponse?.Profile.Username}'s Posts
               </div>
               <div>
@@ -77,6 +77,16 @@ const SampleApp = () => {
           title=" Below you'll find a basic application that you can build with
           different endpoints covered in different sections."
         ></CardHeader>
+        <div className="ml-4 mb-3">
+          For implementation details see{" "}
+          <Link
+            href="https://github.com/DeSoDog/deso-deep-dive/tree/master/src/components/layout"
+            target="_blank"
+          >
+            {" "}
+            here
+          </Link>
+        </div>
       </Card>
       <div className="flex flex-col md:flex-row justify-around w-full mt-4  ">
         <div className="flex flex-col flex-grow-1">

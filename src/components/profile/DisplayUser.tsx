@@ -104,7 +104,7 @@ const DisplayUser = ({ publicKey, isMyAccount }: DisplayUserProps) => {
   return (
     <div className="flex flex-col w-[600px] mx-auto ">
       {isMyAccount && (
-        <div className="text-center  font-bold text-lg mb-2 font-mono">
+        <div className="text-center text-[#fff]  font-bold text-lg mb-2 font-mono">
           You are viewing {user?.profileInfoResponse?.Profile.Username}'s Page
         </div>
       )}

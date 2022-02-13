@@ -1,11 +1,11 @@
-import { Button } from "@mui/material";
+import { Button, Card } from "@mui/material";
 import { useRecoilState } from "recoil";
 import { SampleAppState, AppStateEnum } from "../recoil/AppState.atoms";
 
 const UserActions = () => {
   const [appState, setAppState] = useRecoilState<AppStateEnum>(SampleAppState);
   return (
-    <div className="flex md:flex-row justify-center">
+    <Card className="flex md:flex-row justify-center">
       <Button
         variant="text"
         size="small"
@@ -26,7 +26,7 @@ const UserActions = () => {
       >
         View Followers
       </Button>
-    </div>
+    </Card>
   );
 };
 export default UserActions;
