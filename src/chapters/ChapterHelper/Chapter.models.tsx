@@ -70,23 +70,29 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
                             Provides links to formal Deso documentation to
                             provide a more in depth explanation.
                           </div>
-                          <div className="text-center">
-                            Hit the Arrow icon in the top right of this section
-                            to get started.
-                          </div>
                         </div>
                       )}
                       {PageSection(
                         "About",
-                        <div>
-                          The DeSo Developer Hub is under active development so
-                          endpoints and other features will continue to be added
-                          on a weekly basis. We are also open to community
-                          suggestions on what additional functionality could be
-                          built which could be anything from an onchain comment
-                          threads for common issues (similar to stack overflow),
-                          more useful utility methods, etc.
-                        </div>
+                        <>
+                          <div>
+                            The DeSo Developer Hub is under active development
+                            so endpoints and other features will continue to be
+                            added on a weekly basis. We are also open to
+                            community suggestions on what additional
+                            functionality could be built which could be anything
+                            from an onchain comment threads for common issues
+                            (similar to stack overflow), more useful utility
+                            methods, etc.
+                          </div>
+                          <div className=" my-16 text-center">
+                            Hit the{" "}
+                            <span className="font-semibold">Arrow icon</span> in
+                            the top right or the{" "}
+                            <span className="font-semibold">Sandwich icon</span>{" "}
+                            in the top left to get started.
+                          </div>
+                        </>
                       )}
                     </>
                   ),
