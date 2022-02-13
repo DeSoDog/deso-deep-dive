@@ -8,8 +8,11 @@ import { SampleAppToggleDrawer } from "../../recoil/AppState.atoms";
 export const Header = () => {
   const [toggle, setToggleDrawer] = useRecoilState(SampleAppToggleDrawer);
   return (
-    <>
-      <AppBar position="static" className="bg-primary">
+    <div
+      className="oy"
+      style={{ position: "relative", zIndex: 1301, backgroundColor: "red" }}
+    >
+      <AppBar position="fixed" className="bg-primary">
         <Toolbar>
           <IconButton
             size="large"
@@ -18,7 +21,7 @@ export const Header = () => {
             aria-label="menu"
             sx={{ mr: 2 }}
             onClick={() => {
-              setToggleDrawer(true);
+              setToggleDrawer(!toggle);
             }}
           >
             <MenuIcon />
@@ -30,6 +33,6 @@ export const Header = () => {
           <Identity></Identity>
         </Toolbar>
       </AppBar>
-    </>
+    </div>
   );
 };

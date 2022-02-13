@@ -13,7 +13,6 @@ export interface DesoDrawerProps {
 }
 export default function DesoDrawer({ chapters }: DesoDrawerProps) {
   const [toggleState, setToggleDrawer] = useRecoilState(SampleAppToggleDrawer);
-
   const toggle =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
@@ -29,14 +28,15 @@ export default function DesoDrawer({ chapters }: DesoDrawerProps) {
 
   const list = () => (
     <Box role="presentation" onClick={toggle(false)} onKeyDown={toggle(false)}>
-      <h1 className="font-semibold text-xl bg-primary text-[#fff] py-2 px-4">
-        Deso Deep Dive
-      </h1>
+      <div className="min-h-[64px]"></div>
       <List>
         {chapters.chaptersToArray().map((chapter) => {
           return (
-            <div key={chapter.chapterName}>
-              <ListItem button className="flex justify-center">
+            <div
+              key={chapter.chapterName}
+              className="hover:bg-[#c2c2c2] cursor-click"
+            >
+              <ListItem className="flex justify-center">
                 <Link
                   to={`${chapter.chapterContent.route}`}
                   className="ml-2"
@@ -51,7 +51,7 @@ export default function DesoDrawer({ chapters }: DesoDrawerProps) {
   );
 
   return (
-    <Drawer anchor={"left"} open={toggleState} onClose={toggle(false)}>
+    <Drawer open={toggleState} variant="temporary" anchor="left">
       {list()}
     </Drawer>
   );

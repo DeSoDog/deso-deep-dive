@@ -52,7 +52,7 @@ export default function DeSoTabs({ tabs, navigation }: TabProps) {
     setValue(newValue);
   };
   return (
-    <div className="mx-auto mt-5 max-w-[1160px] pb-2 w-full bg-[#fff] min-h-[800px] rounded-lg">
+    <div className="mx-auto mt-20 max-w-[1160px] pb-2 w-full bg-[#fff] min-h-[800px] rounded-lg">
       <Box
         className="flex justify-between"
         sx={{ borderBottom: 1, borderColor: "divider" }}
