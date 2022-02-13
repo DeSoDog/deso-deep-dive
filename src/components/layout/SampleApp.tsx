@@ -3,25 +3,27 @@ import { RecoilRoot, useRecoilState, useRecoilValue } from "recoil";
 import {
   SampleAppState,
   AppStateEnum,
-  SampleAppMyPublicKey,
   SampleAppMyUserInfo,
   MyUserInfoType,
 } from "../../recoil/AppState.atoms";
 import DisplayFollowerFeed from "../DisplayFollowerFeed";
 import DisplayPosts from "../profile/DisplayPosts";
 import DisplayUser from "../profile/DisplayUser";
-const LayoutContent = () => {
+
+import { PublicKey } from "../../chapters/ChapterHelper/Chapter.atom";
+import { Card, CardHeader } from "@mui/material";
+const SampleApp = () => {
   const [appState, setAppState] = useRecoilState<AppStateEnum>(SampleAppState);
   const [user, setUser] = useRecoilState<MyUserInfoType>(SampleAppMyUserInfo);
-  const myPublicKey = useRecoilValue(SampleAppMyPublicKey);
+  const myPublicKey = useRecoilValue(PublicKey);
   const [appStateContent, setAppStateContent] = useState<ReactElement | null>(
     null
   );
   useEffect(() => {
-    setAppStateContent(generateAppstateContent());
+    setAppStateContent(generateAppStateContent());
   }, [appState, myPublicKey, user]);
 
-  const generateAppstateContent = (): ReactElement => {
+  const generateAppStateContent = (): ReactElement => {
     switch (appState) {
       case AppStateEnum.MY_POST: {
         if (myPublicKey) {
@@ -66,19 +68,33 @@ const LayoutContent = () => {
     }
   };
   return (
-    <div className="flex flex-col md:flex-row justify-around w-full mt-4  ">
-      <div className="flex flex-col flex-grow-1">
-        {myPublicKey !== null && (myPublicKey as string) !== "null" && (
-          <DisplayUser publicKey={myPublicKey} isMyAccount={true}></DisplayUser>
-        )}
-        {!(myPublicKey !== null && (myPublicKey as string) !== "null") && (
-          <div className="mx-auto text-[#fff] ">you need to login first</div>
-        )}
+    <>
+      <Card
+        variant="outlined"
+        className="bg-[#fff] w-2/5 px-3 mt-20 mx-auto mb-5 "
+      >
+        <CardHeader
+          title=" Below you'll find a basic application that you can build with
+          different endpoints covered in different sections."
+        ></CardHeader>
+      </Card>
+      <div className="flex flex-col md:flex-row justify-around w-full mt-4  ">
+        <div className="flex flex-col flex-grow-1">
+          {myPublicKey !== null && (myPublicKey as string) !== "null" && (
+            <DisplayUser
+              publicKey={myPublicKey}
+              isMyAccount={true}
+            ></DisplayUser>
+          )}
+          {!(myPublicKey !== null && (myPublicKey as string) !== "null") && (
+            <div className="mx-auto text-[#fff] ">you need to login first</div>
+          )}
+        </div>
+        <div>
+          <div className="w-[600px] mx-auto">{appStateContent}</div>
+        </div>
       </div>
-      <div>
-        <div className="w-[600px] mx-auto">{appStateContent}</div>
-      </div>
-    </div>
+    </>
   );
 };
-export default LayoutContent;
+export default SampleApp;

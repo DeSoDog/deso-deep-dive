@@ -1,5 +1,5 @@
 import { User } from "../../Interfaces/User";
-import { getIdentityFrame } from "../identity-initialize/GetIdentityFrame";
+import { setIdentityFrame } from "../identity-initialize/GetIdentityFrame";
 
 export const identityLogin = (): Promise<{
   publicKey: string;
@@ -22,7 +22,7 @@ export const identityLogin = (): Promise<{
 
       window.removeEventListener("message", windowHandler);
     };
-    getIdentityFrame();
+    setIdentityFrame();
     window.addEventListener("message", windowHandler);
   });
 };

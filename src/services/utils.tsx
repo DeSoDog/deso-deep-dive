@@ -64,13 +64,21 @@ export const getSourceFromGithub = async (
   );
   return blocks;
 };
-export const jsonBlock = (json: string | Object): ReactElement => {
-  if (json instanceof String) {
+export const jsonBlock = (
+  json: string | Object | HTMLElement | undefined,
+  lang = "json"
+): ReactElement => {
+  console.log(json);
+  console.log(lang);
+  if (!json) {
+    return <></>;
+  }
+  if (json instanceof String || lang === "html") {
     return (
       <CopyBlock
         codeBlock
         text={json}
-        language="json"
+        language={lang}
         wrapLines={true}
         theme={nord}
       />
@@ -80,7 +88,7 @@ export const jsonBlock = (json: string | Object): ReactElement => {
       <CopyBlock
         codeBlock
         text={JSON.stringify(json, null, 2)}
-        language="json"
+        language={lang}
         wrapLines={true}
         theme={nord}
       />

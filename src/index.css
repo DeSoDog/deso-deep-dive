@@ -26,3 +26,7 @@ code {
 .oy {
   z-index: 1500;
 }
+
+.MuiList-padding {
+  padding: 0;
+}

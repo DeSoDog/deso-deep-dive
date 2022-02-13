@@ -1,14 +1,12 @@
 import * as React from "react";
 import { Button, TextField, Tooltip } from "@mui/material";
 import { useRecoilValue } from "recoil";
-import {
-  SampleAppLoggedInUser,
-  SampleAppMyPublicKey,
-} from "../../recoil/AppState.atoms";
+import { SampleAppLoggedInUser } from "../../recoil/AppState.atoms";
 import { useState } from "react";
 import { submitPost } from "../../chapters/Write/submit-post";
+import { PublicKey } from "../../chapters/ChapterHelper/Chapter.atom";
 export default function CreatePostInput() {
-  const myPublicKey = useRecoilValue(SampleAppMyPublicKey);
+  const myPublicKey = useRecoilValue(PublicKey);
   const [postBody, setPostBody] = useState<string | null>(null);
   const loggedInUser = useRecoilValue(SampleAppLoggedInUser);
   const createPost = () => {

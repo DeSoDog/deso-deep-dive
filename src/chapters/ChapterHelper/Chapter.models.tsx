@@ -1,5 +1,5 @@
 import { Route } from "react-router-dom";
-import LayoutContent from "../../components/layout/LayoutContent";
+import SampleApp from "../../components/layout/SampleApp";
 import { getFollowsStateless } from "../Read/get-follows-stateless/GetFollowsStateless.service";
 import { Chapter1Section } from "../Read/ReadSection";
 import { getSingleProfile } from "../Read/get-single-profile/GetSingleProfile.service";
@@ -71,10 +71,10 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
                 CommonPageSectionTitles.OVERVIEW,
                 <div>
                   get-users-stateless will query all information on a user or
-                  users
+                  users.
                 </div>
               )}
-              requestText="Then we assembled  our request object where PublicKeysBased58Check is any array of users that we want to query. and skipForLeaderboard which return only the profile entry object"
+              requestText="Then we assembled our request object where PublicKeysBased58Check is an array of users that we want to query. SkipForLeaderboard is set to false which returns profile info only"
               responseText=""
               tabs={[]}
               chapters={CHAPTERS}
@@ -110,7 +110,7 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
                   an array of followers for a specific account.{" "}
                 </div>
               )}
-              requestText="Then we provide PublicKeyBase58Check which tell the endpoint who's followers to query"
+              requestText="Then we provide PublicKeyBase58Check which tell the endpoint who's followers to query. GetEntriesFollowingUsername returns only followers who are also following the public key(s), numToFetch determines how many followers to return per user."
               responseText=""
               tabs={[]}
               chapters={CHAPTERS}
@@ -218,8 +218,8 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
       "https://docs.deso.org/identity/iframe-api/endpoints#decrypt",
     ],
     githubSource: [
-      "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Identity/identity-decrypt/IdentityDecryption.service.tsx",
       "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Write/get-messages-stateless.tsx",
+      "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Identity/identity-decrypt/IdentityDecryption.service.tsx",
     ],
     component: function () {
       return (
@@ -243,7 +243,7 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
         <Route
           key={this.title}
           path={this.route}
-          element={<LayoutContent />}
+          element={<SampleApp />}
         ></Route>
       );
     },

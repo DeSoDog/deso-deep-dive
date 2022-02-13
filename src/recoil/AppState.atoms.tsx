@@ -20,11 +20,6 @@ export const SampleAppDecryptedHexes =
     default: null,
   });
 
-export const SampleAppMyPublicKey = atom<string | null>({
-  key: "myPublicKey",
-  default: null,
-});
-
 export const SampleAppMyUserInfo = atom<MyUserInfoType>({
   key: "myUserInfo",
   default: null,

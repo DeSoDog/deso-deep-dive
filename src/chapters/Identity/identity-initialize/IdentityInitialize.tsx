@@ -1,4 +1,4 @@
-import { getIdentityFrame } from "./GetIdentityFrame";
+import { setIdentityFrame } from "./GetIdentityFrame";
 
 export const IdentityInitialize = (): Promise<any> => {
   return new Promise((resolve, reject) => {
@@ -21,6 +21,6 @@ export const IdentityInitialize = (): Promise<any> => {
     };
     window.addEventListener("message", windowHandler);
 
-    getIdentityFrame(true);
+    setIdentityFrame(true);
   });
 };

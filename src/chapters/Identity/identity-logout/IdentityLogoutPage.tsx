@@ -41,7 +41,7 @@ export const IdentityLogoutPage = ({
             <>
               {PageSection(
                 "Logout",
-                "After a user has logged in they can end their session with identity by calling logout"
+                "Similar to the login section we can make use of the window api to log a user out."
               )}
               {PageSection(
                 CommonPageSectionTitles.TRY_IT_OUT,
@@ -57,26 +57,31 @@ export const IdentityLogoutPage = ({
                   >
                     here
                   </span>{" "}
-                  to call the logout prompt
+                  to call the logout prompt.
                 </div>
               )}
-              {PageSection(
-                CommonPageSectionTitles.WHAT_HAPPENED,
-                <>
-                  <div className="list-decimal">
-                    <li>
-                      We called the identity logout page with window.open() to
-                      prompt the user to logout.
-                      {LoginCodeBlocks.section1}
-                    </li>
-                    <li>
-                      Then we created a new handler for the "message" event. In
-                      this case all it does is close the prompt
-                      {LoginCodeBlocks.section2}
-                    </li>
-                  </div>
-                </>
-              )}
+              {response &&
+                PageSection(
+                  CommonPageSectionTitles.WHAT_HAPPENED,
+                  <>
+                    <div className="list-decimal">
+                      <li>
+                        We called the identity logout page with window.open() to
+                        prompt the user to logout.
+                        {LoginCodeBlocks.section1}
+                      </li>
+                      <li>
+                        Then we created a new handler for the "message" event.
+                        In this case all it does is close the prompt.
+                        {LoginCodeBlocks.section2}
+                      </li>
+                      <li>
+                        Once a user logs out you should clear any user
+                        information from your application.
+                      </li>
+                    </div>
+                  </>
+                )}
             </>
           ),
         },
@@ -92,30 +97,6 @@ export const IdentityLogoutPage = ({
           ),
         },
       ]}
-      // body={
-      //     {response && (
-      //       <>
-      //         <div className="font-semibold">What just happened?</div>
-      //         <div className="list-decimal p-2">
-      //           <li className="font-semibold">
-      //             We called the identity logout page with window.open() to
-      //             prompt the user to logout.
-      //           </li>
-      //           <li className="font-semibold">
-      //             Then we created a new handler for the "message" event. In this
-      //             case all it does is close the prompt
-      //           </li>
-      //         </div>
-      //         <div className="font-semibold">1.</div>
-      //         {LoginCodeBlocks.section1}
-      //         <div className="font-semibold">2.</div>
-      //         {LoginCodeBlocks.section2}
-      //         <div className="font-semibold text-lg">Github:</div>
-      //         {response && code}
-      //       </>
-      //     )}
-      //   </div>
-      // }
       navigation={
         <PageNavigation
           previous={chapters.prev(selectedChapter) as Chapter}
@@ -125,6 +106,3 @@ export const IdentityLogoutPage = ({
     />
   );
 };
-
-{
-}

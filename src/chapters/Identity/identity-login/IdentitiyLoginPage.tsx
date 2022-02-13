@@ -42,10 +42,9 @@ export const IdentityLoginPage = ({
               <>
                 {PageSection(
                   "Login",
-                  `In order to write data to the chain, decrypt personal
-                  messages, or various other tasks, we must first login to the
-                  DeSo chain. The simplest way to handle this is by making use
-                  of the identity services window api.`
+                  `Once a connection is created between our application and the Identity frame login 
+                  becomes a trivial task. To do so we can take advantage of the existing login page, where users will
+                  be prompted with different login options.`
                 )}
                 {PageSection(
                   CommonPageSectionTitles.TRY_IT_OUT,
@@ -86,9 +85,10 @@ export const IdentityLoginPage = ({
                             {LoginCodeBlocks.section2}
                           </li>
                           <li>
-                            Once the user selects one of the login in options
-                            our Iframe will emit an event with our logged in
-                            user's data.
+                            Once the user selects one of the login options our
+                            Iframe will emit an event with our logged in user's
+                            data. Note you will want to store this information
+                            somewhere in your app for future use.
                             {loggedInUser && jsonBlock(loggedInUser)}
                           </li>
                         </div>

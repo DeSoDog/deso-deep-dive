@@ -2,10 +2,18 @@ import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { PageNavigation } from "../../../components/layout/PageNavigation";
 import { GetMessageRequest } from "../../../interfaces/MessageInfo.interface";
-import { jsonBlock } from "../../../services/utils";
+import { getSourceFromGithub, jsonBlock } from "../../../services/utils";
 import { LoggedInUser, PublicKey } from "../../ChapterHelper/Chapter.atom";
-import { Chapter, ChapterNavigation } from "../../ChapterHelper/Chapter.models";
+import {
+  BASE_URI,
+  Chapter,
+  ChapterNavigation,
+} from "../../ChapterHelper/Chapter.models";
 import { ChapterTemplate } from "../../ChapterHelper/ChapterTemplate";
+import {
+  CommonPageSectionTitles,
+  PageSection,
+} from "../../ChapterHelper/PageSections";
 import { IdentityInitialize } from "../../Identity/identity-initialize/IdentityInitialize";
 import { identityLogin } from "../../Identity/identity-login/IdentityLogin";
 import { User } from "../../Interfaces/User";
@@ -19,6 +27,7 @@ export const DecryptMessagesPage = ({
   selectedChapter,
   chapters,
 }: DecryptMessagesProps) => {
+  const [code, setCode] = useState<any | null>(null);
   const [loggedInUser, setLoggedInUser] = useRecoilState<User | null>(
     LoggedInUser
   );
@@ -39,18 +48,11 @@ export const DecryptMessagesPage = ({
   const [finalResponse, setFinalResponse] = useState<any>();
   const loginInit = async () => {
     await IdentityInitialize();
-    identityLogin().then((response) => {
-      console.log(response);
-      setLoggedInUser(response.loggedInUser);
-      setPublicKey(response.publicKey);
-    });
+    return await identityLogin();
   };
 
   useEffect(() => {
-    console.log("init user", loggedInUser);
-    if (loggedInUser === null) {
-      loginInit();
-    }
+    getSourceFromGithub(selectedChapter.githubSource).then(setCode);
   }, []);
 
   useEffect(() => {}, [setFinalResponse, setMessageResponse]);
@@ -58,6 +60,104 @@ export const DecryptMessagesPage = ({
     <>
       <ChapterTemplate
         title={selectedChapter.title}
+        tabs={[
+          {
+            title: CommonPageSectionTitles.OVERVIEW,
+            content: (
+              <>
+                {PageSection(
+                  "Decrypt",
+                  `One use case of the DeSo chain is storing private data. Since
+                the chain is public, all data can be read by anyone with an internet connection. Fortunately data can remain
+                private by encrypting it first.`
+                )}
+                {PageSection(
+                  CommonPageSectionTitles.TRY_IT_OUT,
+                  <div>
+                    Click{" "}
+                    <span
+                      className="cursor-pointer text-[#1776cf] hover:text-[#fff]"
+                      onClick={async () => {
+                        let user = loggedInUser;
+                        if (!user) {
+                          user = (await loginInit()).loggedInUser;
+                          setLoggedInUser(user);
+                        }
+                        getMessages(request, user).then((response) => {
+                          response.response.OrderedContactsWithMessages.slice(
+                            0,
+                            4
+                          );
+                          setMessageResponse(response.response);
+                          setFinalResponse(response.thread);
+                        });
+                      }}
+                    >
+                      here
+                    </span>{" "}
+                    to get messages and then decrypt messages.
+                  </div>
+                )}
+                {PageSection(
+                  <>
+                    {loggedInUser && (
+                      <div>{CommonPageSectionTitles.WHAT_HAPPENED}</div>
+                    )}
+                  </>,
+                  <div>
+                    {loggedInUser && (
+                      <>
+                        <div className="list-decimal">
+                          <li>
+                            First we sent a post request to:
+                            {jsonBlock(`${BASE_URI}/get-messages-stateless`)}
+                          </li>
+                          <li>
+                            The following payload is included on the post, where
+                            numToFetch is how many conversations to grab,
+                            PublicKeyBase58Check is the owner of the messages,
+                            sortAlgorithm determines how they comeback, and then
+                            HoldersOnly, FollowersOnly, HoldingsOnly, are all
+                            filter options.
+                            {jsonBlock(request)}
+                          </li>
+                          <li>
+                            The Api will respond with our messages, but the
+                            content is still encrypted.{" "}
+                            <div className="overflow-auto max-h-[500px]">
+                              {messageResponse && jsonBlock(messageResponse)}
+                            </div>
+                          </li>
+                          <li>
+                            Now we can take our encrypted response and send a
+                            request to the IdentityFrame to decrypt it. After
+                            decrypting the data and mapping the response to
+                            something easy to work with we get the following.
+                            <div className="overflow-auto max-h-[500px]">
+                              {finalResponse && jsonBlock(finalResponse)}
+                            </div>
+                          </li>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                )}
+              </>
+            ),
+          },
+
+          {
+            title: "Code",
+            content: PageSection("", code),
+          },
+          {
+            title: "Documentation",
+            content: PageSection(
+              CommonPageSectionTitles.ADDITIONAL_DOCUMENTATION,
+              <>{chapters.documentationToLink(selectedChapter)}</>
+            ),
+          },
+        ]}
         body={
           <div className="p-2">
             <div className="font-semibold text-lg">
@@ -65,7 +165,6 @@ export const DecryptMessagesPage = ({
               <span
                 className="cursor-pointer text-[#1776cf] hover:text-[#fff]"
                 onClick={() => {
-                  console.log("logged in user?", loggedInUser);
                   if (loggedInUser) {
                     getMessages(request, loggedInUser).then((response) => {
                       response.response.OrderedContactsWithMessages.slice(0, 4);
@@ -78,31 +177,6 @@ export const DecryptMessagesPage = ({
                 here
               </span>{" "}
               to login with Identity.
-            </div>
-            <div className="font-semibold">What just happened?</div>
-
-            <div className="list-decimal">
-              <li>First we sent a post request to get-messages-stateless</li>
-              <li>
-                The Api will respond with all of our message, but encrypted due
-                to security reasons
-              </li>
-              <li></li>
-            </div>
-            <div className="list-decimal">
-              <div className="max-h-[300px] overflow-auto my-4">
-                <li>{jsonBlock(request)}</li>
-              </div>
-              <li>
-                <div className="max-h-[300px] overflow-auto my-4">
-                  {messageResponse && jsonBlock(messageResponse)}
-                </div>
-              </li>
-              <li className="max-h-[300px] overflow-auto">
-                <div className="max-h-[300px] overflow-auto my-4">
-                  {finalResponse && jsonBlock(finalResponse)}
-                </div>
-              </li>
             </div>
           </div>
         }

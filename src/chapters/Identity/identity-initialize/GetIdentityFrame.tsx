@@ -1,4 +1,4 @@
-export const getIdentityFrame = (createNewIdentityFrame = false): void => {
+export const setIdentityFrame = (createNewIdentityFrame = false): void => {
   let frame = document.getElementById("identity");
   if (frame && createNewIdentityFrame) {
     frame.remove();

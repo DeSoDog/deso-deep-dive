@@ -43,7 +43,7 @@ export const IdentityInitializePage = ({
                 `In order to write data to the chain, decrypt personal
                   messages, or various other tasks, we must first login to the
                   DeSo chain. The simplest way to handle this is by making use
-                  of the identity services window api`
+                  of the identity services window api, but before logging in we must first setup a connection with the Identity service.`
               )}
               {PageSection(
                 CommonPageSectionTitles.TRY_IT_OUT,
@@ -63,45 +63,40 @@ export const IdentityInitializePage = ({
                   to initialize an Identity session.
                 </div>
               )}
-              {PageSection(
-                <>
-                  {initializedResponse && (
-                    <div>{CommonPageSectionTitles.WHAT_HAPPENED}</div>
-                  )}
-                </>,
-                <div className="list-decimal">
-                  <li>
-                    We Created the Identity Iframe and appended it to our
-                    project. (Should be the last element in the body tag).
-                  </li>
-                  <li>
-                    Then we established the event listener for "message" with a
-                    callback and waits for the Iframe to emit an initialize
-                    message.
-                  </li>
+              {initializedResponse &&
+                PageSection(
+                  <>
+                    {initializedResponse && (
+                      <div>{CommonPageSectionTitles.WHAT_HAPPENED}</div>
+                    )}
+                  </>,
+                  <div className="list-decimal">
+                    <li>
+                      We Created the Identity Iframe and appended it to our
+                      project. (Should be the last element in the body tag).
+                      {jsonBlock(
+                        document.getElementById("identity")?.outerHTML,
+                        "html"
+                      )}
+                    </li>
+                    <li>
+                      Wait for Identity to emit an initialize message with a
+                      unique id
+                      {initializedResponse && jsonBlock(initializedResponse)}
+                    </li>
 
-                  <li>
-                    Once the message has been sent Identity will make a call to
-                    get app state and then its done.{" "}
-                  </li>
-                  <div className="font-semibold">
-                    Initial message from IdentityFrame:
-                  </div>
-                  {initializedResponse && jsonBlock(initializedResponse)}
-                  <div>
-                    {" "}
-                    <div className="font-semibold">
-                      The message we send in response to the IdentityFrame:
-                    </div>
-                    {initializedResponse &&
-                      jsonBlock({
+                    <li>
+                      Once received we send a message back to the Identity frame
+                      to confirm the connection.
+                      {jsonBlock({
                         id: initializedResponse.id,
                         service: "identity",
                         payload: {},
                       })}
+                    </li>
+                    <div> </div>
                   </div>
-                </div>
-              )}
+                )}
             </>
           ),
         },

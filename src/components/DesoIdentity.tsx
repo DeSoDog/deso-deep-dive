@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
+import { PublicKey } from "../chapters/ChapterHelper/Chapter.atom";
 import { IdentityInitialize } from "../chapters/Identity/identity-initialize/IdentityInitialize";
 import { identityLogin } from "../chapters/Identity/identity-login/IdentityLogin";
 import { IdentityLogout } from "../chapters/Identity/identity-logout/IdentityLogout.service";
@@ -8,11 +9,10 @@ import { DesoIdentityEncryptedResponse } from "../interfaces/DesoIdentity.interf
 import {
   SampleAppEncryptedMessage,
   SampleAppLoggedInUser,
-  SampleAppMyPublicKey,
 } from "../recoil/AppState.atoms";
 const Identity = () => {
   const [loggedInUser, setLoggedInUser] = useRecoilState(SampleAppLoggedInUser);
-  const [myPublicKey, setPublicKey] = useRecoilState(SampleAppMyPublicKey);
+  const [myPublicKey, setPublicKey] = useRecoilState(PublicKey);
 
   const [encryptedMessage, setEncryptedMessage] = useRecoilState(
     SampleAppEncryptedMessage
@@ -71,7 +71,7 @@ const Identity = () => {
           onClick={() => {
             IdentityLogout(myPublicKey as string).then(() => {
               setLoggedInUser(null);
-              setPublicKey(null);
+              setPublicKey("");
             });
           }}
         >

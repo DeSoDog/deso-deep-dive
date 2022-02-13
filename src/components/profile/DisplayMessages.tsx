@@ -7,19 +7,19 @@ import {
   SampleAppDecryptedHexes,
   SampleAppLoggedInUser,
   SampleAppMyProfilePicture,
-  SampleAppMyPublicKey,
 } from "../../recoil/AppState.atoms";
 import { getUserPicture } from "../../services/DesoApiRead";
 import { SendMessage } from "./SendMessage";
 import { getMessages } from "../../chapters/Write/get-messages-stateless";
 import { User } from "../../chapters/Interfaces/User";
+import { PublicKey } from "../../chapters/ChapterHelper/Chapter.atom";
 
 export interface DisplayMessagesProps {
   publicKey: string;
 }
 
 const DisplayMessages = ({ publicKey }: DisplayMessagesProps) => {
-  const myPublicKey = useRecoilValue(SampleAppMyPublicKey);
+  const myPublicKey = useRecoilValue(PublicKey);
   const [showMessages, setShowMessages] = useState<boolean>(false);
   const [threadCard, setThreadCard] = useState<ReactElement[] | null>(null);
   const loggedInUser = useRecoilValue(SampleAppLoggedInUser);
