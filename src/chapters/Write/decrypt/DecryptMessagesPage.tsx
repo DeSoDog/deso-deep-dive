@@ -158,28 +158,6 @@ export const DecryptMessagesPage = ({
             ),
           },
         ]}
-        body={
-          <div className="p-2">
-            <div className="font-semibold text-lg">
-              Click{" "}
-              <span
-                className="cursor-pointer text-[#1776cf] hover:text-[#fff]"
-                onClick={() => {
-                  if (loggedInUser) {
-                    getMessages(request, loggedInUser).then((response) => {
-                      response.response.OrderedContactsWithMessages.slice(0, 4);
-                      setMessageResponse(response.response);
-                      setFinalResponse(response.thread);
-                    });
-                  }
-                }}
-              >
-                here
-              </span>{" "}
-              to login with Identity.
-            </div>
-          </div>
-        }
         navigation={
           <PageNavigation
             previous={chapters.prev(selectedChapter) as Chapter}

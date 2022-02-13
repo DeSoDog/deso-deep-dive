@@ -47,39 +47,15 @@ export const ProfileAndFollowerCard = ({
     });
   }, []);
   return (
-    <ChapterTemplate
-      title="Profile And Follower Card"
-      body={
-        <div className="h-min-[300px] text-center">
-          go to src\chapters\Chapter1\profile-card\ProfileCard.tsx and build
-          your own profile card. Click{" "}
-          <span
-            className="cursor-pointer text-[#1776cf] hover:text-[#fff]"
-            onClick={() => toggleSample(!showSample)}
-          >
-            here
-          </span>{" "}
-          to show a sample profile card.
-          {showSample && (
-            <DisplayUser
-              publicKey="BC1YLheA3NepQ8Zohcf5ApY6sYQee9aPJCPY6m3u6XxCL57Asix5peY"
-              isMyAccount={false}
-            ></DisplayUser>
-          )}
-          {showSample && (
-            <div className="font-semibold text-lg text-left mx-2">
-              Github:
-              <div className="text-base">{code && code}</div>
-            </div>
-          )}
-        </div>
-      }
-      navigation={
-        <PageNavigation
-          previous={chapters.prev(selectedChapter) as Chapter}
-          next={chapters.next(selectedChapter) as Chapter}
-        />
-      }
-    />
+    // <ChapterTemplate
+    //   title="Profile And Follower Card"
+    //   navigation={
+    //     <PageNavigation
+    //       previous={chapters.prev(selectedChapter) as Chapter}
+    //       next={chapters.next(selectedChapter) as Chapter}
+    //     />
+    //   }
+    // />
+    <></>
   );
 };

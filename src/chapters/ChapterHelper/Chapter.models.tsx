@@ -12,7 +12,95 @@ import { DecryptMessagesPage } from "../Write/decrypt/DecryptMessagesPage";
 
 import { Link as MaterialLink } from "@mui/material";
 import { CommonPageSectionTitles, PageSection } from "./PageSections";
+import { ChapterTemplate } from "./ChapterTemplate";
+import { PageNavigation } from "../../components/layout/PageNavigation";
 export const CHAPTERS: Readonly<ChapterNavigation> = {
+  ABOUT: {
+    title: "Welcome",
+    route: "*",
+    description: "N/A",
+    documentation: [
+      "https://docs.deso.org/backend/blockchain-data/api/user-endpoints#get-single-profile",
+    ],
+    githubSource: [
+      "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Read/get-single-profile/GetSingleProfile.service.tsx",
+    ],
+    component: function () {
+      return (
+        <Route
+          key={this.title}
+          path={this.route}
+          element={
+            <ChapterTemplate
+              title="Welcome"
+              tabs={[
+                {
+                  content: (
+                    <>
+                      {" "}
+                      {PageSection(
+                        "Welcome to the DeSo Developer Hub",
+                        <div>
+                          DeSo developer hub is rich in resources to help you
+                          build your DeSo app. Currently the page supports
+                          interactive endpoints that help you build connect,
+                          read, and write to the DeSo chain.
+                        </div>
+                      )}
+                      {PageSection(
+                        "Tabs",
+                        <div>
+                          While navigation through each page you'll see some
+                          common tabs such as Overview, Code, and Documentation.
+                          <div className="ml-2 my-2">
+                            <span className="font-semibold">Overview:</span>{" "}
+                            Provides context on what the calls does, and briefly
+                            describes the steps required to execute the call.
+                          </div>
+                          <div className="ml-2 my-2">
+                            <span className="font-semibold"> Code:</span>{" "}
+                            Provides the source code to execute call. This means
+                            you can easily copy these files into your own app or
+                            just inspect them for inspiration.
+                          </div>
+                          <div className="ml-2 mt-2">
+                            <span className="font-semibold">
+                              Documentation:
+                            </span>{" "}
+                            Provides links to formal Deso documentation to
+                            provide a more in depth explanation.
+                          </div>
+                        </div>
+                      )}
+                      {PageSection(
+                        "About",
+                        <div>
+                          The DeSo Developer Hub is under active development so
+                          endpoints and other features will continue to be added
+                          on a weekly basis. We are also open to community
+                          suggestions on what additional functionality could be
+                          built which could be anything from an onchain comment
+                          threads for common issues (similar to stack overflow),
+                          more useful utility methods, etc.
+                        </div>
+                      )}
+                    </>
+                  ),
+                  title: "Welcome",
+                },
+              ]}
+              navigation={
+                <PageNavigation
+                  previous={CHAPTERS.prev(this) as Chapter}
+                  next={CHAPTERS.next(this) as Chapter}
+                />
+              }
+            />
+          }
+        ></Route>
+      );
+    },
+  },
   READ_GET_SINGLE_PROFILE: {
     title: "Get Single Profile",
     route: "/read/get-single-profile",
@@ -303,6 +391,7 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
 
 export interface ChapterNavigation {
   // GETTING_STARTED: Chapter;
+  ABOUT: Chapter;
   READ_GET_SINGLE_PROFILE: Chapter;
   READ_GET_USERS_STATELESS: Chapter;
   READ_GET_FOLLOWS_STATELESS: Chapter;

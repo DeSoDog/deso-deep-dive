@@ -22,8 +22,8 @@ export interface Chapter1SectionProps {
   chapters: ChapterNavigation;
   tabs: TabItem[];
   pretext?: ReactElement;
-  responseText: string;
-  requestText: string;
+  responseText?: string;
+  requestText?: string;
   apiCall: (params: any) => any;
 }
 export const Chapter1Section = ({
@@ -67,7 +67,7 @@ export const Chapter1Section = ({
       title={selectedChapter.title}
       tabs={[
         {
-          title: CommonPageSectionTitles.OVERVIEW,
+          title: `${CommonPageSectionTitles.OVERVIEW} ${selectedChapter.title}`,
           content: (
             <>
               {pretext}
@@ -90,7 +90,7 @@ export const Chapter1Section = ({
                   <div className="list-decimal">
                     <li className="mb-2">
                       First we pointed our http client to{" "}
-                      {selectedChapter.description}
+                      {selectedChapter.description}.
                       {endpoint && jsonBlock(endpoint)}
                     </li>
                     <li className="mb-2">

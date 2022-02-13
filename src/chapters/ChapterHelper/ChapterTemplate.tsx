@@ -4,9 +4,8 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/system/Box";
 export interface ChapterTemplateProps {
   title: string;
-  tabs?: TabItem[];
+  tabs: TabItem[];
   navigation: ReactElement;
-  body?: any;
 }
 
 export const ChapterTemplate = ({ tabs, navigation }: ChapterTemplateProps) => {
