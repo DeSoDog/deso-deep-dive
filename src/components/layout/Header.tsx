@@ -28,7 +28,9 @@ export const Header = () => {
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <img className="max-h-[25px] mr-2 inline" src={Logo} />
-            <div className="inline mt-4 max-h-[32px]">DeSo | Developer Hub</div>
+            <div className="inline mt-4 max-h-[32px]">
+              DeSo | Developer Hub (beta)
+            </div>
           </Typography>
           <Identity></Identity>
         </Toolbar>

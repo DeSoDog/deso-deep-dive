@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SendMessageRequest } from "../../interfaces/MessageInfo.interface";
+import { SendMessageRequest } from "../Interfaces/MessageInfo.interface";
 import { submitTransaction } from "../../services/DesoApiSubmitTransaction";
 import { BASE_URI } from "../ChapterHelper/Chapter.models";
 

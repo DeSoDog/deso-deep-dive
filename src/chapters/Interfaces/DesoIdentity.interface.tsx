@@ -1,4 +1,4 @@
-import { Users } from "../chapters/Interfaces/User";
+import { Users } from "./User";
 
 export interface DesoIdentityResponse {
   id: string;

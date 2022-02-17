@@ -2,7 +2,7 @@ import axios from "axios";
 import {
   SendIframeMessageRequest,
   SendMessageRequest,
-} from "../interfaces/MessageInfo.interface";
+} from "../chapters/Interfaces/MessageInfo.interface";
 import { submitTransaction } from "./DesoApiSubmitTransaction";
 import { BASE_URI } from "../chapters/ChapterHelper/Chapter.models";
 import { User } from "../chapters/Interfaces/User";

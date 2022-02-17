@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { PageNavigation } from "../../../components/layout/PageNavigation";
-import { GetMessageRequest } from "../../../interfaces/MessageInfo.interface";
+import { GetMessageRequest } from "../../Interfaces/MessageInfo.interface";
 import { getSourceFromGithub, jsonBlock } from "../../../services/utils";
 import { LoggedInUser, PublicKey } from "../../ChapterHelper/Chapter.atom";
 import {

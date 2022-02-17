@@ -1,5 +1,5 @@
 import axios from "axios";
-import { TransactionPost } from "../../interfaces/Transaction.interface";
+import { TransactionPost } from "../Interfaces/Transaction.interface";
 import { getSignerInfo, uuid } from "../../services/utils";
 import { BASE_URI } from "../ChapterHelper/Chapter.models";
 import { identitySignTransaction } from "../Identity/sign-transaction/IdentitySubmitTransaction.service";

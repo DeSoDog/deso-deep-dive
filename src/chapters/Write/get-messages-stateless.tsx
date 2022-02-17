@@ -2,7 +2,7 @@ import axios from "axios";
 import {
   GetMessageRequest,
   OrderedContactsWithMessages,
-} from "../../interfaces/MessageInfo.interface";
+} from "../Interfaces/MessageInfo.interface";
 import { uuid } from "../../services/utils";
 import { BASE_URI } from "../ChapterHelper/Chapter.models";
 import { identityDecrypt } from "../Identity/identity-decrypt/IdentityDecryption.service";

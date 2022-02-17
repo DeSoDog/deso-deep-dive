@@ -3,7 +3,7 @@ import { ReactElement } from "react";
 import { CopyBlock, nord } from "react-code-blocks";
 import { User } from "../chapters/Interfaces/User";
 import { UserInfoResponse } from "../chapters/Read/get-users-stateless/GetUserStateless.service";
-import { TransactionPost } from "../interfaces/Transaction.interface";
+import { TransactionPost } from "../chapters/Interfaces/Transaction.interface";
 
 export const getFollowerCount = (
   userInfoResponse: UserInfoResponse

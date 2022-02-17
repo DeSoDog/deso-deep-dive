@@ -73,6 +73,20 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
                         </div>
                       )}
                       {PageSection(
+                        "Starter App",
+                        <>
+                          <div>
+                            Looking for a bare bones react template to get
+                            started on your DeSo app? Head over to url and
+                            download it or open your terminal and run <br />
+                            <span className="font-semibold ml-2">
+                              git clone:{" "}
+                            </span>
+                            https://github.com/DeSoDog/deso-react-template.git
+                          </div>
+                        </>
+                      )}
+                      {PageSection(
                         "About",
                         <>
                           <div>
@@ -220,28 +234,6 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
       );
     },
   },
-  // READ_PROFILE_CARD: {
-  //   title: "Profile Card",
-  //   route: "/read/profile-cards",
-  //   documentation: [],
-  //   githubSource: [
-  //     "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/components/profile/DisplayUser.tsx",
-  //   ],
-  //   component: function () {
-  //     return (
-  //       <Route
-  //         key={this.title}
-  //         path={this.route}
-  //         element={
-  //           <ProfileAndFollowerCard
-  //             selectedChapter={this}
-  //             chapters={CHAPTERS}
-  //           />
-  //         }
-  //       ></Route>
-  //     );
-  //   },
-  // },
   IDENTITY_INITIALIZE: {
     title: "Initialize",
     route: "/identity/identity-initialize",
@@ -318,6 +310,28 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
     githubSource: [
       "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Write/get-messages-stateless.tsx",
       "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Identity/identity-decrypt/IdentityDecryption.service.tsx",
+    ],
+    component: function () {
+      return (
+        <Route
+          key={this.title}
+          path={this.route}
+          element={
+            <DecryptMessagesPage chapters={CHAPTERS} selectedChapter={this} />
+          }
+        ></Route>
+      );
+    },
+  },
+
+  WRITE_CREATE_POST: {
+    title: "Create Post",
+    route: "/write/create-post",
+    documentation: [
+      "https://docs.deso.org/identity/iframe-api/endpoints#decrypt",
+    ],
+    githubSource: [
+      "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Write/submit-post.tsx",
     ],
     component: function () {
       return (
@@ -410,6 +424,7 @@ export interface ChapterNavigation {
   IDENTITY_LOGIN: Chapter;
   IDENTITY_LOGOUT: Chapter;
   IDENTITY_DECRYPT: Chapter;
+  WRITE_CREATE_POST: Chapter;
   SAMPLE_APP: Chapter;
   next: (currentChapter: Chapter) => Chapter | null;
   prev: (currentChapter: Chapter) => Chapter | null;

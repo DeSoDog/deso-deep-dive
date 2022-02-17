@@ -6,7 +6,7 @@ import { UserInfoResponse } from "../chapters/Read/get-users-stateless/GetUserSt
 import {
   DesoIdentityDecryptedHexesactionResponse,
   DesoIdentityEncryptedResponse,
-} from "../interfaces/DesoIdentity.interface";
+} from "../chapters/Interfaces/DesoIdentity.interface";
 
 export enum AppStateEnum {
   MY_POST,
