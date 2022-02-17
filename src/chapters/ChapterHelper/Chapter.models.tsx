@@ -10,10 +10,11 @@ import { ReactElement } from "react";
 import { IdentityLogoutPage } from "../Identity/identity-logout/IdentityLogoutPage";
 import { DecryptMessagesPage } from "../Write/decrypt/DecryptMessagesPage";
 
-import { Link as MaterialLink } from "@mui/material";
+import { Link, Link as MaterialLink } from "@mui/material";
 import { CommonPageSectionTitles, PageSection } from "./PageSections";
 import { ChapterTemplate } from "./ChapterTemplate";
 import { PageNavigation } from "../../components/layout/PageNavigation";
+import { SubmitPostPage } from "../Write/submit-post/submit-post-page";
 export const CHAPTERS: Readonly<ChapterNavigation> = {
   ABOUT: {
     title: "Welcome",
@@ -97,7 +98,14 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
                             functionality could be built which could be anything
                             from an onchain comment threads for common issues
                             (similar to stack overflow), more useful utility
-                            methods, etc.
+                            methods, etc. If you have any recommendations for
+                            improvement or find any bugs, please leave feedback{" "}
+                            <Link
+                              target="_blank"
+                              href="https://github.com/DeSoDog/deso-deep-dive/issues"
+                            >
+                              here
+                            </Link>
                           </div>
                           <div className=" my-16 text-center">
                             Hit the{" "}
@@ -328,12 +336,15 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
     title: "Create Post",
     route: "/write/create-post",
     documentation: [
-      "https://docs.deso.org/identity/iframe-api/endpoints#decrypt",
+      "https://docs.deso.org/for-developers/backend/transactions/construct-transactions/social-transactions-api#submit-post",
     ],
     githubSource: [
       "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Write/submit-post.tsx",
       "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Interfaces/Transaction.interface.tsx",
       "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/services/utils.tsx",
+      "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/ChapterHelper/BaseUri.tsx",
+      "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Identity/sign-transaction/IdentitySubmitTransaction.service.tsx",
+      "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Interfaces/User.tsx",
     ],
     component: function () {
       return (
@@ -341,7 +352,7 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
           key={this.title}
           path={this.route}
           element={
-            <DecryptMessagesPage chapters={CHAPTERS} selectedChapter={this} />
+            <SubmitPostPage chapters={CHAPTERS} selectedChapter={this} />
           }
         ></Route>
       );

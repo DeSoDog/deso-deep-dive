@@ -1,6 +1,6 @@
 import { submitTransaction } from "../../../services/DesoApiSubmitTransaction";
 
-export function identitySignTransaction(request: any): Promise<any> {
+export function identitySignTransaction(request: any, data: any): Promise<any> {
   const iframe: HTMLIFrameElement | null = document.getElementById(
     "identity"
   ) as HTMLIFrameElement;
@@ -14,7 +14,8 @@ export function identitySignTransaction(request: any): Promise<any> {
         return submitTransaction(event?.data?.payload?.signedTransactionHex)
           .then((response) => {
             window.removeEventListener("message", windowHandler);
-            resolve(response);
+            console.log(response);
+            resolve({ response, data });
           })
           .catch(() => {
             window.removeEventListener("message", windowHandler);

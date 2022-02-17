@@ -1,9 +1,9 @@
 import axios from "axios";
-import { TransactionPost } from "../Interfaces/Transaction.interface";
-import { getSignerInfo, uuid } from "../../services/utils";
-import { identitySignTransaction } from "../Identity/sign-transaction/IdentitySubmitTransaction.service";
-import { User } from "../Interfaces/User";
-import { BASE_URI } from "../ChapterHelper/BaseUri";
+import { TransactionPost } from "../../Interfaces/Transaction.interface";
+import { getSignerInfo, uuid } from "../../../services/utils";
+import { identitySignTransaction } from "../../Identity/sign-transaction/IdentitySubmitTransaction.service";
+import { User } from "../../Interfaces/User";
+import { BASE_URI } from "../../ChapterHelper/BaseUri";
 
 export const submitPost = async (
   publicKey: string,
@@ -12,7 +12,7 @@ export const submitPost = async (
   postExtraData?: any,
   ParentStakeID?: string,
   imageURL?: string[]
-): Promise<any> => {
+): Promise<{ response: any; data: any } | undefined> => {
   if (!publicKey) {
     console.log("publicKey is required");
     return;
@@ -50,5 +50,6 @@ export const submitPost = async (
     payload,
     service: "identity",
   };
-  return identitySignTransaction(request);
+  console.log(request);
+  return identitySignTransaction(request, data);
 };

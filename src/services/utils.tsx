@@ -95,3 +95,22 @@ export const jsonBlock = (
     );
   }
 };
+export const ClickHereSnippet = (
+  onclick: (...params: any) => any,
+  toCallText: string
+) => {
+  return (
+    <div>
+      Click{" "}
+      <span
+        className="cursor-pointer text-[#1776cf] hover:text-[#fff]"
+        onClick={() => {
+          onclick();
+        }}
+      >
+        here
+      </span>{" "}
+      {toCallText}
+    </div>
+  );
+};
