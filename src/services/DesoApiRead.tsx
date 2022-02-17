@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URI } from "../chapters/ChapterHelper/Chapter.models";
+import { BASE_URI } from "../chapters/ChapterHelper/BaseUri";
 import {
   PostInfoRequest,
   PostInfoResponse,

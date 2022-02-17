@@ -4,11 +4,7 @@ import { PageNavigation } from "../../../components/layout/PageNavigation";
 import { GetMessageRequest } from "../../Interfaces/MessageInfo.interface";
 import { getSourceFromGithub, jsonBlock } from "../../../services/utils";
 import { LoggedInUser, PublicKey } from "../../ChapterHelper/Chapter.atom";
-import {
-  BASE_URI,
-  Chapter,
-  ChapterNavigation,
-} from "../../ChapterHelper/Chapter.models";
+import { Chapter, ChapterNavigation } from "../../ChapterHelper/Chapter.models";
 import { ChapterTemplate } from "../../ChapterHelper/ChapterTemplate";
 import {
   CommonPageSectionTitles,
@@ -18,6 +14,7 @@ import { IdentityInitialize } from "../../Identity/identity-initialize/IdentityI
 import { identityLogin } from "../../Identity/identity-login/IdentityLogin";
 import { User } from "../../Interfaces/User";
 import { getMessages } from "../get-messages-stateless";
+import { BASE_URI } from "../../ChapterHelper/BaseUri";
 
 export interface DecryptMessagesProps {
   selectedChapter: Chapter;

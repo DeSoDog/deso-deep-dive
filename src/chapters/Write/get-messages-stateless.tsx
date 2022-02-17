@@ -4,9 +4,9 @@ import {
   OrderedContactsWithMessages,
 } from "../Interfaces/MessageInfo.interface";
 import { uuid } from "../../services/utils";
-import { BASE_URI } from "../ChapterHelper/Chapter.models";
 import { identityDecrypt } from "../Identity/identity-decrypt/IdentityDecryption.service";
 import { User } from "../Interfaces/User";
+import { BASE_URI } from "../ChapterHelper/BaseUri";
 
 export const getMessages = async (
   request: GetMessageRequest,

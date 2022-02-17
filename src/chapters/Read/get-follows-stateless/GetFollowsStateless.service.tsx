@@ -1,6 +1,6 @@
 import axios from "axios";
+import { BASE_URI } from "../../ChapterHelper/BaseUri";
 import { CoinEntry, DAOCoinEntry } from "../../Interfaces/Coin.interface";
-import { BASE_URI } from "../../ChapterHelper/Chapter.models";
 
 export const getFollowsStateless = async (
   PublicKeyBase58Check: string

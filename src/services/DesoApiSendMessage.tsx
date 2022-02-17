@@ -4,8 +4,8 @@ import {
   SendMessageRequest,
 } from "../chapters/Interfaces/MessageInfo.interface";
 import { submitTransaction } from "./DesoApiSubmitTransaction";
-import { BASE_URI } from "../chapters/ChapterHelper/Chapter.models";
 import { User } from "../chapters/Interfaces/User";
+import { BASE_URI } from "../chapters/ChapterHelper/BaseUri";
 
 export const encryptMessage = async (
   request: SendIframeMessageRequest,

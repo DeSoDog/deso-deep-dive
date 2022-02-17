@@ -1,9 +1,9 @@
 import axios from "axios";
 import { TransactionPost } from "../Interfaces/Transaction.interface";
 import { getSignerInfo, uuid } from "../../services/utils";
-import { BASE_URI } from "../ChapterHelper/Chapter.models";
 import { identitySignTransaction } from "../Identity/sign-transaction/IdentitySubmitTransaction.service";
 import { User } from "../Interfaces/User";
+import { BASE_URI } from "../ChapterHelper/BaseUri";
 
 export const submitPost = async (
   publicKey: string,

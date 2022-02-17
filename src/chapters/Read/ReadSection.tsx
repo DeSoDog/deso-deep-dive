@@ -2,11 +2,7 @@ import { ReactElement, useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { PageNavigation } from "../../components/layout/PageNavigation";
 import { PublicKey } from "../ChapterHelper/Chapter.atom";
-import {
-  BASE_URI,
-  Chapter,
-  ChapterNavigation,
-} from "../ChapterHelper/Chapter.models";
+import { Chapter, ChapterNavigation } from "../ChapterHelper/Chapter.models";
 import { ChapterTemplate, TabItem } from "../ChapterHelper/ChapterTemplate";
 import {
   ProfileInfoRequest,
@@ -17,6 +13,7 @@ import {
   CommonPageSectionTitles,
   PageSection,
 } from "../ChapterHelper/PageSections";
+import { BASE_URI } from "../ChapterHelper/BaseUri";
 export interface Chapter1SectionProps {
   selectedChapter: Chapter;
   chapters: ChapterNavigation;

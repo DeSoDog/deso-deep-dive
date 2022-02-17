@@ -80,7 +80,7 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
                             started on your DeSo app? Head over to url and
                             download it or open your terminal and run <br />
                             <span className="font-semibold ml-2">
-                              git clone:{" "}
+                              git clone{" "}
                             </span>
                             https://github.com/DeSoDog/deso-react-template.git
                           </div>
@@ -332,6 +332,8 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
     ],
     githubSource: [
       "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Write/submit-post.tsx",
+      "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Interfaces/Transaction.interface.tsx",
+      "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/services/utils.tsx",
     ],
     component: function () {
       return (
@@ -441,5 +443,3 @@ export interface Chapter {
   githubSource: string[];
   component: () => ReactElement;
 }
-
-export const BASE_URI: Readonly<string> = "https://node.deso.org/api/v0";
