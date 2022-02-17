@@ -332,9 +332,9 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
     },
   },
 
-  WRITE_CREATE_POST: {
-    title: "Create Post",
-    route: "/write/create-post",
+  WRITE_SUBMIT_POST: {
+    title: "Submit Post",
+    route: "/write/submit-post",
     documentation: [
       "https://docs.deso.org/for-developers/backend/transactions/construct-transactions/social-transactions-api#submit-post",
     ],
@@ -437,7 +437,7 @@ export interface ChapterNavigation {
   IDENTITY_LOGIN: Chapter;
   IDENTITY_LOGOUT: Chapter;
   IDENTITY_DECRYPT: Chapter;
-  WRITE_CREATE_POST: Chapter;
+  WRITE_SUBMIT_POST: Chapter;
   SAMPLE_APP: Chapter;
   next: (currentChapter: Chapter) => Chapter | null;
   prev: (currentChapter: Chapter) => Chapter | null;
