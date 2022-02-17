@@ -78,11 +78,9 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
                         <>
                           <div>
                             Looking for a bare bones react template to get
-                            started on your DeSo app? Head over to url and
-                            download it or open your terminal and run <br />
-                            <span className="font-semibold ml-2">
-                              git clone{" "}
-                            </span>
+                            started on your DeSo app? Open your terminal and run{" "}
+                            <br />
+                            <span className="font-semibold">git clone </span>
                             https://github.com/DeSoDog/deso-react-template.git
                           </div>
                         </>
