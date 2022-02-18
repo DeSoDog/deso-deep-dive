@@ -15,6 +15,7 @@ import { CommonPageSectionTitles, PageSection } from "./PageSections";
 import { ChapterTemplate } from "./ChapterTemplate";
 import { PageNavigation } from "../../components/layout/PageNavigation";
 import { SubmitPostPage } from "../Write/submit-post/submit-post-page";
+import { GetAppStatePage } from "../Read/get-app-state/GetAppStatePage";
 export const CHAPTERS: Readonly<ChapterNavigation> = {
   ABOUT: {
     title: "Welcome",
@@ -356,6 +357,21 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
       );
     },
   },
+  NODE_PAGE: {
+    title: "Node Page",
+    route: "/node-page",
+    documentation: [""],
+    githubSource: ["N/A"],
+    component: function () {
+      return (
+        <Route
+          key={this.title}
+          path={this.route}
+          element={<GetAppStatePage />}
+        ></Route>
+      );
+    },
+  },
   SAMPLE_APP: {
     title: "Sample App",
     route: "/sample-app",
@@ -436,6 +452,7 @@ export interface ChapterNavigation {
   IDENTITY_LOGOUT: Chapter;
   IDENTITY_DECRYPT: Chapter;
   WRITE_SUBMIT_POST: Chapter;
+  NODE_PAGE: Chapter;
   SAMPLE_APP: Chapter;
   next: (currentChapter: Chapter) => Chapter | null;
   prev: (currentChapter: Chapter) => Chapter | null;
