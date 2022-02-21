@@ -14,7 +14,6 @@ export function identitySignTransaction(request: any, data: any): Promise<any> {
         return submitTransaction(event?.data?.payload?.signedTransactionHex)
           .then((response) => {
             window.removeEventListener("message", windowHandler);
-            console.log(response);
             resolve({ response, data });
           })
           .catch(() => {

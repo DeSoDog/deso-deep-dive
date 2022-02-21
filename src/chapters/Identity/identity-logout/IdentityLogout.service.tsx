@@ -7,7 +7,6 @@ export const IdentityLogout = (myPublicKey: string): Promise<boolean> => {
 
   return new Promise((resolve, reject) => {
     const windowHandler = (event: any) => {
-      console.log(event.data.method);
       if (event.data.method === "login") {
         prompt?.close();
         resolve(true);

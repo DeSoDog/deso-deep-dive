@@ -5,6 +5,8 @@ import { User } from "../chapters/Interfaces/User";
 import { UserInfoResponse } from "../chapters/Read/get-users-stateless/GetUserStateless.service";
 import { TransactionPost } from "../chapters/Interfaces/Transaction.interface";
 
+export const DEZO_DOG: Readonly<string> =
+  "BC1YLheA3NepQ8Zohcf5ApY6sYQee9aPJCPY6m3u6XxCL57Asix5peY";
 export const getFollowerCount = (
   userInfoResponse: UserInfoResponse
 ): number => {
@@ -68,8 +70,6 @@ export const jsonBlock = (
   json: string | Object | HTMLElement | undefined,
   lang = "json"
 ): ReactElement => {
-  console.log(json);
-  console.log(lang);
   if (!json) {
     return <></>;
   }

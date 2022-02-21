@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { PageNavigation } from "../../../components/layout/PageNavigation";
 import {
   ClickHereSnippet,
@@ -36,7 +36,6 @@ export const SubmitPostPage = ({
   const createPost = () => {
     if (myPublicKey && loggedInUser) {
       submitPost(myPublicKey, loggedInUser, postMessage).then((response) => {
-        console.log("transaction complete", response);
         setResponse(response);
       });
     } else {

@@ -11,9 +11,9 @@ export default function CreatePostInput() {
   const loggedInUser = useRecoilValue(SampleAppLoggedInUser);
   const createPost = () => {
     if (myPublicKey && postBody && loggedInUser) {
-      submitPost(myPublicKey, loggedInUser, postBody).then((response: any) => {
-        console.log("transaction complete", response);
-      });
+      submitPost(myPublicKey, loggedInUser, postBody).then(
+        (response: any) => {}
+      );
     }
   };
   return (

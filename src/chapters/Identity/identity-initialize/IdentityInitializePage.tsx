@@ -24,7 +24,6 @@ export const IdentityInitializePage = ({
 
   const [code, setCode] = useState<any | null>(null);
   useEffect(() => {
-    console.log(selectedChapter.githubSource);
     getSourceFromGithub(selectedChapter.githubSource).then((response) => {
       setCode(response);
     });
@@ -51,7 +50,6 @@ export const IdentityInitializePage = ({
                   <span
                     className="cursor-pointer text-[#1776cf] hover:text-[#fff]"
                     onClick={() => {
-                      console.log("identity initialized");
                       IdentityInitialize().then((response) => {
                         setInitializedResponse(response);
                       });
@@ -111,24 +109,6 @@ export const IdentityInitializePage = ({
           ),
         },
       ]}
-      // body={
-      //   <ChapterIdentityTemplate
-      //     onClick={() => {
-      //       console.log("identity initialized");
-      //       IdentityInitialize().then((response) => {
-      //         setInitializedResponse(response);
-      //       });
-      //     }}
-      //     title="Initialize Identity"
-      //     response={initializedResponse}
-      //     textBody={
-      //       <div className="p-2">
-      //         <div className="font-semibold">What just happened?</div>
-      //
-      //       </div>
-      //     }
-      //   />
-      // }
       navigation={
         <PageNavigation
           previous={chapters.prev(selectedChapter) as Chapter}

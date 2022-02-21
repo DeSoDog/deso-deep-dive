@@ -1,5 +1,5 @@
 import { ReactElement, useEffect, useState } from "react";
-import { RecoilRoot, useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
   SampleAppState,
   AppStateEnum,
@@ -12,6 +12,7 @@ import DisplayUser from "../profile/DisplayUser";
 
 import { PublicKey } from "../../chapters/ChapterHelper/Chapter.atom";
 import { Card, CardHeader, Link } from "@mui/material";
+import Identity from "../DesoIdentity";
 const SampleApp = () => {
   const [appState, setAppState] = useRecoilState<AppStateEnum>(SampleAppState);
   const [user, setUser] = useRecoilState<MyUserInfoType>(SampleAppMyUserInfo);
@@ -74,7 +75,7 @@ const SampleApp = () => {
         className="bg-[#fff] w-2/5 px-3 mt-20 mx-auto mb-5 "
       >
         <CardHeader title=" Below you'll find a basic DeSo application."></CardHeader>
-        <div className="ml-4 mb-3">
+        <div className="ml-4 mb-2">
           For implementation details see{" "}
           <Link
             href="https://github.com/DeSoDog/deso-deep-dive/tree/master/src/components/layout"
@@ -83,6 +84,9 @@ const SampleApp = () => {
             {" "}
             here
           </Link>
+        </div>
+        <div className="ml-4 mb-2">
+          Click here to render your account: <Identity></Identity>
         </div>
       </Card>
       <div className="flex flex-col md:flex-row justify-around w-full mt-4  ">

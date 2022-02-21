@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Link } from "@mui/material";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { PublicKey } from "../chapters/ChapterHelper/Chapter.atom";
@@ -54,8 +54,8 @@ const Identity = () => {
   return (
     <>
       {!loggedInUser ? (
-        <Button
-          color="inherit"
+        <Link
+          className="cursor-pointer"
           onClick={() => {
             identityLogin().then(({ loggedInUser, publicKey }) => {
               setLoggedInUser(loggedInUser);
@@ -64,10 +64,11 @@ const Identity = () => {
           }}
         >
           Log In
-        </Button>
+        </Link>
       ) : (
         <Button
-          color="inherit"
+          className="cursor-pointer"
+          variant="contained"
           onClick={() => {
             IdentityLogout(myPublicKey as string).then(() => {
               setLoggedInUser(null);

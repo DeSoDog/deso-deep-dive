@@ -58,7 +58,6 @@ const DisplayUser = ({ publicKey, isMyAccount }: DisplayUserProps) => {
       setUser({ profileInfoResponse, userInfoResponse });
       setProfilePicture(profilePictureSrc);
       const followers = await getFollowsStateless(publicKey);
-      console.log(followers);
       setUserFollowers(followers);
     }
   };

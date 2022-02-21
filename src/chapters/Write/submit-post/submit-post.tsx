@@ -23,7 +23,6 @@ export const submitPost = async (
     return;
   }
 
-  // 0. create the identity frame
   // 1. verify they have a key and body everything else is optional
   const data = {
     UpdaterPublicKeyBase58Check: publicKey,
@@ -50,6 +49,5 @@ export const submitPost = async (
     payload,
     service: "identity",
   };
-  console.log(request);
   return identitySignTransaction(request, data);
 };

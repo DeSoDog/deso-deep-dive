@@ -16,6 +16,7 @@ import { ChapterTemplate } from "./ChapterTemplate";
 import { PageNavigation } from "../../components/layout/PageNavigation";
 import { SubmitPostPage } from "../Write/submit-post/submit-post-page";
 import { GetAppStatePage } from "../Read/get-app-state/GetAppStatePage";
+import { CreateFollowTransactionPage } from "../Write/create-follow-txn-stateless/create-follow-transaction-page";
 export const CHAPTERS: Readonly<ChapterNavigation> = {
   ABOUT: {
     title: "Welcome",
@@ -357,6 +358,29 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
       );
     },
   },
+
+  WRITE_CREATE_FOLLOW_TRANSACTION: {
+    title: "Create Follow Transaction",
+    route: "/write/create-follow-transaction",
+    documentation: [
+      "https://docs.deso.org/for-developers/backend/transactions/construct-transactions/social-transactions-api#create-follow-txn-stateless",
+    ],
+    githubSource: [],
+    component: function () {
+      return (
+        <Route
+          key={this.title}
+          path={this.route}
+          element={
+            <CreateFollowTransactionPage
+              selectedChapter={this}
+              chapters={CHAPTERS}
+            />
+          }
+        ></Route>
+      );
+    },
+  },
   NODE_PAGE: {
     title: "Node Page",
     route: "/node-page",
@@ -452,6 +476,7 @@ export interface ChapterNavigation {
   IDENTITY_LOGOUT: Chapter;
   IDENTITY_DECRYPT: Chapter;
   WRITE_SUBMIT_POST: Chapter;
+  WRITE_CREATE_FOLLOW_TRANSACTION: Chapter;
   NODE_PAGE: Chapter;
   SAMPLE_APP: Chapter;
   next: (currentChapter: Chapter) => Chapter | null;
