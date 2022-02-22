@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { Header } from "./components/layout/Header";
-import { BrowserRouter as Router, Routes } from "react-router-dom";
+import { BrowserRouter as Router, HashRouter, Routes } from "react-router-dom";
 import DesoDrawer from "./components/layout/Drawer";
 import { CHAPTERS } from "./chapters/ChapterHelper/Chapter.models";
 function App() {
@@ -9,7 +9,7 @@ function App() {
     chapter.chapterContent.component()
   );
   return (
-    <Router basename="/">
+    <HashRouter>
       <div className="my-[50px] ">
         <div className="flex-grow">
           <Header />
@@ -19,7 +19,7 @@ function App() {
         </div>
       </div>
       <DesoDrawer chapters={CHAPTERS} />
-    </Router>
+    </HashRouter>
   );
 }
 
