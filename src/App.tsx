@@ -9,7 +9,7 @@ function App() {
     chapter.chapterContent.component()
   );
   return (
-    <Router>
+    <Router basename="/">
       <div className="my-[50px] ">
         <div className="flex-grow">
           <Header />
