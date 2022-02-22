@@ -365,7 +365,13 @@ export const CHAPTERS: Readonly<ChapterNavigation> = {
     documentation: [
       "https://docs.deso.org/for-developers/backend/transactions/construct-transactions/social-transactions-api#create-follow-txn-stateless",
     ],
-    githubSource: [],
+    githubSource: [
+      "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Write/create-follow-txn-stateless/create-follow-txn-stateless.tsx",
+      "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/ChapterHelper/BaseUri.tsx",
+      "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/services/utils.tsx",
+      "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Identity/sign-transaction/IdentitySubmitTransaction.service.tsx",
+      "https://raw.githubusercontent.com/DeSoDog/deso-deep-dive/master/src/chapters/Interfaces/User.tsx",
+    ],
     component: function () {
       return (
         <Route

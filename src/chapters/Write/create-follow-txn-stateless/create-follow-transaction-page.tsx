@@ -27,10 +27,13 @@ export const CreateFollowTransactionPage = ({
   const [code, setCode] = useState<any | null>(null);
   const [follow, setFollow] = useState<boolean>(false);
   useEffect(() => {
-    getSourceFromGithub(selectedChapter.githubSource).then(setCode);
+    getSourceFromGithub(selectedChapter.githubSource).then((res) => {
+      console.log(selectedChapter.githubSource);
+      console.log(res);
+      setCode(res);
+    });
   }, []);
   const [myPublicKey, setMyPublicKey] = useRecoilState(PublicKey);
-  const [loggedInUser, setLoggedInUser] = useRecoilState(LoggedInUser);
   return (
     <ChapterTemplate
       title={`${CommonPageSectionTitles.OVERVIEW}Create Follow Transaction`}
